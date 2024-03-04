@@ -1,7 +1,3 @@
-from Interaction import Interaction
-from Vector import Vector
-from Spritesheet import Spritesheet
-
 try:
     import simplegui
 except ImportError:
