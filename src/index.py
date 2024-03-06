@@ -7,8 +7,9 @@ except ImportError:
 
 # player = Spritesheet()
 # interaction = Interaction()
+WIDTH, HEIGHT = (2560 // 2, 800)
 
-terrain = Terrain()
+terrain = Terrain(WIDTH, HEIGHT)
 
 
 def draw(canvas):
@@ -16,8 +17,9 @@ def draw(canvas):
 
 
 # Create a frame and assign callbacks to event handlers
-frame = simplegui.create_frame("game-27", 600, 400, 0)
+frame = simplegui.create_frame("game-27", 2560 / 2, 800, 0)
 frame.set_draw_handler(draw)
+frame.set_canvas_background("cyan")
 
 
 # Start the frame animation

@@ -4,25 +4,26 @@ import noise
 BLOCK_SIZE = 10
 
 
-def rand_col():
-    r = random.randrange(0, 256)
-    g = random.randrange(0, 256)
-    b = random.randrange(0, 256)
-    return 'rgb(' + str(r) + ',' + str(g) + ',' + str(b) + ')'
+def rand_col(minimum=0, maximum=255):
+    g = random.randrange(minimum, maximum)
+    b = random.randrange(minimum, maximum)
+    r = random.randrange(minimum, maximum)
+    return r, g, b
+    # return 'rgb(' + str(r) + ',' + str(g) + ',' + str(b) + ')'
 
 
 class Terrain:
-    def __init__(self):
+    def __init__(self, width, height):
         self.blocks = {}  # (x, y) : Block
 
-        for i in range(0, 600 // BLOCK_SIZE):
-            h = 20 + (noise.pnoise1(i / 10) * 10)
+        for i in range(0, width // BLOCK_SIZE):
+            h = 50 - (noise.pnoise1(i / 20) * 25) + (noise.pnoise1(i / 10) * 10)
 
-            for j in range(0, 400 // BLOCK_SIZE):
+            for j in range(0, height // BLOCK_SIZE):
                 # noise
 
                 if j > h:
-                    self.blocks[(i * BLOCK_SIZE,j * BLOCK_SIZE)] = Block(i * BLOCK_SIZE, j * BLOCK_SIZE)
+                    self.blocks[(i * BLOCK_SIZE, j * BLOCK_SIZE)] = Block(i * BLOCK_SIZE, j * BLOCK_SIZE)
         # self.compute_lighting()
         self.compute_texture()
 
@@ -47,7 +48,7 @@ class Terrain:
                     (block.x + BLOCK_SIZE, block.y) in self.blocks):
                 block.color = "brown"
             else:
-                block.color = "green"
+                block.color = "lime"
 
     def compute_lighting(self):
         for block in self.blocks:
@@ -62,8 +63,8 @@ class Block:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.color = rand_col()
         self.lighting = 0
+        self.color = rand_col()
 
     def draw(self, canvas):
         x = 255 - (self.lighting * 30)
@@ -76,3 +77,6 @@ class Block:
                             1,
                             color,
                             color)
+
+    def get_color(self):
+        return self.color
