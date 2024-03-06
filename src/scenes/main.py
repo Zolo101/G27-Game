@@ -7,7 +7,6 @@ terrain = Terrain(1280, 800)
 
 def draw(canvas):
     terrain.draw(canvas)
-    print("you are drawing the main scene!")
 
 
 main = Scene("main", draw)

@@ -1,3 +1,5 @@
+import math
+
 class Color:
     def __init__(self, r, g, b):
         self.r = r
@@ -5,7 +7,7 @@ class Color:
         self.b = b
 
     def __str__(self):
-        return 'rgb(' + str(self.r) + ',' + str(self.g) + ',' + str(self.b) + ')'
+        return 'rgb(' + str(math.floor(self.r)) + ',' + str(math.floor(self.g)) + ',' + str(math.floor(self.b)) + ')'
 
     def __sub__(self, other):
         return Color(self.r - other.r, self.g - other.g, self.b - other.b)
