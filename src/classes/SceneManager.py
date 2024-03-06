@@ -1,10 +1,21 @@
+# Switches scenes, etc
 class SceneManager:
-    def __init__(self, scene):
-        self.go_to(scene)
+    def __init__(self):
+        self.scenes = {}
+        self.current_scene = None
 
-    def go_to(self, scene):
-        self.scene = scene
-        self.scene.manager = self
+    def add_scene(self, scene):
+        self.scenes[scene.name] = scene
 
-    def run(self):
-        self.scene.run()
+    def switch_scene(self, scene_name):
+        self.current_scene = self.scenes[scene_name]
+
+    def draw(self, canvas):
+        self.current_scene.draw(canvas)
+
+
+# Scene
+class Scene:
+    def __init__(self, name, draw):
+        self.name = name
+        self.draw = draw
