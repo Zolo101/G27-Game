@@ -26,8 +26,8 @@ class Terrain:
 
                 if j > h:
                     self.blocks[(i * BLOCK_SIZE, j * BLOCK_SIZE)] = Block(i * BLOCK_SIZE, j * BLOCK_SIZE)
-        self.compute_lighting()
         self.compute_texture()
+        self.compute_lighting()
 
     def draw(self, canvas):
         for block in self.blocks.values():
@@ -45,9 +45,11 @@ class Terrain:
         #
 
         for block in self.blocks.values():
-            if ((block.x, block.y - BLOCK_SIZE) in self.blocks and
-                    (block.x - BLOCK_SIZE, block.y) in self.blocks and
-                    (block.x + BLOCK_SIZE, block.y) in self.blocks):
+            if ((block.x, block.y - BLOCK_SIZE * 2) in self.blocks and
+                    (block.x - BLOCK_SIZE * 2, block.y) in self.blocks and
+                    (block.x + BLOCK_SIZE * 2, block.y) in self.blocks or
+                    # not (0 < block.x < 1280)):
+                    not (10 < block.x < 1260)):
                 block.color = Color(145, 97, 7)
             else:
                 block.color = Color(81, 255, 61)
@@ -71,6 +73,9 @@ class Terrain:
             if e > 3:
                 block.lighting -= 1
 
+            # if block.lighting > 80:
+            block.color += rand_col(0, max(1, block.lighting // 10))
+
             # block.lighting += (block.x - BLOCK_SIZE, block.y + BLOCK_SIZE) in self.blocks
             # block.lighting += (block.x, block.y + BLOCK_SIZE) in self.blocks
             # block.lighting += (block.x + BLOCK_SIZE, block.y + BLOCK_SIZE) in self.blocks
@@ -91,7 +96,7 @@ class Block:
         self.color = rand_col()
 
     def draw(self, canvas):
-        x = self.lighting * 0.9
+        x = self.lighting * 0.7
         # color = f"rgb({x}, {x}, {x})"
         color = self.color - Color(x, x, x)
         canvas.draw_polygon([(self.x, self.y),
