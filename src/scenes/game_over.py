@@ -1,7 +1,7 @@
 from src.classes.SceneManager import Scene
 
 
-def draw(canvas):
+def draw(canvas, clock, frame):
     print("you are drawing the game_over scene!")
 
 

@@ -4,7 +4,7 @@ GRAVITY = 0.9
 
 
 class Sprite:
-    def __init__(self, name):
+    def __init__(self, name, fixed=True):
         # TODO: Do we need a name?
         self.name = name
 
@@ -17,6 +17,11 @@ class Sprite:
         # The Spritesheet of the sprite
         self.texture = None
 
+        # Affected by gravity?
+        self.fixed = fixed
+
     def update(self):
         self.pos += self.vel
-        self.vel *= GRAVITY
+
+        if not self.fixed:
+            self.vel *= GRAVITY
