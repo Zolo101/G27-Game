@@ -31,8 +31,7 @@ clock = Clock()
 def draw(canvas):
     manager.draw(canvas, clock, frame)
     clock.tick()
-    print(frame._get_fps_average())
-    # terrain.draw(canvas)
+    # frame._get_fps_average()
 
 
 # Start game

@@ -1,9 +1,10 @@
 import random
-#import noise
+from perlin_noise import PerlinNoise
 
 from src.classes.Color import Color
 
 BLOCK_SIZE = 20
+noise = PerlinNoise()
 
 
 def rand_col(minimum=0, maximum=255):
@@ -19,8 +20,7 @@ class Terrain:
         self.blocks = {}  # (x, y) : Block
 
         for i in range(0, width // BLOCK_SIZE):
-            #h = 50 - (noise.pnoise1(i / 20) * 25) + (noise.pnoise1(i / 10) * 10)
-            h = 25
+            h = 25 - (noise.noise(i / 20) * 20) + (noise.noise(i / 10) * 10)
 
             for j in range(0, height // BLOCK_SIZE):
                 # noise
@@ -35,22 +35,12 @@ class Terrain:
             block.draw(canvas)
 
     def compute_texture(self):
-        #
-        #
-        # HERE IS WHERE YOU WOULD COMPUTE THE TEXTURE
-        # FOR EACH BLOCK
-        #
-        #
-        # TODO: RIGHT NOW ITS DOING SOLID COLOURS BUT LATER ON WE GOT TO DO TEXTURES
-        #
-        #
-
         for block in self.blocks.values():
             if ((block.x, block.y - BLOCK_SIZE * 2) in self.blocks and
                     (block.x - BLOCK_SIZE * 2, block.y) in self.blocks and
                     (block.x + BLOCK_SIZE * 2, block.y) in self.blocks or
                     # not (0 < block.x < 1280)):
-                    not (10 < block.x < 1260)):
+                    not (20 < block.x < 1240)):
                 block.color = Color(145, 97, 7)
             else:
                 block.color = Color(81, 255, 61)
