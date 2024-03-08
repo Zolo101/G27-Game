@@ -2,24 +2,13 @@ try:
     import simplegui
 except ImportError:
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
-
+from classes.Vector import Vector
 
 class Zombie:
-    def _init__(self, canvas, name):
-        self.canvas = canvas
-        self.name = name
-
-    def move_towards_player(self):
-        # use Interaction class?
-        player_coords = self.canvas.coords()
-        zombie_coords = self.canvas.coords(self.image)
-        if zombie_coords.x < player_coords:
-            self.zombie_move_right()
-        else:
-            self.zombie_move_left()
-
-    def zombie_move_left(self):
-        self.sprite.vel.x -= 1
-
-    def zombie_move_right(self):
-        self.sprite.vel.x += 1
+    def _init__(self, spawn_point, movement):
+        self.spawn_point = Vector(0,0)
+        self.movement = Vector(1,1)
+    
+    def update(self, canvas):
+        canvas.
+        
