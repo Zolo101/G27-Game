@@ -14,7 +14,6 @@ def rand_col(minimum=0, maximum=255):
     return Color(r, g, b)
     # return 'rgb(' + str(r) + ',' + str(g) + ',' + str(b) + ')'
 
-
 class Terrain:
     def __init__(self, width, height):
         self.blocks = {}  # (x, y) : Block
