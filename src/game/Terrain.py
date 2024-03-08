@@ -1,5 +1,5 @@
 import random
-import noise
+#import noise
 
 from src.classes.Color import Color
 
@@ -19,7 +19,8 @@ class Terrain:
         self.blocks = {}  # (x, y) : Block
 
         for i in range(0, width // BLOCK_SIZE):
-            h = 50 - (noise.pnoise1(i / 20) * 25) + (noise.pnoise1(i / 10) * 10)
+            #h = 50 - (noise.pnoise1(i / 20) * 25) + (noise.pnoise1(i / 10) * 10)
+            h = 50
 
             for j in range(0, height // BLOCK_SIZE):
                 # noise
