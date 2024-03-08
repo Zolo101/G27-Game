@@ -1,5 +1,3 @@
-from src.classes.Sprite import Sprite
-
 try:
     import simplegui
 except ImportError:
@@ -8,7 +6,6 @@ except ImportError:
 
 class Zombie:
     def _init__(self, canvas, name):
-        self.sprite = Sprite("zombie")
         self.canvas = canvas
         self.name = name
 
