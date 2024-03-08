@@ -8,5 +8,4 @@ class Zombie:
         canvas.draw_circle((self.spawn_point.x, self.spawn_point.y), 20, 12, "red", "red") 
 
     def draw(self, canvas):
-        canvas.update(canvas)
         canvas.draw_circle((500,500), 20, 12, "red", "red") 
