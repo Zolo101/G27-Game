@@ -1,11 +1,31 @@
+from src.classes.Sprite import Sprite
+
+SPEED = 10
+
 class Zombie:
-    def _init__(self, spawn_point, movement):
-        self.spawn_point = spawn_point
-        self.movement = movement
-    
-    def update(self, canvas):
-        self.spawn_point.add(self.velocity)
-        canvas.draw_circle((self.spawn_point.x, self.spawn_point.y), 20, 12, "red", "red") 
+    def __init__(self, x, y, player):
+        self.size = (30, 75)
+        self.sprite = Sprite("zombie")
+        self.sprite.pos.x = x
+        self.sprite.pos.y = y
+        self.player = player
+
+    def update(self):
+        if (self.player.sprite.pos.x < self.sprite.pos.x):
+            self.sprite.pos.x = self.sprite.pos.x - 1
+        if (self.player.sprite.pos.x > self.sprite.pos.x ):
+            self.sprite.pos.x = self.sprite.pos.x + 1
+
+        self.sprite.update()
 
     def draw(self, canvas):
-        canvas.draw_circle((500,500), 20, 12, "red", "red") 
+        # self.sprite.draw(canvas)
+        canvas.draw_polygon([
+            (self.sprite.pos.x, self.sprite.pos.y),
+            (self.sprite.pos.x + self.size[0], self.sprite.pos.y),
+            (self.sprite.pos.x + self.size[0], self.sprite.pos.y + self.size[1]),
+            (self.sprite.pos.x, self.sprite.pos.y + self.size[1])],
+            0,
+            "red",
+            "red"
+        )
