@@ -1,10 +1,10 @@
 from src.classes.Vector import Vector
 
-GRAVITY = 0.9
+GRAVITY = 2
 
 
 class Sprite:
-    def __init__(self, name, fixed=True):
+    def __init__(self, name, fixed=False):
         # TODO: Do we need a name?
         self.name = name
 
@@ -20,8 +20,16 @@ class Sprite:
         # Affected by gravity?
         self.fixed = fixed
 
+        # On the ground?
+        self.grounded = False
+
     def update(self):
         self.pos += self.vel
 
         if not self.fixed:
-            self.vel *= GRAVITY
+            self.vel.y += GRAVITY
+
+        # temporary terrain collision
+        self.grounded = self.pos.y > 540
+        if self.grounded:
+            self.vel.y = 0
