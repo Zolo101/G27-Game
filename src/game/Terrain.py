@@ -36,9 +36,9 @@ class Terrain:
 
     def compute_texture(self):
         for block in self.blocks.values():
-            if ((block.x, block.y - BLOCK_SIZE * 2) in self.blocks and
-                    (block.x - BLOCK_SIZE * 2, block.y) in self.blocks and
-                    (block.x + BLOCK_SIZE * 2, block.y) in self.blocks or
+            if ((block.x, block.y - BLOCK_SIZE) in self.blocks and
+                    (block.x - BLOCK_SIZE, block.y) in self.blocks and
+                    (block.x + BLOCK_SIZE, block.y) in self.blocks or
                     # not (0 < block.x < 1280)):
                     not (20 < block.x < 1240)):
                 block.color = Color(145, 97, 7)

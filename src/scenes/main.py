@@ -11,10 +11,12 @@ player = Player(600, 400)
 zombie = Zombie()
 
 
-def draw(canvas, clock, frame):
+def draw(canvas, clock, frame, interaction):
     sky.draw(canvas, clock, frame)
     terrain.draw(canvas)
     zombie.draw(canvas)
+
+    player.update(interaction)
     player.draw(canvas)
 
 
