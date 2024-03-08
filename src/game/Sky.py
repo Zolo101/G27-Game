@@ -11,8 +11,8 @@ CENTER = Vector(1280 // 2, 600)
 
 class Sky:
     def __init__(self):
-        self.sun = Sprite("Sun", False)
-        self.moon = Sprite("Moon", False)
+        self.sun = Sprite("Sun", True)
+        self.moon = Sprite("Moon", True)
         self.moon_offset = 15
         self.phase = 0
 

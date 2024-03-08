@@ -21,7 +21,7 @@ class Terrain:
 
         for i in range(0, width // BLOCK_SIZE):
             # h = 25 - (noise.noise(i / 20) * 20) + (noise.noise(i / 10) * 10)
-            h = 25
+            h = 30
 
             for j in range(0, height // BLOCK_SIZE):
                 # noise
