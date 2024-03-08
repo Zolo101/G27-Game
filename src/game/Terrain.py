@@ -3,7 +3,7 @@ import random
 
 from src.classes.Color import Color
 
-BLOCK_SIZE = 10
+BLOCK_SIZE = 20
 
 
 def rand_col(minimum=0, maximum=255):
@@ -20,7 +20,7 @@ class Terrain:
 
         for i in range(0, width // BLOCK_SIZE):
             #h = 50 - (noise.pnoise1(i / 20) * 25) + (noise.pnoise1(i / 10) * 10)
-            h = 50
+            h = 25
 
             for j in range(0, height // BLOCK_SIZE):
                 # noise
