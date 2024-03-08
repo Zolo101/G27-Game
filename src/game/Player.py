@@ -1,6 +1,6 @@
 from src.classes.Sprite import Sprite
 
-SPEED = 16
+SPEED = 15
 JUMP_POWER = 24
 
 
