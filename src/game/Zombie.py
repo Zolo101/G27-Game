@@ -24,10 +24,12 @@ class Zombie:
         self.sprite.update()
 
     def draw(self, canvas):
+
         # if Sky.phase <= 0 :
         #     self.spritesheet.draw(canvas)
         #     self.spritesheet.next_frame()
-        if self.phase > 300:                                                                                            # CURRENTLY NOT REACTING TO THE UPDATES OIN THE MOON POSITION
+        if self.phase < 300:                                                                                            # CURRENTLY NOT REACTING TO THE UPDATES OIN THE MOON POSITION
+            con = False
             canvas.draw_polygon([
                 (self.sprite.pos.x, self.sprite.pos.y),
                 (self.sprite.pos.x + self.size[0], self.sprite.pos.y),
@@ -37,6 +39,29 @@ class Zombie:
                 "red",
                 "red"
             )
+        else:
+            canvas.draw_polygon([
+                (self.sprite.pos.x, self.sprite.pos.y),
+                (self.sprite.pos.x + self.size[0], self.sprite.pos.y),
+                (self.sprite.pos.x + self.size[0], self.sprite.pos.y + self.size[1]),
+                (self.sprite.pos.x, self.sprite.pos.y + self.size[1])],
+                0,
+                "red",
+                "rgba(255, 0, 0, 0)"
+            )
+
+
+        # if self.phase > 300:                                                                                         # CURRENTLY NOT REACTING TO THE UPDATES OIN THE MOON POSITION
+        #     canvas.draw_polygon([
+        #         (10000, 10000),
+        #         (self.sprite.pos.x + self.size[0], self.sprite.pos.y),
+        #         (self.sprite.pos.x + self.size[0], self.sprite.pos.y + self.size[1]),
+        #         (self.sprite.pos.x, self.sprite.pos.y + self.size[1])],
+        #         0,
+        #         "blue",
+        #         "blue"
+        #     )
+
         # canvas.draw_polygon([
         #     (self.sprite.pos.x, self.sprite.pos.y),
         #     (self.sprite.pos.x + self.size[0], self.sprite.pos.y),
@@ -46,5 +71,7 @@ class Zombie:
         #     "red",
         #     "red"
         # )
+
+
 
 
