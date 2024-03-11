@@ -11,7 +11,12 @@ class Zombie:
         self.sprite.pos.x = x
         self.sprite.pos.y = y
         self.player = player
-        self.phase = sky.moon.pos.y
+        self.sky = sky
+        self.update_p()
+
+    def update_p(self):
+        self.phase = self.sky.moon.pos.y
+
 
 
 
@@ -21,6 +26,8 @@ class Zombie:
         if (self.player.sprite.pos.x > self.sprite.pos.x ):
             self.sprite.pos.x += 1
 
+        self.phase = self.sky.moon.pos.y
+
         self.sprite.update()
 
     def draw(self, canvas):
@@ -28,7 +35,7 @@ class Zombie:
         # if Sky.phase <= 0 :
         #     self.spritesheet.draw(canvas)
         #     self.spritesheet.next_frame()
-        if self.phase.moon.pos.y < 300:                                                                                            # CURRENTLY NOT REACTING TO THE UPDATES OIN THE MOON POSITION
+        if self.phase > 300:                                                                                            # CURRENTLY NOT REACTING TO THE UPDATES OIN THE MOON POSITION
             con = False
             canvas.draw_polygon([
                 (self.sprite.pos.x, self.sprite.pos.y),
@@ -39,16 +46,18 @@ class Zombie:
                 "red",
                 "red"
             )
-        else:
+        if self.phase < 300:
             canvas.draw_polygon([
                 (self.sprite.pos.x, self.sprite.pos.y),
                 (self.sprite.pos.x + self.size[0], self.sprite.pos.y),
                 (self.sprite.pos.x + self.size[0], self.sprite.pos.y + self.size[1]),
                 (self.sprite.pos.x, self.sprite.pos.y + self.size[1])],
                 0,
-                "red",
-                "rgba(255, 0, 0, 0)"
+                "yellow",
+                "yellow"
             )
+
+            #"rgba(255, 0, 0, 0)"
 
 
         # if self.phase > 300:                                                                                         # CURRENTLY NOT REACTING TO THE UPDATES OIN THE MOON POSITION
