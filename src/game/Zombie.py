@@ -1,6 +1,6 @@
 from src.classes.Sprite import Sprite
 from src.classes.Spritesheet import Spritesheet
-from src.game.Sky import Sky
+# from src.game.Sky import Sky
 
 SPEED = 10
 class Zombie:
@@ -28,7 +28,7 @@ class Zombie:
         # if Sky.phase <= 0 :
         #     self.spritesheet.draw(canvas)
         #     self.spritesheet.next_frame()
-        if self.phase < 300:                                                                                            # CURRENTLY NOT REACTING TO THE UPDATES OIN THE MOON POSITION
+        if self.phase.moon.pos.y < 300:                                                                                            # CURRENTLY NOT REACTING TO THE UPDATES OIN THE MOON POSITION
             con = False
             canvas.draw_polygon([
                 (self.sprite.pos.x, self.sprite.pos.y),
