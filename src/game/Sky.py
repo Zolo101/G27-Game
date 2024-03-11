@@ -30,7 +30,7 @@ class Sky:
             math.cos(-clock.time * SPEED) * OFFSET,
         )
 
-        print(self.moon.pos.y)
+        # print(self.moon.pos.y)
 
         self.phase = math.sin(clock.time * SPEED)
 
