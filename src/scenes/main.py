@@ -8,7 +8,7 @@ from src.game.Zombie import Zombie
 terrain = Terrain(1280, 800)
 sky = Sky()
 player = Player(600, 400)
-zombie = Zombie(600, 400, player)
+zombie = Zombie(200, 400, player)
 
 
 def draw(canvas, clock, frame, interaction):
