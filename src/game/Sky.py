@@ -24,10 +24,13 @@ class Sky:
             math.cos(-clock.time * SPEED) * OFFSET,
         )
 
+
         self.moon.pos = CENTER + Vector(
             math.sin(-clock.time * SPEED) * OFFSET,
             math.cos(-clock.time * SPEED) * OFFSET,
         )
+
+        # print(self.moon.pos)
 
         self.phase = math.sin(clock.time * SPEED)
 
