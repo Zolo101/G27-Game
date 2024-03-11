@@ -12,13 +12,7 @@ class Zombie:
         self.sprite.pos.y = y
         self.player = player
         self.sky = sky
-        self.update_p()
-
-    def update_p(self):
         self.phase = self.sky.moon.pos.y
-
-
-
 
     def update(self):
         if (self.player.sprite.pos.x < self.sprite.pos.x):
@@ -31,11 +25,8 @@ class Zombie:
         self.sprite.update()
 
     def draw(self, canvas):
-
-        # if Sky.phase <= 0 :
-        #     self.spritesheet.draw(canvas)
-        #     self.spritesheet.next_frame()
-        if self.phase > 300:                                                                                            # CURRENTLY NOT REACTING TO THE UPDATES OIN THE MOON POSITION
+        # temp code for the day and night cycle of a zombie.
+        if self.phase > 800:
             con = False
             canvas.draw_polygon([
                 (self.sprite.pos.x, self.sprite.pos.y),
@@ -46,7 +37,7 @@ class Zombie:
                 "red",
                 "red"
             )
-        if self.phase < 300:
+        else:
             canvas.draw_polygon([
                 (self.sprite.pos.x, self.sprite.pos.y),
                 (self.sprite.pos.x + self.size[0], self.sprite.pos.y),
@@ -57,29 +48,16 @@ class Zombie:
                 "yellow"
             )
 
-            #"rgba(255, 0, 0, 0)"
+        # NTS = need to check with other devices if the colour changes at the same point
 
 
-        # if self.phase > 300:                                                                                         # CURRENTLY NOT REACTING TO THE UPDATES OIN THE MOON POSITION
-        #     canvas.draw_polygon([
-        #         (10000, 10000),
-        #         (self.sprite.pos.x + self.size[0], self.sprite.pos.y),
-        #         (self.sprite.pos.x + self.size[0], self.sprite.pos.y + self.size[1]),
-        #         (self.sprite.pos.x, self.sprite.pos.y + self.size[1])],
-        #         0,
-        #         "blue",
-        #         "blue"
-        #     )
 
-        # canvas.draw_polygon([
-        #     (self.sprite.pos.x, self.sprite.pos.y),
-        #     (self.sprite.pos.x + self.size[0], self.sprite.pos.y),
-        #     (self.sprite.pos.x + self.size[0], self.sprite.pos.y + self.size[1]),
-        #     (self.sprite.pos.x, self.sprite.pos.y + self.size[1])],
-        #     0,
-        #     "red",
-        #     "red"
-        # )
+
+
+        # "rgba(255, 0, 0, 0)"                                                                                          # INVISIBLE POTION
+
+        # self.spritesheet.draw(canvas)
+        # self.spritesheet.next_frame()
 
 
 
