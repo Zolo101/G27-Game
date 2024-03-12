@@ -16,7 +16,7 @@ timer = 0
 
 zombies = []
 clock = Clock()
-def draw(canvas, clock, frame, interaction):
+def draw(manager, canvas, clock, frame, interaction):
     global timer
     timer +=1
     clock.tick()

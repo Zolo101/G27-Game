@@ -12,7 +12,7 @@ class SceneManager:
         print(f"Switched to scene: {scene_name}")
 
     def draw(self, canvas, clock, frame, interaction):
-        self.current_scene.draw(canvas, clock, frame, interaction)
+        self.current_scene.draw(self, canvas, clock, frame, interaction)
 
 
 # Scene
