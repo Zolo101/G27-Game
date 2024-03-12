@@ -21,8 +21,9 @@ def draw(canvas, clock, frame, interaction):
     timer +=1
     clock.tick()
     sky.draw(canvas, clock, frame)
-    if timer % 200 == 0:
-        zombies.append(Zombie(600, 400, player))
+    if sky.phase < 0.4 and sky.phase > 0.1:
+        if timer % 20 == 0:
+            zombies.append(Zombie(600, 400, player))
     terrain.draw(canvas)
     for Z in zombies:
         Z.draw(canvas)
