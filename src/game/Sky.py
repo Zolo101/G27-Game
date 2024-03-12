@@ -32,7 +32,7 @@ class Sky:
 
         # print(self.moon.pos.y)
 
-        self.phase = math.sin(clock.time * SPEED)
+        self.phase = math.cos(-clock.time * SPEED)
 
         x = max(0, (self.sun.pos - CENTER).y) / 1
         self.color = Color(135, 206, 235) - Color(x, x, x)

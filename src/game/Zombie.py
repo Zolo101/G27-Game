@@ -1,6 +1,6 @@
 from src.classes.Sprite import Sprite
 
-SPEED = 10
+SPEED = 2
 
 class Zombie:
     def __init__(self, x, y, player):
@@ -11,10 +11,10 @@ class Zombie:
         self.player = player
 
     def update(self):
-        if (self.player.sprite.pos.x < self.sprite.pos.x):
-            self.sprite.pos.x = self.sprite.pos.x - 1
-        if (self.player.sprite.pos.x > self.sprite.pos.x ):
-            self.sprite.pos.x = self.sprite.pos.x + 1
+        if self.player.sprite.pos.x < self.sprite.pos.x:
+            self.sprite.pos.x -= SPEED
+        if self.player.sprite.pos.x > self.sprite.pos.x:
+            self.sprite.pos.x += SPEED
 
         self.sprite.update()
 

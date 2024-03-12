@@ -9,7 +9,7 @@ from src.classes.Clock import Clock
 terrain = Terrain(1280, 800)
 sky = Sky()
 player = Player(600, 400)
-zombie = Zombie(200, 400, player,sky)
+zombie = Zombie(200, 400, player)
 
 global timer
 timer = 0
@@ -21,7 +21,7 @@ def draw(canvas, clock, frame, interaction):
     timer +=1
     clock.tick()
     sky.draw(canvas, clock, frame)
-    if sky.phase < 0.4 and sky.phase > 0.1:
+    if sky.phase < 0:
         if timer % 20 == 0:
             zombies.append(Zombie(600, 400, player))
     terrain.draw(canvas)
