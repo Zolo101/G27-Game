@@ -8,7 +8,7 @@ from src.classes.Clock import Clock
 # TODO: Make the width and height a variable
 terrain = Terrain(1280, 800)
 sky = Sky()
-player = Player(600, 400)
+player = Player(600, 400, 'Player1')
 zombie = Zombie(200, 400, player)
 
 global timer
@@ -32,6 +32,5 @@ def draw(canvas, clock, frame, interaction):
     player.update(interaction)
     zombie.update()
     player.draw(canvas)
-
 
 main = Scene("main", draw)

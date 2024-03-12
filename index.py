@@ -12,7 +12,7 @@ except ImportError:
 
 # player = Spritesheet()
 # interaction = Interaction()
-WIDTH, HEIGHT = (2560 // 2, 800)
+WIDTH, HEIGHT = (1280, 800)
 
 frame = simplegui.create_frame("base 27", 2560 / 2, 800, 0)
 
@@ -23,7 +23,7 @@ manager.add_scene(main)
 # manager.add_scene(upgrades)
 manager.add_scene(game_over)
 
-manager.switch_scene("main")
+manager.switch_scene("welcome")
 
 clock = Clock()
 interaction = Interaction(simplegui.KEY_MAP)
