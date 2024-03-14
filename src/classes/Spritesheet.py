@@ -31,9 +31,9 @@ class Spritesheet:
         )
 
         source_size = (self.frame_width, self.frame_height)
-        destination_centre = (300, 150)
+        destination_centre = (640, 400)
         # doesn't have to be same aspect ratio as frame!
-        destination_size = (100, 100)
+        destination_size = (1280, 200)
 
         img = simplegui.load_image(self.img_url)
 
