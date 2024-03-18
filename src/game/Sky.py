@@ -5,7 +5,7 @@ from src.classes.Sprite import Sprite
 from src.classes.Vector import Vector
 from src.classes.Spritesheet import Spritesheet
 
-SPEED = 0.01
+SPEED = 0.001
 OFFSET = 500
 CENTER = Vector(1280 // 2, 600)
 
@@ -20,6 +20,7 @@ class Sky:
         # self.spritesheet = Spritesheet("https://www.cs.rhul.ac.uk/courses/CS1830/sprites/background_clouds.png", 100, 100, 4, 4)
 
     def draw(self, canvas, clock, frame):
+        """ This gets run on every frame. """
         self.sun.pos = CENTER - Vector(
             math.sin(-clock.time * SPEED) * OFFSET,
             math.cos(-clock.time * SPEED) * OFFSET,

@@ -7,7 +7,10 @@ from src.classes.Vector import Vector
 
 GRAVITY = 2
 
+
 class Spritesheet:
+    """ Manipulates a spritesheet for the Sprite class """
+
     def __init__(self, img_url, width, height, columns, rows):
         self.img_url = img_url
         self.width = width
@@ -15,7 +18,6 @@ class Spritesheet:
         self.columns = columns
         self.rows = rows
         self.pos = Vector(0, 0)
-
 
         # Calculate frame dimension
         self._init_dimension()
@@ -30,6 +32,7 @@ class Spritesheet:
         self.frame_centre_y = self.frame_height / 2
 
     def draw(self, canvas):
+        """ This gets run on every frame. """
 
         source_centre = (
             self.frame_width * self.frame_index[0] + self.frame_centre_x,
@@ -43,23 +46,17 @@ class Spritesheet:
 
         img = simplegui.load_image(self.img_url)
 
-
-
         canvas.draw_image(img,
                           source_centre,
                           source_size,
                           (self.pos.x, self.pos.y),
                           (self.height, self.width))
 
-
-
-
-
-
-
-
-
     def next_frame(self):
+        """
+        Goes to the next frame of the spritesheet.
+        If there is none, it goes back to the beginning.
+        """
 
         self.frame_index[0] += 1
 
@@ -72,4 +69,3 @@ class Spritesheet:
         if self.frame_index[1] >= self.rows:
             self.frame_index[0] = 0
             self.frame_index[1] = 0
-

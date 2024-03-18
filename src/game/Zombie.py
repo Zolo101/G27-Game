@@ -19,6 +19,7 @@ class Zombie:
         self.sprite.update()
 
     def draw(self, canvas):
+        """ This gets run on every frame. """
         # self.sprite.draw(canvas)
         canvas.draw_polygon([
             (self.sprite.pos.x, self.sprite.pos.y),

@@ -4,32 +4,37 @@ GRAVITY = 2
 
 
 class Sprite:
+    """
+    Base sprite class which contains the position,
+    velocity and the texture of the sprite.
+    """
+
     def __init__(self, name, fixed=False):
-        # TODO: Do we need a name?
         self.name = name
+        """ The name of the sprite, used to differentiate from other sprites """
 
-        # The position of the sprite
         self.pos = Vector(0, 0)
+        """ Position vector of the sprite """
 
-        # The velocity of the sprite
         self.vel = Vector(0, 0)
+        """ Velocity vector of the sprite """
 
-        # The Spritesheet of the sprite
-        self.texture = None
+        self.sheet = None
+        """ Spritesheet of the sprite """
 
-        # Affected by gravity?
         self.fixed = fixed
+        """ If true, disables gravity on the sprite. """
 
-        # On the ground?
         self.grounded = False
+        """ True if the sprite is colliding with the terrain """
 
     def update(self):
+        """ This gets run on every frame. """
         self.pos += self.vel
 
         if not self.fixed:
             self.vel.y += GRAVITY
 
         # temporary terrain collision
-        self.grounded = self.pos.y > 540
         if self.grounded:
             self.vel.y = 0
