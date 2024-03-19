@@ -1,6 +1,9 @@
 import math
 
+
 class Color:
+    """ Simple class for manipulating color values"""
+
     def __init__(self, r, g, b):
         self.r = r
         self.g = g

@@ -3,14 +3,21 @@ try:
 except ImportError:
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
+from src.classes.Vector import Vector
+
+GRAVITY = 2
+
 
 class Spritesheet:
+    """ Manipulates a spritesheet for the Sprite class """
+
     def __init__(self, img_url, width, height, columns, rows):
         self.img_url = img_url
         self.width = width
         self.height = height
         self.columns = columns
         self.rows = rows
+        self.pos = Vector(0, 0)
 
         # Calculate frame dimension
         self._init_dimension()
@@ -25,25 +32,32 @@ class Spritesheet:
         self.frame_centre_y = self.frame_height / 2
 
     def draw(self, canvas):
+        """ This gets run on every frame. """
+
         source_centre = (
             self.frame_width * self.frame_index[0] + self.frame_centre_x,
             self.frame_height * self.frame_index[1] + self.frame_centre_y
         )
 
         source_size = (self.frame_width, self.frame_height)
-        destination_centre = (300, 150)
-        # doesn't have to be same aspect ratio as frame!
-        destination_size = (100, 100)
+        # destination_centre = (self.x, self.y)
+        # # doesn't have to be same aspect ratio as frame!
+        # destination_size = (self.height, self.width)
 
         img = simplegui.load_image(self.img_url)
 
         canvas.draw_image(img,
                           source_centre,
                           source_size,
-                          destination_centre,
-                          destination_size)
+                          (self.pos.x, self.pos.y),
+                          (self.height, self.width))
 
     def next_frame(self):
+        """
+        Goes to the next frame of the spritesheet.
+        If there is none, it goes back to the beginning.
+        """
+
         self.frame_index[0] += 1
 
         # go to the next row once it reaches the end

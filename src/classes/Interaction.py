@@ -1,4 +1,6 @@
 class Interaction:
+    """ For handling interactions """
+
     def __init__(self, key_map):
         # set every value in a dictionary to False
         self.key_map = key_map
@@ -11,7 +13,16 @@ class Interaction:
         self.press_map[key] = False
 
     def get_key(self, key):
+        """
+        Checks if a key is down. For example:
+
+
+        interaction.get_key("a")
+        interaction.get_key("space")
+        """
         return self.press_map[self.key_map[key]]
 
     def keys_down(self):
+        # TODO: Do we need this function?
+        """ Returns a list of keys currently down """
         return [key for key, value in self.press_map.items() if value]

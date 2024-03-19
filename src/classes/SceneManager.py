@@ -12,6 +12,7 @@ class SceneManager:
         print(f"Switched to scene: {scene_name}")
 
     def draw(self, canvas, clock, frame, interaction):
+        """ This gets run on every frame. """
         self.current_scene.draw(self, canvas, clock, frame, interaction)
 
 

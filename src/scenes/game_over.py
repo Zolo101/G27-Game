@@ -2,6 +2,7 @@ from src.classes.SceneManager import Scene
 
 
 def draw(manager, canvas, clock, frame, interaction):
+    """ This gets run on every frame. """
     print("you are drawing the game_over scene!")
 
 

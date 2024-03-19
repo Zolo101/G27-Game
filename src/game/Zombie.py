@@ -11,14 +11,15 @@ class Zombie:
         self.player = player
 
     def update(self):
-        if self.player.sprite.pos.x < self.sprite.pos.x:
+        if self.player.spritesheet.pos.x < self.sprite.pos.x:
             self.sprite.pos.x -= SPEED
-        if self.player.sprite.pos.x > self.sprite.pos.x:
+        if self.player.spritesheet.pos.x > self.sprite.pos.x:
             self.sprite.pos.x += SPEED
 
         self.sprite.update()
 
     def draw(self, canvas):
+        """ This gets run on every frame. """
         # self.sprite.draw(canvas)
         canvas.draw_polygon([
             (self.sprite.pos.x, self.sprite.pos.y),
