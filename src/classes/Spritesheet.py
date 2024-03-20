@@ -24,7 +24,7 @@ class Spritesheet:
 
         # Set up frame index
         # self.frame_index = [2, 2]
-        self.frame_index = [1, 2]
+        self.frame_index = [1, 4]
 
     def _init_dimension(self):
         self.frame_width = self.width / self.columns
@@ -45,12 +45,12 @@ class Spritesheet:
         # # doesn't have to be same aspect ratio as frame!
         # destination_size = (self.height, self.width)
 
-        img = simplegui.load_image(self.img_url)
+        img = simplegui._load_local_image(self.img_url)
 
         canvas.draw_image(img,
                           source_centre,
                           source_size,
-                          (self.pos.x, self.pos.y),
+                          self.pos.get_p(),
                           (self.height, self.width))
 
     def next_frame(self):
