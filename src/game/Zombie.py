@@ -11,9 +11,9 @@ class Zombie:
         self.player = player
 
     def update(self):
-        if self.player.spritesheet.pos.x < self.sprite.pos.x:
+        if self.player.sprite.sheet.pos.x < self.sprite.pos.x:
             self.sprite.pos.x -= SPEED
-        if self.player.spritesheet.pos.x > self.sprite.pos.x:
+        if self.player.sprite.sheet.pos.x > self.sprite.pos.x:
             self.sprite.pos.x += SPEED
 
         self.sprite.update()

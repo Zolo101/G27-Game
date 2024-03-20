@@ -36,9 +36,6 @@ def draw(manager, canvas, clock, frame, interaction):
     player.draw(canvas)
     check_collision(player, terrain)
 
-    for block in terrain.blocks.values():
-        block.health -= random.randrange(0, 2)
-
     terrain.remove_dead()
 
 
