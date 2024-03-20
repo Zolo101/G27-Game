@@ -130,9 +130,8 @@ class Block:
         x = self.lighting * 0.7
 
         # This gradually makes the block more red as damaged
-        print((255 / (101 - self.health)) * 255)
         color = self.color
-        color += Color((255 / (101 - self.health)) * 255, 0, 0)
+        color += Color(255 - ((self.health / 101) * 255), 0, 0)
 
         # Darken terrain depending on lightning
         color -= Color(x, x, x)
