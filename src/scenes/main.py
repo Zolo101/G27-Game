@@ -22,7 +22,7 @@ clock = Clock()
 def draw(manager, canvas, clock, frame, interaction):
     """ This gets run on every frame. """
     global timer
-    timer +=1
+    timer += 1
     clock.tick()
     sky.draw(canvas, clock, frame)
     if sky.phase < 0:
@@ -33,14 +33,19 @@ def draw(manager, canvas, clock, frame, interaction):
     for Z in zombies:
         Z.draw(canvas)
         Z.update()
+        check_collision(Z, terrain)
+
     player.update(interaction)
     player.draw(canvas)
+
     check_collision(player, terrain)
 
     terrain.remove_dead()
 
 
 def check_collision(p, t):
+    p.sprite.grounded = False
+
     for block in t.blocks.values():
         # block collision
         # collided = (
@@ -48,15 +53,20 @@ def check_collision(p, t):
         #         (block.y <= p.sprite.pos.y <= block.y - 20)
         # )
 
+        # collided = (
+        #         (block.x < p.sprite.pos.x) and
+        #         (block.x + 20 > p.sprite.pos.x) and
+        #         (block.y > p.sprite.pos.y) and
+        #         (block.y + 20 < p.sprite.pos.x)
+        # )
+
         collided = (
-                (block.x < p.sprite.pos.x) and
-                (block.x + 20 > p.sprite.pos.x) and
-                (block.y > p.sprite.pos.y) and
-                (block.y + 20 < p.sprite.pos.x)
+            block.y - (p.size[1] + 10) < p.sprite.pos.y
         )
 
-        p.sprite.grounded = collided
-        break
+        if collided:
+            p.sprite.grounded = True
+            break
 
 
 main = Scene("main", draw)

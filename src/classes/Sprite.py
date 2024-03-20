@@ -9,11 +9,11 @@ class Sprite:
     velocity and the texture of the sprite.
     """
 
-    def __init__(self, name, fixed=False):
+    def __init__(self, name, x=0, y=0, fixed=False):
         self.name = name
         """ The name of the sprite, used to differentiate from other sprites """
 
-        self.pos = Vector(0, 0)
+        self.pos = Vector(x, y)
         """ Position vector of the sprite """
 
         self.vel = Vector(0, 0)
@@ -34,6 +34,9 @@ class Sprite:
 
         if not self.fixed:
             self.vel.y += GRAVITY
+
+        if self.sheet:
+            self.sheet.pos = self.pos
 
         # temporary terrain collision
         if self.grounded:

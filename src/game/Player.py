@@ -12,7 +12,7 @@ class Player:
 
     def __init__(self, x, y, level=1, health=100, max_health=100):
         self.size = (30, 75)
-        self.sprite = Sprite("player")
+        self.sprite = Sprite("player", x, y)
         # self.sprite.texture.pos.x = 300
         # self.sprite.texture.pos.y = 300
         self.sprite.sheet = Spritesheet(

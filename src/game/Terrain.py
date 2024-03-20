@@ -46,10 +46,10 @@ class Terrain:
     def any_neighbours(self, block):
         """ Returns True if there is a neighbour block touching this block. """
         return ((block.x, block.y - BLOCK_SIZE) in self.blocks and
-            (block.x - BLOCK_SIZE, block.y) in self.blocks and
-            (block.x + BLOCK_SIZE, block.y) in self.blocks or
-            # not (0 < block.x < 1280)):
-            not (20 < block.x < 1240))
+                (block.x - BLOCK_SIZE, block.y) in self.blocks and
+                (block.x + BLOCK_SIZE, block.y) in self.blocks or
+                # not (0 < block.x < 1280)):
+                not (20 < block.x < 1240))
 
     def remove_dead(self):
         """ Removes blocks where health <= 0."""

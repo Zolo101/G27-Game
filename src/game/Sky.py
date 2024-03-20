@@ -26,7 +26,6 @@ class Sky:
             math.cos(-clock.time * SPEED) * OFFSET,
         )
 
-
         self.moon.pos = CENTER + Vector(
             math.sin(-clock.time * SPEED) * OFFSET,
             math.cos(-clock.time * SPEED) * OFFSET,
@@ -44,7 +43,6 @@ class Sky:
         # self.spritesheet.next_frame()
         canvas.draw_circle(self.moon.pos.get_p(), 1, 100, "White")
         canvas.draw_circle((self.moon.pos - Vector(self.moon_offset, self.moon_offset)).get_p(), 1, 100, self.color.__str__())
-
 
         frame.set_canvas_background(self.color.__str__())
 
