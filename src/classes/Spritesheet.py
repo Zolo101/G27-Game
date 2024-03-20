@@ -5,7 +5,7 @@ except ImportError:
 
 from src.classes.Vector import Vector
 
-GRAVITY = 2
+GRAVITY = 0
 
 
 class Spritesheet:

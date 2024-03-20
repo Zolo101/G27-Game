@@ -5,7 +5,7 @@ SPEED = 2
 class Zombie:
     def __init__(self, x, y, player):
         self.size = (30, 75)
-        self.sprite = Sprite("zombie", x, y, True)
+        self.sprite = Sprite("zombie", True)
         self.sprite.pos.x = x
         self.sprite.pos.y = y
         self.player = player
