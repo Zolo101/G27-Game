@@ -14,9 +14,17 @@ def rand_col(minimum=0, maximum=255):
     return Color(r, g, b)
     # return 'rgb(' + str(r) + ',' + str(g) + ',' + str(b) + ')'
 
+
 class Terrain:
+    """
+    Container that stores every `Block` in the game
+    """
+
     def __init__(self, width, height):
         self.blocks = {}  # (x, y) : Block
+
+        # These are blocks that the player can touch
+        self.visible_blocks = {}
 
         for i in range(0, width // BLOCK_SIZE):
             # h = 25 - (noise.noise(i / 20) * 20) + (noise.noise(i / 10) * 10)
@@ -31,25 +39,54 @@ class Terrain:
         self.compute_lighting()
 
     def draw(self, canvas):
+        """ This gets run on every frame. """
         for block in self.blocks.values():
             block.draw(canvas)
 
-    def compute_texture(self):
+    def any_neighbours(self, block):
+        """ Returns True if there is a neighbour block touching this block. """
+        return ((block.x, block.y - BLOCK_SIZE) in self.blocks and
+            (block.x - BLOCK_SIZE, block.y) in self.blocks and
+            (block.x + BLOCK_SIZE, block.y) in self.blocks or
+            # not (0 < block.x < 1280)):
+            not (20 < block.x < 1240))
+
+    def remove_dead(self):
+        """ Removes blocks where health <= 0."""
+        to_remove = {}
+        for coord, block in self.blocks.items():
+            if block.is_dead():
+                to_remove[coord] = block
+
+        for coord in to_remove.keys():
+            del self.blocks[coord]
+
+    def compute_visible(self):
+        """ Updates the dict of blocks that collide with air."""
+        self.visible_blocks.clear()
+
         for block in self.blocks.values():
-            if ((block.x, block.y - BLOCK_SIZE) in self.blocks and
-                    (block.x - BLOCK_SIZE, block.y) in self.blocks and
-                    (block.x + BLOCK_SIZE, block.y) in self.blocks or
-                    # not (0 < block.x < 1280)):
-                    not (20 < block.x < 1240)):
+            # check neighbours
+            if self.any_neighbours(block):
+                self.visible_blocks = block
+
+    def compute_texture(self):
+        """ Gives a color for the block based on some comparisons. """
+        for block in self.blocks.values():
+            if self.any_neighbours(block):
                 block.color = Color(145, 97, 7)
             else:
                 block.color = Color(81, 255, 61)
 
     def compute_lighting(self):
-        # compute how much blocks are in each 3x3 chunk
+        """
+        Computes the lightning for each block by
+        checking how many blocks are in a 9x9 grid.
+        """
+
         for block in self.blocks.values():
             block.lighting = 0
-            e = 0
+            clip = 0
 
             # for i in range(-1, 2):
             for i in range(-4, 5):
@@ -59,9 +96,9 @@ class Terrain:
                     if (nx, ny) in self.blocks or not (0 < nx < 1280) or not (0 < ny < 800):
                         block.lighting += 1
                     else:
-                        e += 1
+                        clip += 1
 
-            if e > 3:
+            if clip > 3:
                 block.lighting -= 1
 
             # if block.lighting > 80:
@@ -85,11 +122,21 @@ class Block:
         self.y = y
         self.lighting = 0
         self.color = rand_col()
+        self.health = 100
 
     def draw(self, canvas):
+        """ This gets run on every frame. """
+
         x = self.lighting * 0.7
-        # color = f"rgb({x}, {x}, {x})"
-        color = self.color - Color(x, x, x)
+
+        # This gradually makes the block more red as damaged
+        print((255 / (101 - self.health)) * 255)
+        color = self.color
+        color += Color((255 / (101 - self.health)) * 255, 0, 0)
+
+        # Darken terrain depending on lightning
+        color -= Color(x, x, x)
+
         canvas.draw_polygon([(self.x, self.y),
                              (self.x + BLOCK_SIZE, self.y),
                              (self.x + BLOCK_SIZE, self.y + BLOCK_SIZE),
@@ -100,3 +147,6 @@ class Block:
 
     def get_color(self):
         return self.color
+
+    def is_dead(self):
+        return self.health < 0

@@ -23,7 +23,8 @@ class Spritesheet:
         self._init_dimension()
 
         # Set up frame index
-        self.frame_index = [2, 1]
+        # self.frame_index = [2, 2]
+        self.frame_index = [1, 2]
 
     def _init_dimension(self):
         self.frame_width = self.width / self.columns

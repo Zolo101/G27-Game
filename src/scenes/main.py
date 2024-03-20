@@ -1,3 +1,5 @@
+import random
+
 from src.classes.SceneManager import Scene
 from src.game.Player import Player
 from src.game.Sky import Sky
@@ -8,15 +10,17 @@ from src.classes.Clock import Clock
 # TODO: Make the width and height a variable
 terrain = Terrain(1280, 800)
 sky = Sky()
-player = Player(600, 400, 'Player1')
-zombie = Zombie(200, 400, player)
+player = Player(600, 400)
 
 global timer
 timer = 0
 
 zombies = []
 clock = Clock()
+
+
 def draw(manager, canvas, clock, frame, interaction):
+    """ This gets run on every frame. """
     global timer
     timer +=1
     clock.tick()
@@ -28,9 +32,33 @@ def draw(manager, canvas, clock, frame, interaction):
     for Z in zombies:
         Z.draw(canvas)
         Z.update()
-    zombie.draw(canvas)
     player.update(interaction)
-    zombie.update()
     player.draw(canvas)
+    check_collision(player, terrain)
+
+    for block in terrain.blocks.values():
+        block.health -= random.randrange(0, 2)
+
+    terrain.remove_dead()
+
+
+def check_collision(p, t):
+    for block in t.blocks.values():
+        # block collision
+        # collided = (
+        #         (block.x <= p.sprite.pos.x <= block.x + 20) and
+        #         (block.y <= p.sprite.pos.y <= block.y - 20)
+        # )
+
+        collided = (
+                (block.x < p.sprite.pos.x) and
+                (block.x + 20 > p.sprite.pos.x) and
+                (block.y > p.sprite.pos.y) and
+                (block.y + 20 < p.sprite.pos.x)
+        )
+
+        p.sprite.grounded = collided
+        break
+
 
 main = Scene("main", draw)

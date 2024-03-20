@@ -30,6 +30,7 @@ interaction = Interaction(simplegui.KEY_MAP)
 
 
 def draw(canvas):
+    """ This gets run on every frame. """
     manager.draw(canvas, clock, frame, interaction)
     clock.tick()
     # frame._get_fps_average()

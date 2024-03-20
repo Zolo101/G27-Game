@@ -16,9 +16,9 @@ class Player:
         # self.sprite.texture.pos.x = 300
         # self.sprite.texture.pos.y = 300
         self.sprite.sheet = Spritesheet(
-            "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/8a072d29-42bc-45bb-be7b-cd731544eac2/degnka6-ae982415-ae64-485b-a2e9-04d30aeb9141.png/v1/fill/w_640,h_840/wonderland_player_spritesheet_by_littlestarsowo_degnka6-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9ODQwIiwicGF0aCI6IlwvZlwvOGEwNzJkMjktNDJiYy00NWJiLWJlN2ItY2Q3MzE1NDRlYWMyXC9kZWdua2E2LWFlOTgyNDE1LWFlNjQtNDg1Yi1hMmU5LTA0ZDMwYWViOTE0MS5wbmciLCJ3aWR0aCI6Ijw9NjQwIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.b46AhMWfR3ygLqYMAhNkdrAuIsnDj_iKiV52391Nj5w",
+            "./assets/player_spritesheet.png",
             640,
-            210, 4, 1)
+            420, 4, 2)
         self.sprite.sheet.pos.x = x
         self.sprite.sheet.pos.y = y
 
