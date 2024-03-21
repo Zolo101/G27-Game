@@ -6,11 +6,13 @@ from src.game.Sky import Sky
 from src.game.Terrain import Terrain
 from src.game.Zombie import Zombie
 from src.classes.Clock import Clock
+from src.scenes.UI import UI
 
 # TODO: Make the width and height a variable
 terrain = Terrain(1280, 800)
 sky = Sky()
 player = Player(600, 400)
+ui = UI(player)
 
 global timer
 timer = 0
@@ -41,6 +43,8 @@ def draw(manager, canvas, clock, frame, interaction):
     check_collision(player, terrain)
 
     terrain.remove_dead()
+
+    ui.draw(canvas)
 
 
 def check_collision(p, t):
