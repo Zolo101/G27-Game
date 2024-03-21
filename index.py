@@ -29,10 +29,19 @@ clock = Clock()
 interaction = Interaction(simplegui.KEY_MAP)
 
 
+def e():
+    manager.tick(clock, frame, interaction)
+
+
+timer = simplegui.create_timer(1, e)
+
+
 def draw(canvas):
     """ This gets run on every frame. """
     manager.draw(canvas, clock, frame, interaction)
-    clock.tick()
+    # manager.tick(canvas, clock, frame, interaction)
+    # print(clock.time)
+    # clock.tick()
     # frame._get_fps_average()
 
 
@@ -40,4 +49,5 @@ def draw(canvas):
 frame.set_draw_handler(draw)
 frame.set_keydown_handler(interaction.key_down)
 frame.set_keyup_handler(interaction.key_up)
+timer.start()
 frame.start()

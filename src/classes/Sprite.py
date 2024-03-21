@@ -1,6 +1,7 @@
 from src.classes.Vector import Vector
 
 GRAVITY = 2
+AIR_RESISTANCE = 0.8
 
 
 class Sprite:
@@ -28,6 +29,13 @@ class Sprite:
         self.grounded = False
         """ True if the sprite is colliding with the terrain """
 
+        self.blocked = {
+            "up": False,
+            "down": False,
+            "left": False,
+            "right": False,
+        }
+
     def update(self):
         """ This gets run on every frame. """
         self.pos += self.vel
@@ -39,5 +47,10 @@ class Sprite:
             self.sheet.pos = self.pos
 
         # temporary terrain collision
-        if self.grounded:
+        if self.blocked["down"]:
             self.vel.y = 0
+
+        if not (self.blocked["left"] or self.blocked["right"]):
+            self.vel.x *= AIR_RESISTANCE
+        else:
+            self.vel.x = 0

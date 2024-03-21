@@ -51,7 +51,7 @@ class Spritesheet:
                           source_centre,
                           source_size,
                           self.pos.get_p(),
-                          (self.height, self.width))
+                          (self.height / 3, self.width / 3))
 
     def next_frame(self):
         """

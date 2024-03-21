@@ -15,9 +15,14 @@ class SceneManager:
         """ This gets run on every frame. """
         self.current_scene.draw(self, canvas, clock, frame, interaction)
 
+    def tick(self, clock, frame, interaction):
+        """ This gets run every 4 ms for time sensitive functions """
+        self.current_scene.tick(self, clock, frame, interaction)
+
 
 # Scene
 class Scene:
-    def __init__(self, name, draw):
+    def __init__(self, name, draw, tick):
         self.name = name
         self.draw = draw
+        self.tick = tick

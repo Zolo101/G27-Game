@@ -6,4 +6,8 @@ def draw(manager, canvas, clock, frame, interaction):
     print("you are drawing the game_over scene!")
 
 
-game_over = Scene("game_over", draw)
+def tick():
+    pass
+
+
+game_over = Scene("game_over", draw, tick)

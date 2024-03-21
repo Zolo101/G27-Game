@@ -17,10 +17,8 @@ def draw(manager, canvas, clock, frame, interaction):
         manager.switch_scene("main")
 
 
+def tick():
+    pass
 
 
-
-
-
-
-welcome = Scene("welcome", draw)
+welcome = Scene("welcome", draw, tick)
