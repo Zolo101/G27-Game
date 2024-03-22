@@ -15,7 +15,7 @@ ui = UI(player)
 
 global timer
 timer = 0
-gun = gun(20,20)
+gun = gun(200,200,player)
 zombies = []
 clock = Clock()
 
@@ -33,6 +33,7 @@ def draw(manager, canvas, clock, frame, interaction):
     # zombies.append(Zombie(1500, 400, player))
     terrain.draw(canvas)
     gun.draw(canvas)
+    gun.update()
     for Z in zombies:
         Z.draw(canvas)
         Z.update()
