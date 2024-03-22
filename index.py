@@ -9,7 +9,7 @@ try:
     import simplegui
 except ImportError:
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
-  
+
 # player = Spritesheet()
 # interaction = Interaction()
 WIDTH, HEIGHT = (1280, 800)
@@ -33,7 +33,8 @@ def e():
     manager.tick(clock, frame, interaction)
 
 
-timer = simplegui.create_timer(8, e)
+timer = simplegui.create_timer(16, e)
+
 
 def draw(canvas):
     """ This gets run on every frame. """
@@ -50,3 +51,5 @@ frame.set_keydown_handler(interaction.key_down)
 frame.set_keyup_handler(interaction.key_up)
 timer.start()
 frame.start()
+
+#Test Commit

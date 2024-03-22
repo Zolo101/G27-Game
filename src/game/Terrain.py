@@ -68,8 +68,11 @@ class Terrain:
 
         for block in self.blocks.values():
             # check neighbours
-            if self.any_neighbours(block):
+            # if self.any_neighbours(block):
+            if not self.any_neighbours(block):
                 self.visible_blocks[(block.x, block.y)] = block
+
+        print(len(self.visible_blocks), "visible,", len(self.blocks), "total")
 
     def compute_texture(self):
         """ Gives a color for the block based on some comparisons. """
@@ -103,7 +106,7 @@ class Terrain:
                 block.lighting -= 1
 
             # if block.lighting > 80:
-            block.color += rand_col(0, max(1, block.lighting // 10))
+            # block.color += rand_col(0, max(1, block.lighting // 10))
 
             # block.lighting += (block.x - BLOCK_SIZE, block.y + BLOCK_SIZE) in self.blocks
             # block.lighting += (block.x, block.y + BLOCK_SIZE) in self.blocks

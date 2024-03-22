@@ -11,7 +11,7 @@ class Player:
     """
 
     def __init__(self, x, y, level=1, health=100, max_health=100):
-        self.size = (640 / 8, 420 / 4)
+        self.size = (50, 120)
         self.sprite = Sprite("player", x, y)
         self.sprite.sheet = Spritesheet(
             "./assets/player_spritesheet.png",
@@ -75,16 +75,16 @@ class Player:
 
         # print(self.sprite.blocked)
 
+        canvas.draw_polygon([
+            (self.sprite.pos.x, self.sprite.pos.y),
+            (self.sprite.pos.x + self.size[0], self.sprite.pos.y),
+            (self.sprite.pos.x + self.size[0], self.sprite.pos.y + self.size[1]),
+            (self.sprite.pos.x, self.sprite.pos.y + self.size[1])],
+            0,
+            "blue",
+            "blue"
+        )
         self.sprite.sheet.draw(canvas)
-        # canvas.draw_polygon([
-        #     (self.sprite.pos.x, self.sprite.pos.y),
-        #     (self.sprite.pos.x + self.size[0], self.sprite.pos.y),
-        #     (self.sprite.pos.x + self.size[0], self.sprite.pos.y + self.size[1]),
-        #     (self.sprite.pos.x, self.sprite.pos.y + self.size[1])],
-        #     0,
-        #     "blue",
-        #     "blue"
-        # )
 
         # self.sprite.sheet.draw(canvas)
         # self.sprite.texture_idle.draw(canvas)
