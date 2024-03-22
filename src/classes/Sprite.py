@@ -45,7 +45,10 @@ class Sprite:
             self.vel.y += GRAVITY
 
         if self.sheet:
-            self.sheet.pos = self.pos.copy().add(Vector(self.sheet.frame_centre_x / 3, self.sheet.frame_centre_y / 3))
+            if self.name == "player":
+                self.sheet.pos = self.pos.copy().add(Vector(self.sheet.frame_centre_x / 3, self.sheet.frame_centre_y / 3))
+            else:
+                self.sheet.pos = self.pos.copy().add(Vector(self.sheet.frame_centre_x / 0.4, self.sheet.frame_centre_y / 0.16))
 
         # debug
         # print(self.name, self.blocked)

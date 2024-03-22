@@ -106,7 +106,7 @@ class Terrain:
                 block.lighting -= 1
 
             # if block.lighting > 80:
-            # block.color += rand_col(0, max(1, block.lighting // 10))
+            block.color += rand_col(0, max(1, block.lighting // 10))
 
             # block.lighting += (block.x - BLOCK_SIZE, block.y + BLOCK_SIZE) in self.blocks
             # block.lighting += (block.x, block.y + BLOCK_SIZE) in self.blocks

@@ -28,7 +28,7 @@ def draw(manager, canvas, clock, frame, interaction):
     sky.draw(canvas, clock, frame)
     # if sky.phase < 0:
     if timer % 40 == 0:
-        zombies.append(Zombie(400, -800, player))
+        zombies.append(Zombie(400, -000, player))
     # zombies.append(Zombie(-100, 400, player))
     # zombies.append(Zombie(1500, 400, player))
     terrain.draw(canvas)
@@ -43,6 +43,14 @@ def draw(manager, canvas, clock, frame, interaction):
     player.draw(canvas)
 
     terrain.remove_dead()
+
+    if player.sprite.pos.y > 800:
+        player.take_damage(49)
+        player.sprite.pos.x = 600
+        player.sprite.pos.y = 400
+
+    if not player.is_alive():
+        manager.switch_scene("game_over")
 
     ui.draw(canvas)
 
@@ -78,11 +86,6 @@ def check_collision(p, t):
     for block in t.visible_blocks.values():
         # block collision
 
-        bl_pos = p.sprite.pos.copy().add(Vector(0, p.size[1] - 50))
-        br_pos = p.sprite.pos.copy().add(Vector(p.size[0], p.size[1] - 50))
-        tl_pos = p.sprite.pos.copy().add(Vector(0, p.size[1] - 30))
-        tr_pos = p.sprite.pos.copy().add(Vector(0, p.size[1] - 30))
-
         dx = p.sprite.pos.x - block.x
         dy = p.sprite.pos.y - block.y
 
@@ -94,6 +97,9 @@ def check_collision(p, t):
             p.sprite.blocked["down"] |= down
 
         if collision_consensus_sides(dx, dy, p):
+            bl_pos = p.sprite.pos.copy().add(Vector(0, p.size[1] - 50))
+            br_pos = p.sprite.pos.copy().add(Vector(p.size[0], p.size[1] - 50))
+
             left = block.x <= bl_pos.x
             right = block.x + p.size[0] >= br_pos.x
 

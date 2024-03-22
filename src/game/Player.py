@@ -58,8 +58,7 @@ class Player:
             self.health = 0
 
     def is_alive(self):
-        if self.health <= 0:
-            return False
+        return self.health > 0
 
     def level_up(self):
         """ Increments the player level by 1, along with increases their health. """
