@@ -6,7 +6,7 @@ from src.game.Terrain import Terrain
 from src.game.Zombie import Zombie
 from src.classes.Clock import Clock
 from src.scenes.UI import UI
-
+from src.classes.gun import gun
 # TODO: Make the width and height a variable
 terrain = Terrain(1280, 800)
 sky = Sky()
@@ -15,7 +15,7 @@ ui = UI(player)
 
 global timer
 timer = 0
-
+gun = gun(20,20)
 zombies = []
 clock = Clock()
 
@@ -32,6 +32,7 @@ def draw(manager, canvas, clock, frame, interaction):
     # zombies.append(Zombie(-100, 400, player))
     # zombies.append(Zombie(1500, 400, player))
     terrain.draw(canvas)
+    gun.draw(canvas)
     for Z in zombies:
         Z.draw(canvas)
         Z.update()
