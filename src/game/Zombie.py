@@ -34,6 +34,9 @@ class Zombie:
             # self.sprite.sheet.frame_width = (self.sprite.sheet.frame_width)
             self.sprite.sheet.frame_index[1] = 1
             self.sprite.sheet.next_frame()
+        if (self.sprite.pos.x > self.player.sprite.sheet.pos.x) and (self.sprite.pos.x < self.player.sprite.sheet.pos.x + 40):
+            self.player.take_damage(1)
+
 
 
         if self.sprite.blocked["left"] or self.sprite.blocked["right"]:
