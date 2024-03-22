@@ -37,6 +37,7 @@ class Terrain:
                     self.blocks[(i * BLOCK_SIZE, j * BLOCK_SIZE)] = Block(i * BLOCK_SIZE, j * BLOCK_SIZE)
         self.compute_texture()
         self.compute_lighting()
+        self.compute_visible()
 
     def draw(self, canvas):
         """ This gets run on every frame. """
@@ -68,7 +69,7 @@ class Terrain:
         for block in self.blocks.values():
             # check neighbours
             if self.any_neighbours(block):
-                self.visible_blocks = block
+                self.visible_blocks[(block.x, block.y)] = block
 
     def compute_texture(self):
         """ Gives a color for the block based on some comparisons. """

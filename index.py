@@ -33,7 +33,7 @@ def e():
     manager.tick(clock, frame, interaction)
 
 
-timer = simplegui.create_timer(1, e)
+timer = simplegui.create_timer(8, e)
 
 def draw(canvas):
     """ This gets run on every frame. """
