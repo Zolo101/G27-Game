@@ -69,7 +69,11 @@ class Terrain:
         for block in self.blocks.values():
             # check neighbours
             # if self.any_neighbours(block):
-            if not self.any_neighbours(block):
+            if not ((block.x, block.y - BLOCK_SIZE * 2) in self.blocks and
+                    (block.x - BLOCK_SIZE * 2, block.y) in self.blocks and
+                    (block.x + BLOCK_SIZE * 2, block.y) in self.blocks or
+                    # not (0 < block.x < 1280)):
+                    not (20 < block.x < 1240)):
                 self.visible_blocks[(block.x, block.y)] = block
 
         print(len(self.visible_blocks), "visible,", len(self.blocks), "total")
