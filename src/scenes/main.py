@@ -35,7 +35,7 @@ def draw(manager, canvas, clock, frame, interaction):
     for Z in zombies:
         Z.draw(canvas)
         Z.update()
-        check_collision(Z, terrain)
+        # check_collision(Z, terrain)
         # draw_debug_collisions(canvas, terrain, Z)
 
     player.update(interaction)
