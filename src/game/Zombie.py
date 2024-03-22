@@ -10,9 +10,10 @@ class Zombie:
         self.size = (75, 200)
         self.sprite = Sprite("zombie", x, y)
         self.sprite.sheet = Spritesheet(
-            "./assets/zombie_spritesheet.png",
+            "./assets/rrr.png",
             288,
-            160, 9, 5,100,200)
+            320, 9, 10,100,200)
+
         self.sprite.sheet.pos.x = x
         self.sprite.sheet.pos.y = y
         self.sprite.sheet.frame_index[1] = 1
@@ -25,9 +26,13 @@ class Zombie:
     def update(self):
         if self.player.sprite.sheet.pos.x < self.sprite.pos.x:
             self.sprite.pos.x -= SPEED
+            # self.sprite.sheet.frame_width = -(self.sprite.sheet.frame_width)
+            self.sprite.sheet.frame_index[1] = 5
             self.sprite.sheet.next_frame()
         if self.player.sprite.sheet.pos.x > self.sprite.pos.x:
             self.sprite.pos.x += SPEED
+            # self.sprite.sheet.frame_width = (self.sprite.sheet.frame_width)
+            self.sprite.sheet.frame_index[1] = 1
             self.sprite.sheet.next_frame()
 
 
