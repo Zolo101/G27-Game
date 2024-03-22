@@ -51,5 +51,3 @@ frame.set_keydown_handler(interaction.key_down)
 frame.set_keyup_handler(interaction.key_up)
 timer.start()
 frame.start()
-
-#Test Commit
