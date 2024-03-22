@@ -99,8 +99,10 @@ def check_collision(p, t):
             p.sprite.blocked["left"] |= left
             p.sprite.blocked["right"] |= right
 
-        p.sprite.grounded |= p.sprite.blocked["up"] or p.sprite.blocked["down"] or p.sprite.blocked["left"] or \
-                             p.sprite.blocked["right"]
+        p.sprite.grounded |= (p.sprite.blocked["up"] or
+                              p.sprite.blocked["down"] or
+                              p.sprite.blocked["left"] or
+                              p.sprite.blocked["right"])
 
 
 def collision_consensus(dx, dy, p):

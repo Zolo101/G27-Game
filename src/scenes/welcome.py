@@ -20,7 +20,7 @@ def draw(manager, canvas, clock, frame, interaction):
         manager.switch_scene("main")
 
 
-def tick():
+def tick(clock, frame, interaction):
     pass
 
 
