@@ -13,12 +13,10 @@ class Player:
     def __init__(self, x, y, level=1, health=100, max_health=100):
         self.size = (640 / 8, 420 / 4)
         self.sprite = Sprite("player", x, y)
-        # self.sprite.texture.pos.x = 300
-        # self.sprite.texture.pos.y = 300
         self.sprite.sheet = Spritesheet(
             "./assets/player_spritesheet.png",
             640,
-            420, 4, 2)
+            420, 4, 2, 140,213)
         self.sprite.sheet.pos.x = x
         self.sprite.sheet.pos.y = y
 
@@ -36,10 +34,15 @@ class Player:
         if interaction.get_key("a") and not self.sprite.blocked["left"]:
             self.sprite.vel.x -= SPEED
             # self.sprite.sheet.pos.x -= SPEED
+            self.sprite.sheet.max_c = 4
+            self.sprite.sheet.frame_index[1] = 0                                                        # CHOOSES THE ROW FROM THE SPRITESHEET
             self.sprite.sheet.next_frame()
         if interaction.get_key("d") and not self.sprite.blocked["right"]:
             self.sprite.vel.x += SPEED
+            self.sprite.sheet.max_c = 4
             # self.sprite.sheet.pos.x += SPEED
+
+            self.sprite.sheet.frame_index[1] = 1                                                        # CHOOSES THH ROW FROM THE SPRITESHEET
             self.sprite.sheet.next_frame()
 
         self.sprite.update()
@@ -73,15 +76,15 @@ class Player:
         # print(self.sprite.blocked)
 
         self.sprite.sheet.draw(canvas)
-        canvas.draw_polygon([
-            (self.sprite.pos.x, self.sprite.pos.y),
-            (self.sprite.pos.x + self.size[0], self.sprite.pos.y),
-            (self.sprite.pos.x + self.size[0], self.sprite.pos.y + self.size[1]),
-            (self.sprite.pos.x, self.sprite.pos.y + self.size[1])],
-            0,
-            "blue",
-            "blue"
-        )
+        # canvas.draw_polygon([
+        #     (self.sprite.pos.x, self.sprite.pos.y),
+        #     (self.sprite.pos.x + self.size[0], self.sprite.pos.y),
+        #     (self.sprite.pos.x + self.size[0], self.sprite.pos.y + self.size[1]),
+        #     (self.sprite.pos.x, self.sprite.pos.y + self.size[1])],
+        #     0,
+        #     "blue",
+        #     "blue"
+        # )
 
         # self.sprite.sheet.draw(canvas)
         # self.sprite.texture_idle.draw(canvas)

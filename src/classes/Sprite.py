@@ -35,6 +35,7 @@ class Sprite:
             "left": False,
             "right": False,
         }
+        self.frame_index = [1, 4]
 
     def update(self):
         """ This gets run on every frame. """
@@ -54,3 +55,5 @@ class Sprite:
             self.vel.x *= AIR_RESISTANCE
         else:
             self.vel.x = 0
+
+

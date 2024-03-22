@@ -7,24 +7,25 @@ from src.classes.Vector import Vector
 
 GRAVITY = 0
 
-
 class Spritesheet:
     """ Manipulates a spritesheet for the Sprite class """
 
-    def __init__(self, img_url, width, height, columns, rows):
+    def __init__(self, img_url, width, height, columns, rows,sprite_size_h,sprite_size_w):
         self.img_url = img_url
         self.width = width
         self.height = height
         self.columns = columns
         self.rows = rows
         self.pos = Vector(0, 0)
+        self.sprite_size_h = sprite_size_h                                                  # The height of the sprite in game.
+        self.sprite_size_w = sprite_size_w                                                  # The width of the sprite in game.
 
         # Calculate frame dimension
         self._init_dimension()
 
         # Set up frame index
-        # self.frame_index = [2, 2]
-        self.frame_index = [1, 4]
+
+        self.frame_index = [0,0]
 
     def _init_dimension(self):
         self.frame_width = self.width / self.columns
@@ -41,9 +42,6 @@ class Spritesheet:
         )
 
         source_size = (self.frame_width, self.frame_height)
-        # destination_centre = (self.x, self.y)
-        # # doesn't have to be same aspect ratio as frame!
-        # destination_size = (self.height, self.width)
 
         img = simplegui._load_local_image(self.img_url)
 
@@ -51,7 +49,7 @@ class Spritesheet:
                           source_centre,
                           source_size,
                           self.pos.get_p(),
-                          (self.height / 3, self.width / 3))
+                          (self.sprite_size_h, self.sprite_size_w))
 
     def next_frame(self):
         """
@@ -62,11 +60,11 @@ class Spritesheet:
         self.frame_index[0] += 1
 
         # go to the next row once it reaches the end
-        if self.frame_index[0] >= self.columns:
+        if self.frame_index[0] >= self.max_c:
             self.frame_index[0] = 0
-            self.frame_index[1] += 1
+            # self.frame_index[1] += 1
 
         # go back to the start once it reaches the end of the last row
-        if self.frame_index[1] >= self.rows:
-            self.frame_index[0] = 0
-            self.frame_index[1] = 0
+        # if self.frame_index[1] >= self.rows:
+        #     self.frame_index[0] = 0
+        #     self.frame_index[1] = 0
