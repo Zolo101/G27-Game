@@ -32,11 +32,13 @@ def draw(manager, canvas, clock, frame, interaction):
     # zombies.append(Zombie(-100, 400, player))
     # zombies.append(Zombie(1500, 400, player))
     terrain.draw(canvas)
-    # gun.draw(canvas)
-    # gun.update()
+
+    gun.draw(canvas)
+    gun.update()
     for Z in zombies:
         Z.draw(canvas)
         Z.update()
+        
         # check_collision(Z, terrain)
         # draw_debug_collisions(canvas, terrain, Z)
 

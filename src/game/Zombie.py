@@ -34,8 +34,10 @@ class Zombie:
             # self.sprite.sheet.frame_width = (self.sprite.sheet.frame_width)
             self.sprite.sheet.frame_index[1] = 1
             self.sprite.sheet.next_frame()
-        if (self.sprite.pos.x > self.player.sprite.sheet.pos.x) and (self.sprite.pos.x < self.player.sprite.sheet.pos.x + 40):
+        if (self.sprite.pos.x > self.player.sprite.sheet.pos.x) and (self.sprite.pos.x < self.player.sprite.sheet.pos.x + 20) and (self.sprite.pos.y > self.player.sprite.sheet.pos.y - 80) and (self.sprite.pos.y < self.player.sprite.sheet.pos.y + 80) :
             self.player.take_damage(1)
+
+
 
 
 
