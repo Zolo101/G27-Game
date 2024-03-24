@@ -120,6 +120,18 @@ class Vector:
         return self.rotate_rad(theta_rad)
 
     def get_proj(self, vec):
-        """ project the vector onto a given vector """
+        """ Project the vector onto a given vector """
         unit = vec.get_normalized()
         return unit.multiply(self.dot(unit))
+
+    def minimum(self, vec):
+        """ Returns the minimum of the two vectors """
+        return Vector(min(self.x, vec.x), min(self.y, vec.y))
+
+    def maximum(self, vec):
+        """ Returns the maximum of the two vectors """
+        return Vector(max(self.x, vec.x), max(self.y, vec.y))
+
+    def clamp(self, min_vec, max_vec):
+        """ Clamps the vector to a given vector """
+        return self.minimum(max_vec).maximum(min_vec)

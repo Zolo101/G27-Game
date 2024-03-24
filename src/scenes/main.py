@@ -35,12 +35,14 @@ def draw(manager, canvas, clock, frame, interaction):
 
     gun.draw(canvas)
     gun.update()
-    for Z in zombies:
-        Z.draw(canvas)
-        Z.update()
-        
-        # check_collision(Z, terrain)
-        # draw_debug_collisions(canvas, terrain, Z)
+    for zombie in zombies:
+        zombie.draw(canvas)
+        zombie.update()
+
+        if zombie.sprite.pos.y > 800:
+            zombies.remove(zombie)
+        # check_collision(zombie, terrain)
+        # draw_debug_collisions(canvas, terrain, zombie)
 
     player.update(interaction)
     player.draw(canvas)

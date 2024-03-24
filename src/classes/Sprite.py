@@ -2,12 +2,13 @@ from src.classes.Vector import Vector
 
 GRAVITY = 2
 AIR_RESISTANCE = 0.8
+TERMINAL_VELOCITY = 20
 
 
 class Sprite:
     """
     Base sprite class which contains the position,
-    velocity and the texture of the sprite.
+    velocity and the texture (spritesheet) of the sprite.
     """
 
     def __init__(self, name, x=0, y=0, fixed=False):
@@ -35,6 +36,8 @@ class Sprite:
             "left": False,
             "right": False,
         }
+        """ Dictionary of collision states """
+
         self.frame_index = [1, 4]
 
     def update(self):
@@ -53,7 +56,7 @@ class Sprite:
         # debug
         # print(self.name, self.blocked)
 
-        # temporary terrain collision
+        # collision physics
         if self.blocked["down"]:
             self.vel.y = 0
 
@@ -62,4 +65,5 @@ class Sprite:
         else:
             self.vel.x = 0
 
-
+        # physics clamping (to stop super jumps)
+        self.vel.y = max(self.vel.y, -TERMINAL_VELOCITY)
