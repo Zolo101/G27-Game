@@ -6,14 +6,15 @@ from src.game.Terrain import Terrain
 from src.game.Zombie import Zombie
 from src.classes.Clock import Clock
 from src.scenes.UI import UI
-from src.classes.gun import gun
 from src.classes.Pew import Pew
+from src.classes.Shoot import Shoot
 # TODO: Make the width and height a variable
 terrain = Terrain(1280, 800)
 sky = Sky()
 player = Player(600, 400)
 pew = Pew(player)
 ui = UI(player)
+shoot = Shoot(player)
 
 global timer
 timer = 0
@@ -31,12 +32,14 @@ def draw(manager, canvas, clock, frame, interaction):
     sky.draw(canvas, clock, frame)
     # if sky.phase < 0:
     if timer % 40 == 0:
-        zombies.append(Zombie(400, -000, player))
+        zombies.append(Zombie(400, -000, player,shoot))
     # zombies.append(Zombie(-100, 400, player))
     # zombies.append(Zombie(1500, 400, player))
+
     terrain.draw(canvas)
-    pew.draw(canvas)
-    pew.update(interaction)
+
+    shoot.draw(canvas)
+    shoot.update(interaction)
 
     for Z in zombies:
         Z.draw(canvas)
@@ -59,8 +62,12 @@ def draw(manager, canvas, clock, frame, interaction):
 
     if not player.is_alive():
         manager.switch_scene("game_over")
-
+    pew.draw(canvas)
+    pew.update(interaction)
     ui.draw(canvas)
+
+    for k in zombies :
+        pass
 
     # draw_debug_collisions(canvas, terrain, player)
 

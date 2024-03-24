@@ -6,7 +6,8 @@ JUMP_POWER = 40 / 4
 
 
 class Zombie:
-    def __init__(self, x, y, player):
+    def __init__(self, x, y, player,bullets):
+        self.bullets = bullets
         self.size = (75, 200)
         self.sprite = Sprite("zombie", x, y)
         self.sprite.sheet = Spritesheet(
@@ -39,7 +40,9 @@ class Zombie:
             self.player.take_damage(1)
 
 
-
+        if  self.bullets.sprite.pos.x < self.sprite.pos.x:
+            self.sprite.sheet.pos.x = 1000
+            self.sprite.sheet.next_frame()
 
 
         if self.sprite.blocked["left"] or self.sprite.blocked["right"]:
