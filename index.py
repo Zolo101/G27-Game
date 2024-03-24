@@ -10,6 +10,7 @@ try:
 except ImportError:
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
+# fonts = simplegui.Text.fonts_installed_list()
 # player = Spritesheet()
 # interaction = Interaction()
 WIDTH, HEIGHT = (1280, 800)
@@ -23,7 +24,7 @@ manager.add_scene(main)
 # manager.add_scene(upgrades)
 manager.add_scene(game_over)
 
-manager.switch_scene("main")
+manager.switch_scene("welcome")
 
 clock = Clock()
 interaction = Interaction(simplegui.KEY_MAP)
