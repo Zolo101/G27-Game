@@ -10,9 +10,10 @@ class Zombie:
         self.size = (75, 200)
         self.sprite = Sprite("zombie", x, y)
         self.sprite.sheet = Spritesheet(
-            "./assets/rrr.png",
+            "./assets/zombie_spritesheet.png",
             288,
-            320, 9, 10,100,200)
+            256, 9, 8,80,200)
+
 
         self.sprite.sheet.pos.x = x
         self.sprite.sheet.pos.y = y

@@ -17,8 +17,8 @@ class Player:
             "./assets/player_spritesheet.png",
             640,
             420, 4, 2, 140,213)
-        self.sprite.sheet.pos.x = x
-        self.sprite.sheet.pos.y = y
+        self.sprite.sheet.pos.x = 11111111
+        self.sprite.sheet.pos.y = 11111111
 
         self.level = level
         self.health = health
