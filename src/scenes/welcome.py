@@ -24,8 +24,6 @@ def draw(manager, canvas, clock, frame, interaction):
 
     canvas.draw_polygon([(200,260), (1080,260), (1080,645), (200,645)], 2, 'White')
 
-
-
     canvas.draw_text('Press \'spacebar\' to start game', (520, 750), 20, 'Yellow', 'sans-serif')
 
     if interaction.get_key("space"):
