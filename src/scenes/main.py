@@ -26,7 +26,9 @@ timer = 0
 zombies = []
 perk = []
 clock = Clock()
-
+cur_zom_num = 0
+max_zom_num = 1
+wave_delay = 10000
 
 def draw(manager, canvas, clock, frame, interaction):
     """ This gets run on every frame. """
@@ -34,9 +36,15 @@ def draw(manager, canvas, clock, frame, interaction):
     timer += 1
     clock.tick()
     sky.draw(canvas, clock, frame)
-    # if sky.phase < 0:
-    if timer % 40 == 0:
-        zombies.append(Zombie(400, -000, player,shoot))
+    if sky.phase < 0:
+        if cur_zom_num < max_zom_num:
+            if timer % 40 == 0: 
+                zombies.append(Zombie(400, -000, player,shoot))
+                cur_zom_num + 1
+
+    if timer % wave_delay == 0:
+        max_zom_num * 2
+
     # zombies.append(Zombie(-100, 400, player))
     # zombies.append(Zombie(1500, 400, player))
     if timer % 70 == 0:
@@ -79,8 +87,7 @@ def draw(manager, canvas, clock, frame, interaction):
     pew.update(interaction)
     ui.draw(canvas)
 
-    for k in zombies :
-        pass
+  
 
     # draw_debug_collisions(canvas, terrain, player)
 

@@ -1,12 +1,12 @@
 from src.classes.Sprite import Sprite
 from src.classes.Spritesheet import Spritesheet
 
-SPEED = 2
+
 JUMP_POWER = 40 / 4
 
 
 class Zombie:
-    def __init__(self, x, y, player,bullets):
+    def __init__(self, x, y, player,bullets, health = 50, max_health = 50,SPEED = 2):
         self.bullets = bullets
         self.size = (75, 200)
         self.sprite = Sprite("zombie", x, y)
@@ -24,15 +24,18 @@ class Zombie:
         # self.sprite.pos.x = x
         # self.sprite.pos.y = y
         self.player = player
+        self.health = health
+        self.max_health = max_health
+        self.SPEED = SPEED
 
     def update(self):
         if self.player.sprite.sheet.pos.x < self.sprite.pos.x:
-            self.sprite.pos.x -= SPEED
+            self.sprite.pos.x -= self.SPEED
             # self.sprite.sheet.frame_width = -(self.sprite.sheet.frame_width)
             self.sprite.sheet.frame_index[1] = 5
             self.sprite.sheet.next_frame()
         if self.player.sprite.sheet.pos.x > self.sprite.pos.x:
-            self.sprite.pos.x += SPEED
+            self.sprite.pos.x += self.SPEED
             # self.sprite.sheet.frame_width = (self.sprite.sheet.frame_width)
             self.sprite.sheet.frame_index[1] = 1
             self.sprite.sheet.next_frame()
@@ -53,6 +56,16 @@ class Zombie:
         self.sprite.sheet.max_c = 2
         self.sprite.update()
 
+
+    def progres_dif(self):
+        self.health += 20
+        self.max_health +=20
+        self.SPEED += 2
+
+    def zombie_take_damage(self, amount):
+        self.health -= amount
+        
+        
 
     def draw(self, canvas):
         """ This gets run on every frame. """
