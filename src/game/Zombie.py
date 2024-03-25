@@ -56,7 +56,7 @@ class Zombie:
         self.sprite.sheet.max_c = 2
         self.sprite.update()
 
-
+    #with each wave zombies become tougher
     def progres_dif(self):
         self.health += 20
         self.max_health +=20
