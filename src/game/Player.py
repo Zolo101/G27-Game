@@ -47,7 +47,10 @@ class Player:
 
             self.sprite.sheet.frame_index[1] = 2                                                        # CHOOSES THH ROW FROM THE SPRITESHEET
             self.sprite.sheet.next_frame()
-
+        if interaction.get_key("left"):
+            self.sprite.sheet.frame_index[1] = 1
+        if interaction.get_key("right"):
+            self.sprite.sheet.frame_index[1] = 2
 
 
         self.sprite.update()
