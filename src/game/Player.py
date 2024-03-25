@@ -16,9 +16,10 @@ class Player:
         self.sprite.sheet = Spritesheet(
             "./assets/player_spritesheet.png",
             640,
-            420, 4, 2, 140,213)
+            840, 4, 4, 140,213)
         self.sprite.sheet.pos.x = 11111111
         self.sprite.sheet.pos.y = 11111111
+
 
         self.level = level
         self.health = health
@@ -28,6 +29,8 @@ class Player:
         """ This gets run on every frame. """
         # print(interaction.get_key("space"))
         # convert interaction keys to velocity
+        self.sprite.sheet.frame_index[1] = 0
+
         if interaction.get_key("space") and self.sprite.grounded:
             self.sprite.vel.y -= JUMP_POWER
 
@@ -35,15 +38,17 @@ class Player:
             self.sprite.vel.x -= SPEED
             # self.sprite.sheet.pos.x -= SPEED
             self.sprite.sheet.max_c = 4
-            self.sprite.sheet.frame_index[1] = 0                                                        # CHOOSES THE ROW FROM THE SPRITESHEET
+            self.sprite.sheet.frame_index[1] = 1                                                        # CHOOSES THE ROW FROM THE SPRITESHEET
             self.sprite.sheet.next_frame()
         if interaction.get_key("d") and not self.sprite.blocked["right"]:
             self.sprite.vel.x += SPEED
             self.sprite.sheet.max_c = 4
             # self.sprite.sheet.pos.x += SPEED
 
-            self.sprite.sheet.frame_index[1] = 1                                                        # CHOOSES THH ROW FROM THE SPRITESHEET
+            self.sprite.sheet.frame_index[1] = 2                                                        # CHOOSES THH ROW FROM THE SPRITESHEET
             self.sprite.sheet.next_frame()
+
+
 
         self.sprite.update()
 
