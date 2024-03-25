@@ -1,3 +1,5 @@
+import random
+
 from src.classes.SceneManager import Scene
 from src.classes.Vector import Vector
 from src.game.Player import Player
@@ -8,6 +10,7 @@ from src.classes.Clock import Clock
 from src.scenes.UI import UI
 from src.classes.Pew import Pew
 from src.classes.Shoot import Shoot
+from src.classes.Perks import Perks
 # TODO: Make the width and height a variable
 terrain = Terrain(1280, 800)
 sky = Sky()
@@ -15,10 +18,12 @@ player = Player(600, 400)
 pew = Pew(player)
 ui = UI(player)
 shoot = Shoot(player)
+# perks = Perks()
 
 global timer
 timer = 0
 zombies = []
+perk = []
 clock = Clock()
 
 
@@ -35,6 +40,14 @@ def draw(manager, canvas, clock, frame, interaction):
         zombies.append(Zombie(400, -000, player,shoot))
     # zombies.append(Zombie(-100, 400, player))
     # zombies.append(Zombie(1500, 400, player))
+    if timer % 70 == 0:
+        perk.append(Perks(random.randint(0, 1280),player))
+
+    for Z in perk:
+        Z.draw(canvas)
+        Z.update(interaction)
+
+
 
     terrain.draw(canvas)
 
@@ -70,6 +83,9 @@ def draw(manager, canvas, clock, frame, interaction):
         pass
 
     # draw_debug_collisions(canvas, terrain, player)
+
+
+
 
 
 def draw_cube(canvas, pos, colour="#ffffff"):

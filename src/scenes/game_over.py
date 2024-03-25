@@ -8,10 +8,11 @@ def draw(manager, canvas, clock, frame, interaction):
                      'sans-serif')  # POSITION IS THE BOTTOM LEFT OF TEXT
     canvas.draw_text('G A M E  O V E R', (465, 410), 50, 'Yellow',
                      'sans-serif')  # POSITION IS THE BOTTOM LEFT OF TEXT
-    canvas.draw_text('Press \'p\' to play again', (540, 750), 20, 'Yellow', 'sans-serif')
+    canvas.draw_text('Press \'c\' to close game', (540, 750), 20, 'Yellow', 'sans-serif')
     # print(frame.get_canvas_textheight('Welcome to Base 27 !',50))
-    if interaction.get_key("p"):
-        manager.switch_scene("welcome")
+    if interaction.get_key("c"):
+        # manager.switch_scene("welcome")
+        frame.stop()
 
 
 def tick(manager, clock, frame, interaction):

@@ -24,7 +24,7 @@ manager.add_scene(main)
 # manager.add_scene(upgrades)
 manager.add_scene(game_over)
 
-manager.switch_scene("welcome")
+manager.switch_scene("main")
 
 clock = Clock()
 interaction = Interaction(simplegui.KEY_MAP)
