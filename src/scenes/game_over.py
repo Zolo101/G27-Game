@@ -14,7 +14,6 @@ def draw(manager, canvas, clock, frame, interaction):
         # manager.switch_scene("welcome")
         frame.stop()
 
-
 def tick(manager, clock, frame, interaction):
     pass
 
