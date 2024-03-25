@@ -16,6 +16,7 @@ class Health:
             if interaction.get_key("e"):
                 if (obj[0] > self.player.sprite.sheet.pos.x) and (obj[0] < self.player.sprite.sheet.pos.x + 50) and (obj[1] > self.player.sprite.sheet.pos.y - 110) and (obj[1] < self.player.sprite.sheet.pos.y + 110) :
                     self.falling_perks.remove(obj)
+                    self.player.heal(50)
 class Speed:
     def __init__(self,x,player):
         self.falling_perks = []
@@ -33,4 +34,5 @@ class Speed:
             if interaction.get_key("e"):
                 if (obj[0] > self.player.sprite.sheet.pos.x) and (obj[0] < self.player.sprite.sheet.pos.x + 50) and (obj[1] > self.player.sprite.sheet.pos.y - 110) and (obj[1] < self.player.sprite.sheet.pos.y + 110) :
                     self.falling_perks.remove(obj)
+                    self.player.
 
