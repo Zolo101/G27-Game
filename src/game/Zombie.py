@@ -62,8 +62,11 @@ class Zombie:
         self.max_health +=20
         self.SPEED += 2
 
+    #reduce zombie hp
     def zombie_take_damage(self, amount):
         self.health -= amount
+        if self.health < 0:
+            self.health = 0
         
         
 

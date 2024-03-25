@@ -40,10 +40,16 @@ def draw(manager, canvas, clock, frame, interaction):
         if cur_zom_num < max_zom_num:
             if timer % 40 == 0: 
                 zombies.append(Zombie(400, -000, player,shoot))
-                cur_zom_num + 1
 
+                #this line of code crushes the game for some reason
+                #responsible for limiting the number of zombies in each wave
+                #cur_zom_num += 1
+
+
+    #makes zombies substantially harder to kill
     if timer % wave_delay == 0:
-        max_zom_num * 2
+        for Z in zombies:
+            Z.progres_dif()
 
     # zombies.append(Zombie(-100, 400, player))
     # zombies.append(Zombie(1500, 400, player))
@@ -56,6 +62,11 @@ def draw(manager, canvas, clock, frame, interaction):
         Z.draw(canvas)
         Z.update(interaction)
 
+    #deletes zombies from the list zombies
+    #effectively kills them
+    for Z in zombies:
+        if Z.health == 0:
+            zombies.remove(Z)
 
     terrain.draw(canvas)
 
