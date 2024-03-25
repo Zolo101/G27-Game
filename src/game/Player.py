@@ -36,15 +36,12 @@ class Player:
 
         if interaction.get_key("a") and not self.sprite.blocked["left"]:
             self.sprite.vel.x -= SPEED
-            # self.sprite.sheet.pos.x -= SPEED
             self.sprite.sheet.max_c = 4
             self.sprite.sheet.frame_index[1] = 1                                                        # CHOOSES THE ROW FROM THE SPRITESHEET
             self.sprite.sheet.next_frame()
         if interaction.get_key("d") and not self.sprite.blocked["right"]:
             self.sprite.vel.x += SPEED
             self.sprite.sheet.max_c = 4
-            # self.sprite.sheet.pos.x += SPEED
-
             self.sprite.sheet.frame_index[1] = 2                                                        # CHOOSES THH ROW FROM THE SPRITESHEET
             self.sprite.sheet.next_frame()
         if interaction.get_key("left"):

@@ -10,7 +10,9 @@ from src.classes.Clock import Clock
 from src.scenes.UI import UI
 from src.classes.Pew import Pew
 from src.classes.Shoot import Shoot
-from src.classes.Perks import Perks
+from src.classes.Perks import Health
+from src.classes.Perks import Speed
+
 # TODO: Make the width and height a variable
 terrain = Terrain(1280, 800)
 sky = Sky()
@@ -18,7 +20,6 @@ player = Player(600, 400)
 pew = Pew(player)
 ui = UI(player)
 shoot = Shoot(player)
-# perks = Perks()
 
 global timer
 timer = 0
@@ -29,8 +30,6 @@ clock = Clock()
 
 def draw(manager, canvas, clock, frame, interaction):
     """ This gets run on every frame. """
-
-
     global timer
     timer += 1
     clock.tick()
@@ -41,12 +40,13 @@ def draw(manager, canvas, clock, frame, interaction):
     # zombies.append(Zombie(-100, 400, player))
     # zombies.append(Zombie(1500, 400, player))
     if timer % 70 == 0:
-        perk.append(Perks(random.randint(0, 1280),player))
+        perk.append(Health(random.randint(0, 1280),player))                                                         # HEALTH PERKS
+    if timer % 60 == 0:
+        perk.append(Speed(random.randint(0, 1280),player))                                                          # SPEED PERKS
 
     for Z in perk:
         Z.draw(canvas)
         Z.update(interaction)
-
 
 
     terrain.draw(canvas)
