@@ -27,6 +27,7 @@ class music:
         else:
             self.stop_music()
         
+    #use to add the ability for the player to stop/start    
     def update(self, interaction):
         if interaction.get_key("m"):
             self.toggle_music()

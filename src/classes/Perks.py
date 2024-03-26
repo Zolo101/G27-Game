@@ -26,7 +26,7 @@ class Health:
             img = simplegui._load_local_image("./assets/heart_spritesheet.png")
             canvas.draw_image(img, (592,592),(1184,1184), (obj), (95, 95))
 
-
+    #updates
     def update(self,interaction):
         for obj in self.falling_perks:
             obj[1] += 1                                                                                                 # SPEED OF PERK FALLING

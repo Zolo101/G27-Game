@@ -2,11 +2,13 @@ from src.classes.Color import Color
 from src.classes.Vector import Vector
 from src.game.Terrain import Block
 
-
+#start of the class
 class Builder:
+    #constructor
     def __init__(self):
         self.pos = Vector(0, 0)
         pass
+
 
     def draw(self, canvas, interaction):
         if interaction.get_key("shift"):
@@ -21,7 +23,7 @@ class Builder:
                 "blue",
                 "white"
             )
-
+    
     def build(self, terrain):
         block = Block(self.pos.x, self.pos.y, True)
         block.color = Color(156, 156, 156)

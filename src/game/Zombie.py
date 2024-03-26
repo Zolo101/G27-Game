@@ -4,7 +4,7 @@ from src.classes.Spritesheet import Spritesheet
 
 JUMP_POWER = 40 / 4
 
-
+#zombie class
 class Zombie:
     def __init__(self, x, y, player, bullets,health = 50, max_health = 50,SPEED = 2,):
         self.bullets = bullets
@@ -20,7 +20,7 @@ class Zombie:
         self.sprite.sheet.pos.y = y
         self.sprite.sheet.frame_index[1] = 1
         self.sprite.sheet.max_c = 2
-
+        #
         # self.sprite.pos.x = x
         # self.sprite.pos.y = y
         self.player = player

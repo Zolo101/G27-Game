@@ -32,46 +32,59 @@ class Player:
         # convert interaction keys to velocity
         self.sprite.sheet.frame_index[1] = 0
 
+        #jumping
         if interaction.get_key("space") and self.sprite.grounded:
             self.sprite.vel.y -= JUMP_POWER
 
+        #moving left
         if interaction.get_key("a") and not self.sprite.blocked["left"]:
             self.sprite.vel.x -= SPEED
             self.sprite.sheet.max_c = 4
             self.sprite.sheet.frame_index[1] = 1                                                        # CHOOSES THE ROW FROM THE SPRITESHEET
             self.sprite.sheet.next_frame()
+
+         #moving right   
         if interaction.get_key("d") and not self.sprite.blocked["right"]:
             self.sprite.vel.x += SPEED
             self.sprite.sheet.max_c = 4
             self.sprite.sheet.frame_index[1] = 2                                                        # CHOOSES THH ROW FROM THE SPRITESHEET
             self.sprite.sheet.next_frame()
+
+        #gun appears to the left of the player    
         if interaction.get_key("left"):
             self.sprite.sheet.frame_index[1] = 1
+
+        #gun appear on the right    
         if interaction.get_key("right"):
             self.sprite.sheet.frame_index[1] = 2
 
 
         self.sprite.update()
 
+    #heals the player
     def heal(self, amount):
         self.health += amount
         if self.health > self.max_health:
             self.health = self.max_health
 
+    #deals damage to the player
     def take_damage(self, amount):
         self.health -= amount
         if self.health < 0:
             self.health = 0
 
+    #checks if alive
     def is_alive(self):
         return self.health > 0
 
+    #levels up the player
     def level_up(self):
         """ Increments the player level by 1, along with increases their health. """
         self.level += 1
         self.max_health += 10
         self.health = self.max_health
 
+    #earns money 
     def earn(self, amount):
         self.money += amount
 

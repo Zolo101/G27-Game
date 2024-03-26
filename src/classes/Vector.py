@@ -107,6 +107,11 @@ class Vector:
         self.x, self.y = -self.y, self.x
         return self
 
+    # go back to the start once it reaches the end of the last row
+    # if self.frame_index[1] >= self.rows:
+    #     self.frame_index[0] = 0
+    #     self.frame_index[1] = 0
+    
     def rotate_rad(self, theta):
         """ Rotates the vector according to an angle theta given in radians """
         rx = self.x * math.cos(theta) - self.y * math.sin(theta)

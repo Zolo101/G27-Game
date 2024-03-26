@@ -17,6 +17,7 @@ except ImportError:
 # interaction = Interaction()
 WIDTH, HEIGHT = (1280, 800)
 
+
 frame = simplegui.create_frame("base 27", 2560 / 2, 800, 0)
 
 manager = SceneManager()

@@ -201,7 +201,7 @@ def check_collision_old(s, t):
         .snap(Vector(20, 20))
         .get_p()
     )
-
+    
     if side_left in t.visible_blocks:
         s.sprite.blocked["left"] = True
 
