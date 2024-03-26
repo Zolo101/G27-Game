@@ -135,3 +135,11 @@ class Vector:
     def clamp(self, min_vec, max_vec):
         """ Clamps the vector to a given vector """
         return self.minimum(max_vec).maximum(min_vec)
+
+    def round(self):
+        """ Rounds the vectors to the nearest integer """
+        return Vector(round(self.x), round(self.y))
+
+    def snap(self, vec):
+        """ Snaps the vector to the nearest multiple of another vector """
+        return Vector(self.x - self.x % vec.x, self.y - self.y % vec.y)

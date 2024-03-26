@@ -1,19 +1,26 @@
-class Bullets:
+from src.classes.Vector import Vector
+
+BULLET_GRAVITY = 0.2
+
+
+class Bullet:
     """ Creates the bullet. """
     def __init__(self, pos, vel):
         """ Initialises the bullet's position and velocity """
-        self.pos = list(pos)
-        self.vel = list(vel)
+        self.pos = Vector(pos[0], pos[1])
+        self.vel = Vector(vel[0], vel[1])
 
     def update(self):
         """ Updates the bullets position based on its velocity. Making it move """
-        for i in range(1):
-            self.pos[i] += self.vel[i]
+        self.pos += self.vel
+
+        # Bullet drop (like in fortnite 🗿)
+        self.vel.y += BULLET_GRAVITY
 
     def draw(self, canvas):
         """ Creates the bullet. """
         # THIS IS A TEMPORARY BULLET.
-        canvas.draw_circle(self.pos, 5,10, "Blue")
+        canvas.draw_circle(self.pos.get_p(), 5,10, "Blue")
 
 
 
