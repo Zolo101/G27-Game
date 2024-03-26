@@ -15,13 +15,13 @@ class Shoot:
 
     def update(self,interaction):
         """ Shoots left or right depending on the user input """
-        if interaction.get_key("left"):
+        if interaction.get_key("left") and not interaction.get_key("right"):
             if interaction.get_key("up"):
                 self.bullets.append(Bullet((self.player.sprite.sheet.pos.x - 77, self.player.sprite.sheet.pos.y - 7), (-BULLET_SPEED, 0)))
                 if interaction.get_key("space"):
                     self.bullets.append(
                         Bullet((self.player.sprite.sheet.pos.x - 77, self.player.sprite.sheet.pos.y - 7), (-BULLET_SPEED, 0)))
-        if interaction.get_key("right"):
+        if interaction.get_key("right") and not interaction.get_key("left"):
             if interaction.get_key("up"):
                 self.bullets.append(Bullet((self.player.sprite.sheet.pos.x + 77, self.player.sprite.sheet.pos.y - 7), (BULLET_SPEED, 0)))
                 if interaction.get_key("space"):
