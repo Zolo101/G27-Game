@@ -53,10 +53,10 @@ def draw(manager, canvas, clock, frame, interaction):
 
     # zombies.append(Zombie(-100, 400, player))
     # zombies.append(Zombie(1500, 400, player))
-    # if timer % 70 == 0:
-    #     perks.append(Health(random.randint(0, 1280),player))                                                         # HEALTH PERKS
-    # if timer % 60 == 0:
-    #     perks.append(Speed(random.randint(0, 1280),player))                                                          # SPEED PERKS
+    if timer % 70 == 0:
+        perks.append(Health(random.randint(0, 1280),player))                                                         # HEALTH PERKS
+    if timer % 60 == 0:
+        perks.append(Speed(random.randint(0, 1280),player))                                                          # SPEED PERKS
 
     terrain.draw(canvas)
 
@@ -135,7 +135,48 @@ def tick(manager, clock, frame, interaction):
     check_collision(player, terrain)
 
 
-def check_collision(p, t):
+def check_collision(s, t):
+    # raycast to terrain
+    # if collision at side, set blocked side to true
+    s.sprite.grounded = False
+
+    s.sprite.blocked["up"] = False
+    s.sprite.blocked["down"] = False
+    s.sprite.blocked["left"] = False
+    s.sprite.blocked["right"] = False
+
+    side_left = (
+        Vector(s.sprite.pos.x, s.sprite.pos.y + (s.size[1] - 10))
+        .snap(Vector(20, 20))
+        .get_p()
+    )
+    side_right = (
+        Vector(s.sprite.pos.x + (s.size[0]), s.sprite.pos.y + (s.size[1] - 10))
+        .snap(Vector(20, 20))
+        .get_p()
+    )
+    bottom_center = (
+        Vector(s.sprite.pos.x + (s.size[0] / 2), s.sprite.pos.y + s.size[1] + 20)
+        .snap(Vector(20, 20))
+        .get_p()
+    )
+
+    if side_left in t.visible_blocks:
+        s.sprite.blocked["left"] = True
+
+    if side_right in t.visible_blocks:
+        s.sprite.blocked["right"] = True
+
+    if bottom_center in t.visible_blocks:
+        s.sprite.blocked["down"] = True
+
+    s.sprite.grounded |= (s.sprite.blocked["up"] or
+                          s.sprite.blocked["down"] or
+                          s.sprite.blocked["left"] or
+                          s.sprite.blocked["right"])
+
+
+def check_collision_old(p, t):
     p.sprite.grounded = False
 
     p.sprite.blocked["up"] = False
