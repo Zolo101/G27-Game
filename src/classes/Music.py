@@ -26,3 +26,7 @@ class music:
             self.play_music()
         else:
             self.stop_music()
+        
+    def update(self, interaction):
+        if interaction.get_key("m"):
+            self.toggle_music()

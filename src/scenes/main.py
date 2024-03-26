@@ -13,6 +13,7 @@ from src.classes.Pew import Pew
 from src.classes.Shoot import Shoot
 from src.classes.Perks import Health
 from src.classes.Perks import Speed
+from src.classes import Music
 
 # TODO: Make the width and height a variable
 terrain = Terrain(1280, 800)
@@ -62,6 +63,7 @@ def draw(manager, canvas, clock, frame, interaction):
     # zombies.append(Zombie(-100, 400, player))
     # zombies.append(Zombie(1500, 400, player))
 
+
     rrr = random.randint(0, 600)
     global hCount
     global sCount
@@ -79,11 +81,11 @@ def draw(manager, canvas, clock, frame, interaction):
     shoot.draw(canvas)
     shoot.update(interaction)
 
-
+    
     for perk in perks:
         perk.draw(canvas)
         perk.update(interaction)
-
+    
     for zombie in zombies:
         zombie.draw(canvas)
         zombie.update()
