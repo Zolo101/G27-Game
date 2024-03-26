@@ -6,7 +6,7 @@ TERMINAL_VELOCITY = 20
 
 
 class Sprite:
-    """
+    """3
     Base sprite class which contains the position,
     velocity and the texture (spritesheet) of the sprite.
     """

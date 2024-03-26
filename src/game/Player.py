@@ -51,10 +51,6 @@ class Player:
             self.sprite.sheet.frame_index[1] = 2
 
 
-
-
-
-
         self.sprite.update()
 
     def heal(self, amount):
