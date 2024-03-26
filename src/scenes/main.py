@@ -88,6 +88,7 @@ def draw(manager, canvas, clock, frame, interaction):
     player.draw(canvas)
 
     terrain.remove_dead()
+    terrain.heal()
 
     # bullet collision check
     shoot.check_collision(terrain)
