@@ -1,3 +1,8 @@
+try:
+    import simplegui
+except ImportError:
+    import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
+
 from src.classes.Spritesheet import Spritesheet
 from src.classes.Sprite import Sprite
 
@@ -11,12 +16,16 @@ class Health:
         #     "./assets/heart_spritesheet.png",
         #     1184,
         #     1, 1, 10, 95, 45)
+        # img = simplegui._load_local_image("./assets/gun_spritesheet.png")
 
     def draw(self,canvas):
+
         for obj in self.falling_perks:
             # self.sprite.sheet.draw(canvas)
-            canvas.draw_circle(obj, 10, 60, "Red")
-            # canvas.draw_polygon([(200, 260), (1080, 260), (1080, 645), (200, 645)], 2, 'White')
+            # canvas.draw_circle(obj, 10, 60, "Red")
+            img = simplegui._load_local_image("./assets/heart_spritesheet.png")
+            canvas.draw_image(img, (592,592),(1184,1184), (obj), (95, 95))
+
 
     def update(self,interaction):
         for obj in self.falling_perks:
@@ -34,7 +43,8 @@ class Speed:
 
     def draw(self,canvas):
         for obj in self.falling_perks:
-            canvas.draw_circle(obj, 10, 60, "Yellow")
+            img = simplegui._load_local_image("./assets/speed_spritesheet.png")
+            canvas.draw_image(img, (4, 7.5), (8, 15), (obj), (40, 75))
 
     def update(self,interaction):
         for obj in self.falling_perks:

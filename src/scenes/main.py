@@ -63,7 +63,7 @@ def draw(manager, canvas, clock, frame, interaction):
     # zombies.append(Zombie(-100, 400, player))
     # zombies.append(Zombie(1500, 400, player))
 
-    rrr = random.randint(0, 7)
+    rrr = random.randint(0, 600)
     global hCount
     global sCount
     if hCount < 4:
