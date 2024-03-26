@@ -22,6 +22,10 @@ ui = UI(player)
 shoot = Shoot(player)
 
 global timer
+global hCount
+global sCount
+hCount = 0
+sCount = 0
 timer = 0
 zombies = []
 perks = []
@@ -32,6 +36,8 @@ wave_delay = 10000
 # zzz = Zombie(400, -000, player,shoot)
 def draw(manager, canvas, clock, frame, interaction):
     """ This gets run on every frame. """
+
+    max_zom_num = 1
     global timer
     timer += 1
     clock.tick()
@@ -43,7 +49,7 @@ def draw(manager, canvas, clock, frame, interaction):
 
                 #this line of code crushes the game for some reason
                 #responsible for limiting the number of zombies in each wave
-                cur_zom_num += 1
+                #cur_zom_num += 1
 
 
     #makes zombies substantially harder to kill
@@ -53,10 +59,18 @@ def draw(manager, canvas, clock, frame, interaction):
 
     # zombies.append(Zombie(-100, 400, player))
     # zombies.append(Zombie(1500, 400, player))
-    if timer % 70 == 0:
-        perks.append(Health(random.randint(0, 1280),player))                                                         # HEALTH PERKS
-    if timer % 60 == 0:
-        perks.append(Speed(random.randint(0, 1280),player))                                                          # SPEED PERKS
+
+    rrr = random.randint(0, 600)
+    global hCount
+    global sCount
+    if hCount < 4:
+        if rrr == 1:
+            perks.append(Health(random.randint(0, 1280), player))  # HEALTH PERKS
+            hCount=hCount+1
+    if sCount < 4:
+        if rrr == 2:
+            perks.append(Speed(random.randint(0, 1280), player))  # SPEED PERKS
+            sCount=sCount+1
 
     terrain.draw(canvas)
 
@@ -64,9 +78,9 @@ def draw(manager, canvas, clock, frame, interaction):
     shoot.update(interaction)
 
 
-    # for perk in perks:
-    #     perk.draw(canvas)
-    #     perk.update(interaction)
+    for perk in perks:
+        perk.draw(canvas)
+        perk.update(interaction)
 
     for zombie in zombies:
         zombie.draw(canvas)
