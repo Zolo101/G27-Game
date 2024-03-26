@@ -21,7 +21,7 @@ class UI:
         canvas.draw_polygon([(10, 10), (10 + self.bar_width, 10), (10 + self.bar_width, 10 + self.bar_height), (10, 10 + self.bar_height)], 5, self.border_colour)
 
         # money colour
-        money_colour = "Black"
+        money_colour = "Green"
 
         if self.player.money == 0:
             money_colour = "Red"

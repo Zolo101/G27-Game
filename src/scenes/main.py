@@ -72,15 +72,12 @@ def draw(manager, canvas, clock, frame, interaction):
         zombie.draw(canvas)
         zombie.update()
 
-        if not zombie.is_alive():
-            zombies.remove(zombie)
-            player.earn(100) # money per zombie kill
-
     if len(zombies) > 0:
         for bullet in shoot.bullets:
             for zombie in zombies:
                 if (bullet.pos.x < (zombie.sprite.pos.x+20)) and (bullet.pos.x > (zombie.sprite.pos.x-20)):
                     zombies.remove(zombie)
+                    player.earn(100) # money per zombie kill
                     shoot.bullets.remove(bullet)
 
         # check_collision(zombie, terrain)
