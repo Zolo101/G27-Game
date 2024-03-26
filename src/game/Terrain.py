@@ -62,6 +62,15 @@ class Terrain:
         for coord in to_remove.keys():
             del self.blocks[coord]
 
+        if len(to_remove) > 0:
+            self.compute_lighting()
+            self.compute_visible()
+
+    def heal(self):
+        """ Heal terrain slowly """
+        for block in self.blocks.values():
+            block.heal(0.05)
+
     def compute_visible(self):
         """ Updates the dict of blocks that collide with air."""
         self.visible_blocks.clear()
@@ -110,7 +119,7 @@ class Terrain:
                 block.lighting -= 1
 
             # if block.lighting > 80:
-            block.color += rand_col(0, max(1, block.lighting // 10))
+            # block.color += rand_col(0, max(1, block.lighting // 10))
 
             # block.lighting += (block.x - BLOCK_SIZE, block.y + BLOCK_SIZE) in self.blocks
             # block.lighting += (block.x, block.y + BLOCK_SIZE) in self.blocks
@@ -129,6 +138,7 @@ class Block:
         self.x = x
         self.y = y
         self.lighting = 0
+        self.offset_colour = rand_col(0, 10)
         self.color = rand_col()
         self.health = 100
 
@@ -139,6 +149,7 @@ class Block:
 
         # This gradually makes the block more red as damaged
         color = self.color
+        color += self.offset_colour
         color += Color(255 - ((self.health / 101) * 255), 0, 0)
 
         # Darken terrain depending on lightning
@@ -151,6 +162,9 @@ class Block:
                             1,
                             color.__str__(),
                             color.__str__())
+
+    def heal(self, amount):
+        self.health = min(100, self.health + amount);
 
     def get_color(self):
         return self.color

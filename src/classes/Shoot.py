@@ -30,18 +30,23 @@ class Shoot:
 
         for bullet in self.bullets:
             bullet.update()
-            print(bullet.pos.x)
 
     def check_collision(self, terrain):
         for bullet in self.bullets:
             bullet_nearest = bullet.pos.snap(Vector(20, 20))
 
+            bn_tuple = bullet_nearest.get_p()
+
             conditions = (
-                    (bullet_nearest.x, bullet_nearest.y) in terrain.blocks or
+                    bn_tuple in terrain.blocks or
                     0 > bullet_nearest.x or
                     1600 < bullet_nearest.x or
                     bullet_nearest.y < 0
             )
+
+            # bullets damage blocks
+            if bn_tuple in terrain.blocks:
+                terrain.blocks[bn_tuple].health -= 5
 
             if conditions:
                 self.bullets.remove(bullet)
