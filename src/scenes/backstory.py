@@ -7,11 +7,11 @@ def draw(manager, canvas, clock, frame, interaction):
 
 
     canvas.draw_text('Press \' space \' to start game', (720, 760), 20, 'Yellow', 'sans-serif')
-    canvas.draw_text('Press \' i \' to go back to welcome screen', (320, 760), 20, 'Yellow', 'sans-serif')
+    canvas.draw_text('Press \' o \' to go back to welcome screen', (320, 760), 20, 'Yellow', 'sans-serif')
 
     if interaction.get_key("space"):
         manager.switch_scene("main")
-    if interaction.get_key("i"):
+    if interaction.get_key("o"):
         manager.switch_scene("welcome")
 
 
