@@ -84,6 +84,9 @@ def draw(manager, canvas, clock, frame, interaction):
 
     terrain.remove_dead()
 
+    # bullet collision check
+    shoot.check_collision(terrain)
+
     # out of bounds check
     if player.sprite.pos.y > 800:
         player.take_damage(49)

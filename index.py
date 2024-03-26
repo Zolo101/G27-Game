@@ -22,11 +22,12 @@ frame = simplegui.create_frame("base 27", 2560 / 2, 800, 0)
 manager = SceneManager()
 music = Music.music()
 
-def e():
+
+def collision_check():
     manager.tick(clock, frame, interaction)
 
 # Start playing music
-music.play_music() 
+music.play_music()
 
 
 manager.add_scene(welcome)
@@ -44,7 +45,7 @@ interaction = Interaction(simplegui.KEY_MAP)
 
 
 
-timer = simplegui.create_timer(8, e)
+timer = simplegui.create_timer(8, collision_check)
 
 
 def draw(canvas):
