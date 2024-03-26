@@ -1,6 +1,7 @@
 import random
 
 from src.classes.Builder import Builder
+from src.classes.Color import Color
 from src.classes.SceneManager import Scene
 from src.classes.Vector import Vector
 from src.game.Player import Player
@@ -39,7 +40,7 @@ wave_delay = 10000
 # zzz = Zombie(400, -000, player,shoot)
 def draw(manager, canvas, clock, frame, interaction):
     """ This gets run on every frame. """
-
+    # print(interaction.keys_down())
     max_zom_num = 1
     global timer
     timer += 1
@@ -70,11 +71,11 @@ def draw(manager, canvas, clock, frame, interaction):
     if hCount < 4:
         if rrr == 1:
             perks.append(Health(random.randint(0, 1280), player))  # HEALTH PERKS
-            hCount=hCount+1
+            hCount = hCount+1
     if sCount < 4:
         if rrr == 2:
             perks.append(Speed(random.randint(0, 1280), player))  # SPEED PERKS
-            sCount=sCount+1
+            sCount = sCount+1
 
     terrain.draw(canvas)
 
@@ -151,12 +152,31 @@ def draw_cube(canvas, pos, colour="#ffffff"):
 
 
 def tick(manager, clock, frame, interaction):
+    RANGE = 60
+    HURT = 0.1
+
     for zombie in zombies:
         check_collision(zombie, terrain)
+        pos = (
+            zombie.sprite.pos
+            .copy()
+            .add(Vector(0, zombie.size[1]))
+            .snap(Vector(20, 20))
+        )
+
+
+        for x in range(int(pos.x) - RANGE, int(pos.x) + RANGE, 20):
+            for y in range(int(pos.y) - RANGE, int(pos.y) + RANGE, 20):
+                block = terrain.blocks.get((x, y))
+                if block is not None:
+                    # player made blocks only
+                    if block.color == Color(156, 156, 156):
+                        block.health -= HURT
+
     check_collision(player, terrain)
 
 
-def check_collision(s, t):
+def check_collision_old(s, t):
     # raycast to terrain
     # if collision at side, set blocked side to true
     s.sprite.grounded = False
@@ -197,7 +217,7 @@ def check_collision(s, t):
                           s.sprite.blocked["right"])
 
 
-def check_collision_old(p, t):
+def check_collision(p, t):
     p.sprite.grounded = False
 
     p.sprite.blocked["up"] = False
