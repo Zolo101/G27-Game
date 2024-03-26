@@ -40,7 +40,7 @@ def draw(manager, canvas, clock, frame, interaction):
     max_zom_num = 1
     global timer
     timer += 1
-    clock.tick()
+    clock.tick()    
     sky.draw(canvas, clock, frame)
     if sky.phase < 0:
         if cur_zom_num < max_zom_num:
