@@ -39,7 +39,7 @@ wave_delay = 10000
 # zzz = Zombie(400, -000, player,shoot)
 def draw(manager, canvas, clock, frame, interaction):
     """ This gets run on every frame. """
-
+    print(interaction.keys_down())
     max_zom_num = 1
     global timer
     timer += 1
