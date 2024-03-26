@@ -24,7 +24,7 @@ shoot = Shoot(player)
 global timer
 timer = 0
 zombies = []
-perk = []
+perks = []
 clock = Clock()
 cur_zom_num = 0
 max_zom_num = 1
@@ -54,24 +54,18 @@ def draw(manager, canvas, clock, frame, interaction):
     # zombies.append(Zombie(-100, 400, player))
     # zombies.append(Zombie(1500, 400, player))
     if timer % 70 == 0:
-        perk.append(Health(random.randint(0, 1280),player))                                                         # HEALTH PERKS
+        perks.append(Health(random.randint(0, 1280),player))                                                         # HEALTH PERKS
     if timer % 60 == 0:
-        perk.append(Speed(random.randint(0, 1280),player))                                                          # SPEED PERKS
-
-    for zombie in perk:
-        zombie.draw(canvas)
-        zombie.update(interaction)
-
-    #deletes zombies from the list zombies
-    #effectively kills them
-    for zombie in zombies:
-        if zombie.health == 0:
-            zombies.remove(zombie)
+        perks.append(Speed(random.randint(0, 1280),player))                                                          # SPEED PERKS
 
     terrain.draw(canvas)
 
     shoot.draw(canvas)
     shoot.update(interaction)
+
+    for perk in perks:
+        perk.draw(canvas)
+        perk.update(interaction)
 
     for zombie in zombies:
         zombie.draw(canvas)
@@ -88,17 +82,18 @@ def draw(manager, canvas, clock, frame, interaction):
     player.update(interaction)
     player.draw(canvas)
 
-
-
     terrain.remove_dead()
 
+    # out of bounds check
     if player.sprite.pos.y > 800:
         player.take_damage(49)
         player.sprite.pos.x = 600
         player.sprite.pos.y = 400
 
+    # game over check
     if not player.is_alive():
         manager.switch_scene("game_over")
+
     pew.draw(canvas)
     pew.update(interaction)
     ui.draw(canvas)
