@@ -4,6 +4,7 @@ from src.classes.SceneManager import SceneManager, Scene
 from src.scenes.game_over import game_over
 from src.scenes.main import main
 from src.scenes.welcome import welcome
+from src.classes import Music
 
 try:
     import simplegui
@@ -18,6 +19,14 @@ WIDTH, HEIGHT = (1280, 800)
 frame = simplegui.create_frame("base 27", 2560 / 2, 800, 0)
 
 manager = SceneManager()
+music = Music.music()
+
+def e():
+    manager.tick(clock, frame, interaction)
+
+# Start playing music
+music.play_music() 
+
 
 manager.add_scene(welcome)
 manager.add_scene(main)
@@ -30,8 +39,7 @@ clock = Clock()
 interaction = Interaction(simplegui.KEY_MAP)
 
 
-def e():
-    manager.tick(clock, frame, interaction)
+
 
 
 timer = simplegui.create_timer(8, e)

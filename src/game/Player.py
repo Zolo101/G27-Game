@@ -1,5 +1,6 @@
 from src.classes.Sprite import Sprite
 from src.classes.Spritesheet import Spritesheet
+from src.classes import Music
 
 SPEED = 2.5
 JUMP_POWER = 24 * 2
@@ -48,6 +49,10 @@ class Player:
             self.sprite.sheet.frame_index[1] = 1
         if interaction.get_key("right"):
             self.sprite.sheet.frame_index[1] = 2
+       
+            
+            
+
 
 
         self.sprite.update()
