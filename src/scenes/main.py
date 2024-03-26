@@ -62,17 +62,17 @@ def draw(manager, canvas, clock, frame, interaction):
     # zombies.append(Zombie(-100, 400, player))
     # zombies.append(Zombie(1500, 400, player))
 
-    rrr = random.randint(0, 600)
+    rrr = random.randint(0, 7)
     global hCount
     global sCount
     if hCount < 4:
         if rrr == 1:
             perks.append(Health(random.randint(0, 1280), player))  # HEALTH PERKS
-            hCount=hCount+1
+            hCount = hCount+1
     if sCount < 4:
         if rrr == 2:
             perks.append(Speed(random.randint(0, 1280), player))  # SPEED PERKS
-            sCount=sCount+1
+            sCount = sCount+1
 
     terrain.draw(canvas)
 
