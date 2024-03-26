@@ -20,14 +20,18 @@ def draw(manager, canvas, clock, frame, interaction):
     canvas.draw_text('[ > ]  =  AIM RIGHT ', (700, 462.5), 40, 'White', 'sans-serif')
     canvas.draw_text('[ ^ ]  =  SHOOT ', (700, 570), 40, 'White', 'sans-serif')
 
+
     canvas.draw_text('©GROUP-XXVII', (1185, 793), 15, 'White', 'sans-serif')
 
     canvas.draw_polygon([(200,260), (1080,260), (1080,645), (200,645)], 2, 'White')
 
-    canvas.draw_text('Press \'spacebar\' to start game', (520, 750), 20, 'Yellow', 'sans-serif')
+    canvas.draw_text('Press \' space \' to start game', (720, 760), 20, 'Yellow', 'sans-serif')
+    canvas.draw_text('Press \' i \' to view game backstory', (320, 760), 20, 'Yellow', 'sans-serif')
 
     if interaction.get_key("space"):
         manager.switch_scene("main")
+    if interaction.get_key("i"):
+        manager.switch_scene("backstory")
 
 
 def tick(manager, clock, frame, interaction):

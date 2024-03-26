@@ -4,6 +4,7 @@ from src.classes.SceneManager import SceneManager, Scene
 from src.scenes.game_over import game_over
 from src.scenes.main import main
 from src.scenes.welcome import welcome
+from src.scenes.backstory import backstory
 from src.classes import Music
 
 try:
@@ -32,8 +33,9 @@ manager.add_scene(welcome)
 manager.add_scene(main)
 # manager.add_scene(upgrades)
 manager.add_scene(game_over)
+manager.add_scene(backstory)
 
-manager.switch_scene("main")
+manager.switch_scene("welcome")
 
 clock = Clock()
 interaction = Interaction(simplegui.KEY_MAP)
