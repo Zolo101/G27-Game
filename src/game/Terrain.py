@@ -85,7 +85,7 @@ class Terrain:
                     not (20 < block.x < 1240)):
                 self.visible_blocks[(block.x, block.y)] = block
 
-        print(len(self.visible_blocks), "visible,", len(self.blocks), "total")
+        # print(len(self.visible_blocks), "visible,", len(self.blocks), "total")
 
     def compute_texture(self):
         """ Gives a color for the block based on some comparisons. """
