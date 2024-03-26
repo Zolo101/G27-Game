@@ -1,3 +1,6 @@
+from src.classes.Vector import Vector
+
+
 class Interaction:
     """ For handling interactions """
 
@@ -5,12 +8,21 @@ class Interaction:
         # set every value in a dictionary to False
         self.key_map = key_map
         self.press_map = dict.fromkeys(key_map.values(), False)
+        self.mouse_pos = Vector(0,0)
 
     def key_down(self, key):
         self.press_map[key] = True
 
     def key_up(self, key):
         self.press_map[key] = False
+
+    def mouse_click(self, pos):
+        self.mouse_pos.x = pos[0]
+        self.mouse_pos.y = pos[1]
+
+    # def mouse_drag(self, pos):
+    #     self.m
+    #     print(pos)
 
     def get_key(self, key):
         """
