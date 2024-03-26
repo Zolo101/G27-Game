@@ -43,7 +43,7 @@ def draw(manager, canvas, clock, frame, interaction):
 
                 #this line of code crushes the game for some reason
                 #responsible for limiting the number of zombies in each wave
-                #cur_zom_num += 1
+                cur_zom_num += 1
 
 
     #makes zombies substantially harder to kill
