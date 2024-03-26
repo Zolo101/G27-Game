@@ -17,9 +17,9 @@ class Builder:
                 (interaction.mouse_pos.x + 20, interaction.mouse_pos.y),
                 (interaction.mouse_pos.x + 20, interaction.mouse_pos.y + 20),
                 (interaction.mouse_pos.x, interaction.mouse_pos.y + 20)],
-                0,
+                10,
                 "blue",
-                "blue"
+                "white"
             )
 
     def build(self, terrain):
