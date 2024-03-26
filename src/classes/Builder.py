@@ -23,7 +23,7 @@ class Builder:
             )
 
     def build(self, terrain):
-        block = Block(self.pos.x, self.pos.y)
+        block = Block(self.pos.x, self.pos.y, True)
         block.color = Color(156, 156, 156)
         terrain.blocks[self.pos.get_p()] = block
 

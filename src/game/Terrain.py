@@ -134,13 +134,14 @@ class Terrain:
 
 
 class Block:
-    def __init__(self, x, y):
+    def __init__(self, x, y, man_made=False):
         self.x = x
         self.y = y
         self.lighting = 0
         self.offset_colour = rand_col(0, 10)
         self.color = rand_col()
         self.health = 100
+        self.man_made = man_made
 
     def draw(self, canvas):
         """ This gets run on every frame. """
@@ -162,6 +163,18 @@ class Block:
                             1,
                             color.__str__(),
                             color.__str__())
+
+        outset = 7
+
+
+        if self.man_made:
+            canvas.draw_polygon([(self.x + outset, self.y + outset),
+                                 (self.x - outset + BLOCK_SIZE, self.y + outset),
+                                 (self.x - outset + BLOCK_SIZE, self.y + BLOCK_SIZE - outset),
+                                 (self.x + outset, self.y + BLOCK_SIZE - outset)],
+                                1,
+                                "white",
+                                "white")
 
     def heal(self, amount):
         self.health = min(100, self.health + amount);
