@@ -38,7 +38,7 @@ def draw(manager, canvas, clock, frame, interaction):
     sky.draw(canvas, clock, frame)
     if sky.phase < 0:
         if cur_zom_num < max_zom_num:
-            if timer % 40 == 0: 
+            if timer % 40 == 0:
                 zombies.append(Zombie(400, -000, player,shoot))
 
                 #this line of code crushes the game for some reason
@@ -48,8 +48,8 @@ def draw(manager, canvas, clock, frame, interaction):
 
     #makes zombies substantially harder to kill
     if timer % wave_delay == 0:
-        for Z in zombies:
-            Z.progres_dif()
+        for zombie in zombies:
+            zombie.progres_dif()
 
     # zombies.append(Zombie(-100, 400, player))
     # zombies.append(Zombie(1500, 400, player))
@@ -58,26 +58,31 @@ def draw(manager, canvas, clock, frame, interaction):
     if timer % 60 == 0:
         perk.append(Speed(random.randint(0, 1280),player))                                                          # SPEED PERKS
 
-    for Z in perk:
-        Z.draw(canvas)
-        Z.update(interaction)
+    for zombie in perk:
+        zombie.draw(canvas)
+        zombie.update(interaction)
 
     #deletes zombies from the list zombies
     #effectively kills them
-    for Z in zombies:
-        if Z.health == 0:
-            zombies.remove(Z)
+    for zombie in zombies:
+        if zombie.health == 0:
+            zombies.remove(zombie)
 
     terrain.draw(canvas)
 
     shoot.draw(canvas)
     shoot.update(interaction)
 
-    for Z in zombies:
-        Z.draw(canvas)
-        Z.update()
-        # check_collision(Z, terrain)
-        # draw_debug_collisions(canvas, terrain, Z)
+    for zombie in zombies:
+        zombie.draw(canvas)
+        zombie.update()
+
+        if not zombie.is_alive():
+            zombies.remove(zombie)
+            player.earn(100) # money per zombie kill
+
+        # check_collision(zombie, terrain)
+        # draw_debug_collisions(canvas, terrain, zombie)
 
 
     player.update(interaction)
@@ -98,7 +103,7 @@ def draw(manager, canvas, clock, frame, interaction):
     pew.update(interaction)
     ui.draw(canvas)
 
-  
+
 
     # draw_debug_collisions(canvas, terrain, player)
 
@@ -168,6 +173,7 @@ def collision_consensus(dx, dy, p):
 def collision_consensus_sides(dx, dy, p):
     return abs(dx) - 10 < p.size[0] and p.size[1] - 30 < abs(dy) < p.size[1] - 10
 
+
 def draw_debug_collisions(canvas, terrain, character):
     for t in terrain.visible_blocks.values():
         dx = character.sprite.pos.x - t.x
@@ -178,5 +184,6 @@ def draw_debug_collisions(canvas, terrain, character):
 
         if collision_consensus_sides(dx, dy, character):
             draw_cube(canvas, Vector(t.x, t.y), "#ff0000")
+
 
 main = Scene("main", draw, tick)

@@ -56,40 +56,33 @@ class Zombie:
         self.sprite.sheet.max_c = 2
         self.sprite.update()
 
-    #with each wave zombies become tougher
     def progres_dif(self):
+        """ with each wave zombies become tougher """
         self.health += 20
         self.max_health +=20
         self.SPEED += 2
 
-    #reduce zombie hp
     def zombie_take_damage(self, amount):
+        """ reduce zombie hp """
         self.health -= amount
         if self.health < 0:
             self.health = 0
-        
-        
+
+    def is_alive(self):
+        return self.health > 0
 
     def draw(self, canvas):
         """ This gets run on every frame. """
-        # self.sprite.draw(canvas)
-        canvas.draw_polygon([
-            (self.sprite.pos.x, self.sprite.pos.y),
-            (self.sprite.pos.x + self.size[0], self.sprite.pos.y),
-            (self.sprite.pos.x + self.size[0], self.sprite.pos.y + self.size[1]),
-            (self.sprite.pos.x, self.sprite.pos.y + self.size[1])],
-            0,
-            "red",
-            "red"
-        )
-        #
+
+        # debug
         # canvas.draw_polygon([
         #     (self.sprite.pos.x, self.sprite.pos.y),
-        #     (self.sprite.pos.x + 10, self.sprite.pos.y),
-        #     (self.sprite.pos.x + 10, self.sprite.pos.y + 10),
-        #     (self.sprite.pos.x, self.sprite.pos.y + 10)],
+        #     (self.sprite.pos.x + self.size[0], self.sprite.pos.y),
+        #     (self.sprite.pos.x + self.size[0], self.sprite.pos.y + self.size[1]),
+        #     (self.sprite.pos.x, self.sprite.pos.y + self.size[1])],
         #     0,
-        #     "blue",
-        #     "blue"
+        #     "red",
+        #     "red"
         # )
+
         self.sprite.sheet.draw(canvas)

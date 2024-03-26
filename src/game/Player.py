@@ -21,8 +21,8 @@ class Player:
         self.sprite.sheet.pos.x = 11111111
         self.sprite.sheet.pos.y = 11111111
 
-
         self.level = level
+        self.money = 0
         self.health = health
         self.max_health = max_health
 
@@ -49,9 +49,9 @@ class Player:
             self.sprite.sheet.frame_index[1] = 1
         if interaction.get_key("right"):
             self.sprite.sheet.frame_index[1] = 2
-       
-            
-            
+
+
+
 
 
 
@@ -76,6 +76,9 @@ class Player:
         self.max_health += 10
         self.health = self.max_health
 
+    def earn(self, amount):
+        self.money += amount
+
     def __str__(self):
         return f"{self.name} (Level {self.level}) - Health: {self.health}/{self.max_health}"
 
@@ -84,15 +87,17 @@ class Player:
 
         # print(self.sprite.blocked)
 
-        canvas.draw_polygon([
-            (self.sprite.pos.x, self.sprite.pos.y),
-            (self.sprite.pos.x + self.size[0], self.sprite.pos.y),
-            (self.sprite.pos.x + self.size[0], self.sprite.pos.y + self.size[1]),
-            (self.sprite.pos.x, self.sprite.pos.y + self.size[1])],
-            0,
-            "blue",
-            "blue"
-        )
+        # debug
+        # canvas.draw_polygon([
+        #     (self.sprite.pos.x, self.sprite.pos.y),
+        #     (self.sprite.pos.x + self.size[0], self.sprite.pos.y),
+        #     (self.sprite.pos.x + self.size[0], self.sprite.pos.y + self.size[1]),
+        #     (self.sprite.pos.x, self.sprite.pos.y + self.size[1])],
+        #     0,
+        #     "blue",
+        #     "blue"
+        # )
+
         self.sprite.sheet.draw(canvas)
 
         # self.sprite.sheet.draw(canvas)
