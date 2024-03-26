@@ -18,18 +18,19 @@ class Shoot:
         if interaction.get_key("left"):
             if interaction.get_key("up"):
                 self.bullets.append(Bullet((self.player.sprite.sheet.pos.x - 77, self.player.sprite.sheet.pos.y - 7), (-BULLET_SPEED, 0)))
-                if  interaction.get_key("space"):
+                if interaction.get_key("space"):
                     self.bullets.append(
                         Bullet((self.player.sprite.sheet.pos.x - 77, self.player.sprite.sheet.pos.y - 7), (-BULLET_SPEED, 0)))
         if interaction.get_key("right"):
             if interaction.get_key("up"):
                 self.bullets.append(Bullet((self.player.sprite.sheet.pos.x + 77, self.player.sprite.sheet.pos.y - 7), (BULLET_SPEED, 0)))
-                if  interaction.get_key("space"):
+                if interaction.get_key("space"):
                     self.bullets.append(
                         Bullet((self.player.sprite.sheet.pos.x + 77, self.player.sprite.sheet.pos.y - 7), (BULLET_SPEED, 0)))
 
         for bullet in self.bullets:
             bullet.update()
+            print(bullet.pos.x)
 
     def check_collision(self, terrain):
         for bullet in self.bullets:

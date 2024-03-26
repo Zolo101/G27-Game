@@ -29,7 +29,7 @@ clock = Clock()
 cur_zom_num = 0
 max_zom_num = 1
 wave_delay = 10000
-
+# zzz = Zombie(400, -000, player,shoot)
 def draw(manager, canvas, clock, frame, interaction):
     """ This gets run on every frame. """
     global timer
@@ -53,19 +53,20 @@ def draw(manager, canvas, clock, frame, interaction):
 
     # zombies.append(Zombie(-100, 400, player))
     # zombies.append(Zombie(1500, 400, player))
-    if timer % 70 == 0:
-        perks.append(Health(random.randint(0, 1280),player))                                                         # HEALTH PERKS
-    if timer % 60 == 0:
-        perks.append(Speed(random.randint(0, 1280),player))                                                          # SPEED PERKS
+    # if timer % 70 == 0:
+    #     perks.append(Health(random.randint(0, 1280),player))                                                         # HEALTH PERKS
+    # if timer % 60 == 0:
+    #     perks.append(Speed(random.randint(0, 1280),player))                                                          # SPEED PERKS
 
     terrain.draw(canvas)
 
     shoot.draw(canvas)
     shoot.update(interaction)
 
-    for perk in perks:
-        perk.draw(canvas)
-        perk.update(interaction)
+
+    # for perk in perks:
+    #     perk.draw(canvas)
+    #     perk.update(interaction)
 
     for zombie in zombies:
         zombie.draw(canvas)
@@ -74,6 +75,13 @@ def draw(manager, canvas, clock, frame, interaction):
         if not zombie.is_alive():
             zombies.remove(zombie)
             player.earn(100) # money per zombie kill
+
+    if len(zombies) > 0:
+        for bullet in shoot.bullets:
+            for zombie in zombies:
+                if (bullet.pos.x < (zombie.sprite.pos.x+20)) and (bullet.pos.x > (zombie.sprite.pos.x-20)):
+                    zombies.remove(zombie)
+                    shoot.bullets.remove(bullet)
 
         # check_collision(zombie, terrain)
         # draw_debug_collisions(canvas, terrain, zombie)
