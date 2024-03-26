@@ -61,5 +61,7 @@ def draw(canvas):
 frame.set_draw_handler(draw)
 frame.set_keydown_handler(interaction.key_down)
 frame.set_keyup_handler(interaction.key_up)
+frame.set_mouseclick_handler(interaction.mouse_click)
+frame.set_mousedrag_handler(interaction.mouse_click)
 timer.start()
 frame.start()

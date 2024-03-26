@@ -1,5 +1,6 @@
 import random
 
+from src.classes.Builder import Builder
 from src.classes.SceneManager import Scene
 from src.classes.Vector import Vector
 from src.game.Player import Player
@@ -17,6 +18,7 @@ from src.classes.Perks import Speed
 terrain = Terrain(1280, 800)
 sky = Sky()
 player = Player(600, 400)
+builder = Builder()
 pew = Pew(player)
 ui = UI(player)
 shoot = Shoot(player)
@@ -40,7 +42,7 @@ def draw(manager, canvas, clock, frame, interaction):
     max_zom_num = 1
     global timer
     timer += 1
-    clock.tick()    
+    clock.tick()
     sky.draw(canvas, clock, frame)
     if sky.phase < 0:
         if cur_zom_num < max_zom_num:
@@ -92,11 +94,18 @@ def draw(manager, canvas, clock, frame, interaction):
                 if (bullet.pos.x < (zombie.sprite.pos.x+20)) and (bullet.pos.x > (zombie.sprite.pos.x-20)):
                     zombies.remove(zombie)
                     player.earn(100) # money per zombie kill
-                    shoot.bullets.remove(bullet)
+
+                    # the line below crashes sometimes when killing a zombie
+                    if bullet in shoot.bullets:
+                        shoot.bullets.remove(bullet)
 
         # check_collision(zombie, terrain)
         # draw_debug_collisions(canvas, terrain, zombie)
 
+    if player.money >= 10:
+        if not builder.pos.get_p() in terrain.blocks:
+            builder.build(terrain)
+            player.money -= 10
 
     player.update(interaction)
     player.draw(canvas)
@@ -119,14 +128,12 @@ def draw(manager, canvas, clock, frame, interaction):
 
     pew.draw(canvas)
     pew.update(interaction)
+    builder.draw(canvas, interaction)
     ui.draw(canvas)
 
 
 
     # draw_debug_collisions(canvas, terrain, player)
-
-
-
 
 
 def draw_cube(canvas, pos, colour="#ffffff"):
