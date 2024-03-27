@@ -67,6 +67,7 @@ def draw(manager, canvas, clock, frame, interaction):
         wave_manager.new_wave(50, 1)
     night_count = sky.day
 
+    # print(night_count)
 
     # zombies.append(Zombie(-100, 400, player))
     # zombies.append(Zombie(1500, 400, player))
@@ -136,6 +137,9 @@ def draw(manager, canvas, clock, frame, interaction):
     # game over check
     if not player.is_alive():
         manager.switch_scene("game_over")
+
+    if (night_count == 5 and player.is_alive() and sky.moon.pos.x > 1138):
+        manager.switch_scene("win")
 
     pew.draw(canvas)
     pew.update(interaction)
