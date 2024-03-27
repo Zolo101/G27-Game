@@ -2,6 +2,7 @@ from src.classes.Clock import Clock
 from src.classes.Interaction import Interaction
 from src.classes.SceneManager import SceneManager, Scene
 from src.scenes.game_over import game_over
+from src.scenes.win import win
 from src.scenes.main import main
 from src.scenes.welcome import welcome
 from src.scenes.backstory import backstory
@@ -35,8 +36,9 @@ manager.add_scene(main)
 # manager.add_scene(upgrades)
 manager.add_scene(game_over)
 manager.add_scene(backstory)
+manager.add_scene(win)
 
-manager.switch_scene("backstory")
+manager.switch_scene("main")
 
 clock = Clock()
 interaction = Interaction(simplegui.KEY_MAP | {"shift": 17})
