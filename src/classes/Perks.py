@@ -12,6 +12,7 @@ class Health:
         self.x = x
         self.falling_perks.append([x, 0])
         self.player = player
+        self.image = simplegui._load_local_image("./assets/heart_spritesheet.png")
         # self.sprite.sheet = Spritesheet(
         #     "./assets/heart_spritesheet.png",
         #     1184,
@@ -23,8 +24,7 @@ class Health:
         for obj in self.falling_perks:
             # self.sprite.sheet.draw(canvas)
             # canvas.draw_circle(obj, 10, 60, "Red")
-            img = simplegui._load_local_image("./assets/heart_spritesheet.png")
-            canvas.draw_image(img, (592,592),(1184,1184), (obj), (95, 95))
+            canvas.draw_image(self.image, (592,592),(1184,1184), (obj), (95, 95))
 
     #updates
     def update(self,interaction):
@@ -40,12 +40,12 @@ class Speed:
         self.x = x
         self.falling_perks.append([x, 0])
         self.player = player
+        self.image = simplegui._load_local_image("./assets/speed_spritesheet.png")
 
     def draw(self,canvas):
         for obj in self.falling_perks:
-            img = simplegui._load_local_image("./assets/speed_spritesheet.png")
             # https://www.spriters-resource.com/resources/sheets/200/202977.png?updated=1690658883
-            canvas.draw_image(img, (4, 7.5), (8, 15), (obj), (40, 75))
+            canvas.draw_image(self.image, (4, 7.5), (8, 15), (obj), (40, 75))
 
     def update(self,interaction):
         for obj in self.falling_perks:

@@ -19,6 +19,7 @@ class Spritesheet:
         self.pos = Vector(0, 0)
         self.sprite_size_h = sprite_size_h                                                  # The height of the sprite in game.
         self.sprite_size_w = sprite_size_w                                                  # The width of the sprite in game.
+        self.image = simplegui._load_local_image(self.img_url)
 
         # Calculate frame dimension
         self._init_dimension()
@@ -43,9 +44,7 @@ class Spritesheet:
 
         source_size = (self.frame_width, self.frame_height)
 
-        img = simplegui._load_local_image(self.img_url)
-
-        canvas.draw_image(img,
+        canvas.draw_image(self.image,
                           source_centre,
                           source_size,
                           self.pos.get_p(),
