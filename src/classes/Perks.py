@@ -44,6 +44,7 @@ class Speed:
     def draw(self,canvas):
         for obj in self.falling_perks:
             img = simplegui._load_local_image("./assets/speed_spritesheet.png")
+            # https://www.spriters-resource.com/resources/sheets/200/202977.png?updated=1690658883
             canvas.draw_image(img, (4, 7.5), (8, 15), (obj), (40, 75))
 
     def update(self,interaction):

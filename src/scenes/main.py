@@ -37,16 +37,20 @@ clock = Clock()
 cur_zom_num = 0
 max_zom_num = 1
 wave_delay = 10000
+global night_count
+night_count = 0
 # zzz = Zombie(400, -000, player,shoot)
 def draw(manager, canvas, clock, frame, interaction):
     """ This gets run on every frame. """
     # print(interaction.keys_down())
     max_zom_num = 1
     global timer
+    global night_count
     timer += 1
     clock.tick()
     sky.draw(canvas, clock, frame)
     if sky.phase < 0:
+
         if cur_zom_num < max_zom_num:
             if timer % 40 == 0:
                 zombies.append(Zombie(400, -000, player,shoot))
@@ -54,7 +58,9 @@ def draw(manager, canvas, clock, frame, interaction):
                 #this line of code crushes the game for some reason
                 #responsible for limiting the number of zombies in each wave
                 #cur_zom_num += 1
-
+    if (sky.phase > -1) and (sky.phase < -0.999):
+        night_count = night_count + 1
+        print(night_count)
 
     #makes zombies substantially harder to kill
     if timer % wave_delay == 0:

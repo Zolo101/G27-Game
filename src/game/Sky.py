@@ -5,7 +5,7 @@ from src.classes.Sprite import Sprite
 from src.classes.Vector import Vector
 from src.classes.Spritesheet import Spritesheet
 
-SPEED = 0.01
+SPEED = 0.1
 OFFSET = 500
 CENTER = Vector(1280 // 2, 600)
 
