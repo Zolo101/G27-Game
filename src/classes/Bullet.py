@@ -1,5 +1,6 @@
 import random
 
+from src.classes.Color import Color
 from src.classes.Vector import Vector
 
 BULLET_GRAVITY = 0.1
@@ -28,7 +29,9 @@ class Bullet:
     def draw(self, canvas):
         """ Creates the bullet. """
         # THIS IS A TEMPORARY BULLET.
-        canvas.draw_circle(self.pos.get_p(), 5,10, "Blue")
+        color = Color(0, 0, 255)
+        color += Color(self.age ** 1.2, 0, -self.age ** 2) # gradient bullets based on age
+        canvas.draw_circle(self.pos.get_p(), 5,10, color.__str__())
 
 
 
