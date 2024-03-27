@@ -1,5 +1,5 @@
 import random
-
+from src.classes import Music
 from src.classes.Builder import Builder
 from src.classes.Color import Color
 from src.classes.SceneManager import Scene
@@ -14,7 +14,12 @@ from src.classes.Pew import Pew
 from src.classes.Shoot import Shoot
 from src.classes.Perks import Health
 from src.classes.Perks import Speed
-from src.classes import Music
+
+# from src.game.Zombie import Zombie1
+# from src.game.Zombie import Zombie2
+# from src.game.Zombie import Zombie3
+# from src.game.Zombie import Zombie4
+# from src.game.Zombie import Zombie5
 
 # TODO: Make the width and height a variable
 terrain = Terrain(1280, 800)
@@ -60,7 +65,7 @@ def draw(manager, canvas, clock, frame, interaction):
                 #cur_zom_num += 1
     if (sky.phase > -1) and (sky.phase < -0.999):
         night_count = night_count + 1
-        print(night_count)
+        # print(night_count)
 
     #makes zombies substantially harder to kill
     if timer % wave_delay == 0:

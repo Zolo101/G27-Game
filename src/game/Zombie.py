@@ -15,36 +15,27 @@ class Zombie:
             288,
             256, 9, 8,80,200)
 
-
         self.sprite.sheet.pos.x = x
         self.sprite.sheet.pos.y = y
         self.sprite.sheet.frame_index[1] = 1
         self.sprite.sheet.max_c = 2
-        #
-        # self.sprite.pos.x = x
-        # self.sprite.pos.y = y
         self.player = player
         self.health = health
         self.max_health = max_health
         self.SPEED = SPEED
 
     def update(self):
-        if self.player.sprite.sheet.pos.x < self.sprite.pos.x and not self.sprite.blocked["left"]:
+        if self.player.sprite.sheet.pos.x < self.sprite.pos.x:
             self.sprite.pos.x -= self.SPEED
-            # self.sprite.sheet.frame_width = -(self.sprite.sheet.frame_width)
             self.sprite.sheet.frame_index[1] = 5
             self.sprite.sheet.next_frame()
-        if self.player.sprite.sheet.pos.x > self.sprite.pos.x and not self.sprite.blocked["right"]:
+        if self.player.sprite.sheet.pos.x > self.sprite.pos.x:
             self.sprite.pos.x += self.SPEED
-            # self.sprite.sheet.frame_width = (self.sprite.sheet.frame_width)
             self.sprite.sheet.frame_index[1] = 1
             self.sprite.sheet.next_frame()
         if (self.sprite.pos.x > self.player.sprite.sheet.pos.x) and (self.sprite.pos.x < self.player.sprite.sheet.pos.x + 20) and (self.sprite.pos.y > self.player.sprite.sheet.pos.y - 80) and (self.sprite.pos.y < self.player.sprite.sheet.pos.y + 80) :
             self.player.take_damage(1)
-        # if self.bullets. >1000:
-        #     self.sprite.pos.x == 1
-
-        if (self.sprite.blocked["left"] or self.sprite.blocked["right"]) and self.sprite.grounded:
+        if self.sprite.blocked["left"] or self.sprite.blocked["right"]:
             self.sprite.vel.y -= JUMP_POWER
             self.sprite.sheet.next_frame()
 
