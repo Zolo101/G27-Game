@@ -97,6 +97,7 @@ def draw(manager, canvas, clock, frame, interaction):
                 if (bullet.pos.x < (zombie.sprite.pos.x+20)) and (bullet.pos.x > (zombie.sprite.pos.x-20)):
                     zombies.remove(zombie)
                     player.earn(100) # money per zombie kill
+                    player.increaseScore(1) #increase score per zombie kill
 
                     # the line below crashes sometimes when killing a zombie
                     if bullet in shoot.bullets:

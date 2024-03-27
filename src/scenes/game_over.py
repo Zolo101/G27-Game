@@ -1,5 +1,5 @@
 from src.classes.SceneManager import Scene
-
+from src.scenes.main import player
 
 def draw(manager, canvas, clock, frame, interaction):
     """ This gets run on every frame. """
@@ -10,6 +10,15 @@ def draw(manager, canvas, clock, frame, interaction):
                      'sans-serif')  # POSITION IS THE BOTTOM LEFT OF TEXT
     canvas.draw_text('Press \'c\' to close game', (540, 750), 20, 'Yellow', 'sans-serif')
     # print(frame.get_canvas_textheight('Welcome to Base 27 !',50))
+
+    #Display Score
+    canvas.draw_text(f"Score: {player.score}", (522, 488), 60, "Black")
+    canvas.draw_text(f"Score: {player.score}", (525, 490), 60, "Yellow")
+
+    #Display Time Survived
+    canvas.draw_text(f"Time Survived: {player.time_survived}", (422, 568), 60, "Black")
+    canvas.draw_text(f"Time Survived: {player.time_survived}", (425, 570), 60, "Yellow") 
+
     if interaction.get_key("c"):
         # manager.switch_scene("welcome")
         frame.stop()

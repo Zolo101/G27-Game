@@ -23,6 +23,8 @@ class Player:
 
         self.level = level
         self.money = 0
+        self.score = 0
+        self.time_survived = 0
         self.health = health
         self.max_health = max_health
 
@@ -87,13 +89,21 @@ class Player:
     #earns money 
     def earn(self, amount):
         self.money += amount
+    
+    #increase score
+    def increaseScore(self, amount):
+        self.score += amount
+
+    #increase time_survived
+    def increaseTimeSurvived(self, amount):
+        self.time_survived += amount
 
     def __str__(self):
         return f"{self.name} (Level {self.level}) - Health: {self.health}/{self.max_health}"
 
     def draw(self, canvas):
         """ This gets run on every frame. """
-
+        self.increaseTimeSurvived(1)
         # print(self.sprite.blocked)
 
         # debug
