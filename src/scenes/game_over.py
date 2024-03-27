@@ -1,6 +1,7 @@
 from src.classes.SceneManager import Scene
 from src.scenes.main import player
 
+
 def draw(manager, canvas, clock, frame, interaction):
     """ This gets run on every frame. """
     frame.set_canvas_background('rgb(255, 0, 10)')
@@ -14,6 +15,7 @@ def draw(manager, canvas, clock, frame, interaction):
     #Display Score
     canvas.draw_text(f"Score: {player.score}", (522, 488), 60, "Black")
     canvas.draw_text(f"Score: {player.score}", (525, 490), 60, "Yellow")
+    # canvas.draw_text(f"Score: {night_count}", (50, 50), 40, 'White', 'sans-serif')
 
     #Display Time Survived
     canvas.draw_text(f"Time Survived: {player.time_survived}", (422, 568), 60, "Black")

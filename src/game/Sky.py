@@ -17,6 +17,7 @@ class Sky:
         self.moon_offset = 15
         self.phase = 0
         self.color = Color(135, 206, 235)
+        self.night_count = 0
 
     def draw(self, canvas, clock, frame):
         """ This gets run on every frame. """
@@ -39,6 +40,9 @@ class Sky:
         canvas.draw_circle((self.moon.pos - Vector(self.moon_offset, self.moon_offset)).get_p(), 1, 100, self.color.__str__())
 
         frame.set_canvas_background(self.color.__str__())
+
+
+
 
     def get_sky_colour(self):
         x = max(0, (self.sun.pos - CENTER).y) / 1

@@ -21,6 +21,8 @@ def draw(manager, canvas, clock, frame, interaction):
     canvas.draw_text('[ ^ ]  =  SHOOT ', (700, 570), 40, 'White', 'sans-serif')
 
 
+
+
     canvas.draw_text('©GROUP-XXVII', (1185, 793), 15, 'White', 'sans-serif')
 
     canvas.draw_polygon([(200,260), (1080,260), (1080,645), (200,645)], 2, 'White')
