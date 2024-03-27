@@ -98,7 +98,7 @@ def draw(manager, canvas, clock, frame, interaction):
         for bullet in shoot.bullets:
             for zombie in zombies:
                 if (bullet.pos.x < (zombie.sprite.pos.x+20)) and (bullet.pos.x > (zombie.sprite.pos.x-20)):
-                    if zombie.health == 0:
+                    if zombie.health <= 0:
                         zombies.remove(zombie)
                         player.earn(100) # money per zombie kill
                         player.increaseScore(1) #increase score per zombie kill
