@@ -29,12 +29,12 @@ class Zombie:
         self.SPEED = SPEED
 
     def update(self):
-        if self.player.sprite.sheet.pos.x < self.sprite.pos.x:
+        if self.player.sprite.sheet.pos.x < self.sprite.pos.x and not self.sprite.blocked["left"]:
             self.sprite.pos.x -= self.SPEED
             # self.sprite.sheet.frame_width = -(self.sprite.sheet.frame_width)
             self.sprite.sheet.frame_index[1] = 5
             self.sprite.sheet.next_frame()
-        if self.player.sprite.sheet.pos.x > self.sprite.pos.x:
+        if self.player.sprite.sheet.pos.x > self.sprite.pos.x and not self.sprite.blocked["right"]:
             self.sprite.pos.x += self.SPEED
             # self.sprite.sheet.frame_width = (self.sprite.sheet.frame_width)
             self.sprite.sheet.frame_index[1] = 1
@@ -44,10 +44,7 @@ class Zombie:
         # if self.bullets. >1000:
         #     self.sprite.pos.x == 1
 
-
-
-
-        if self.sprite.blocked["left"] or self.sprite.blocked["right"]:
+        if (self.sprite.blocked["left"] or self.sprite.blocked["right"]) and self.sprite.grounded:
             self.sprite.vel.y -= JUMP_POWER
             self.sprite.sheet.next_frame()
 

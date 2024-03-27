@@ -1,6 +1,6 @@
 from src.classes.Vector import Vector
 
-GRAVITY = 2
+GRAVITY = 1.5
 AIR_RESISTANCE = 0.8
 TERMINAL_VELOCITY = 20
 
@@ -28,7 +28,10 @@ class Sprite:
         """ If true, disables gravity on the sprite. """
 
         self.grounded = False
-        """ True if the sprite is colliding with the terrain """
+        """ True if the sprite is colliding down with the terrain"""
+
+        self.touching = False
+        """ True if the sprite is colliding at all with the terrain """
 
         self.blocked = {
             "up": False,
@@ -39,6 +42,16 @@ class Sprite:
         """ Dictionary of collision states """
 
         self.frame_index = [1, 4]
+
+    def emulate_next_frame(self):
+        next_position = self.pos.copy()
+        next_velocity = self.vel.copy()
+
+        if not self.fixed:
+            next_velocity.y += GRAVITY;
+
+        next_position += next_velocity;
+        return next_position
 
     def update(self):
         """ This gets run on every frame. """
@@ -57,7 +70,7 @@ class Sprite:
         # print(self.name, self.blocked)
 
         # collision physics
-        if self.blocked["down"]:
+        if self.blocked["down"] or self.blocked["up"]:
             self.vel.y = 0
 
         if not (self.blocked["left"] or self.blocked["right"]):

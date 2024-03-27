@@ -3,7 +3,7 @@ from src.classes.Spritesheet import Spritesheet
 from src.classes import Music
 
 SPEED = 2.5
-JUMP_POWER = 24 * 2
+JUMP_POWER = 24 * 4
 
 
 class Player:
@@ -46,18 +46,18 @@ class Player:
             self.sprite.sheet.frame_index[1] = 1                                                        # CHOOSES THE ROW FROM THE SPRITESHEET
             self.sprite.sheet.next_frame()
 
-         #moving right   
+        #moving right
         if interaction.get_key("d") and not self.sprite.blocked["right"]:
             self.sprite.vel.x += SPEED
             self.sprite.sheet.max_c = 4
             self.sprite.sheet.frame_index[1] = 2                                                        # CHOOSES THH ROW FROM THE SPRITESHEET
             self.sprite.sheet.next_frame()
 
-        #gun appears to the left of the player    
+        #gun appears to the left of the player
         if interaction.get_key("left"):
             self.sprite.sheet.frame_index[1] = 1
 
-        #gun appear on the right    
+        #gun appear on the right
         if interaction.get_key("right"):
             self.sprite.sheet.frame_index[1] = 2
 
@@ -87,10 +87,10 @@ class Player:
         self.max_health += 10
         self.health = self.max_health
 
-    #earns money 
+    #earns money
     def earn(self, amount):
         self.money += amount
-    
+
     #increase score
     def increaseScore(self, amount):
         self.score += amount
