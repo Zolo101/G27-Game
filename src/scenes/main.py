@@ -22,7 +22,7 @@ sky = Sky()
 player = Player(600, 400)
 builder = Builder()
 pew = Pew(player)
-ui = UI(player, sky)
+ui = UI(player)
 shoot = Shoot(player)
 
 global timer
