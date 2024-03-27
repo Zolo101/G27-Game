@@ -67,32 +67,75 @@ def draw(manager, canvas, clock, frame, interaction):
         wave_manager.new_wave(50, 1)
     night_count = sky.day
 
-    # print(night_count)
+    print(night_count)
 
     # zombies.append(Zombie(-100, 400, player))
     # zombies.append(Zombie(1500, 400, player))
 
 
-    rrr = random.randint(0, 600)
+    rrr = random.randint(0, 500)
     global hCount
     global sCount
-    if hCount < 4:
-        if rrr == 1:
-            perks.append(Health(random.randint(0, 1280), player))  # HEALTH PERKS
-            hCount = hCount+1
-    if sCount < 4:
-        if rrr == 2:
-            perks.append(Speed(random.randint(0, 1280), player))  # SPEED PERKS
-            sCount = sCount+1
+    if night_count == 1:
+        if hCount < 2:
+            if rrr == 1:
+                perks.append(Health(random.randint(80, 1200), player))  # HEALTH PERKS
+                hCount += 1
+        if sCount < 2:
+            if rrr == 2:
+                perks.append(Speed(random.randint(80, 1200), player))  # SPEED PERKS
+                sCount += 1
+    if night_count == 2:
+        if hCount < 3:
+            if rrr == 1:
+                perks.append(Health(random.randint(80, 1200), player))  # HEALTH PERKS
+                hCount += 1
+        if sCount < 3:
+            if rrr == 2:
+                perks.append(Speed(random.randint(80, 1200), player))  # SPEED PERKS
+                sCount += 1
+    if night_count == 3:
+        if hCount < 4:
+            if rrr == 1:
+                perks.append(Health(random.randint(80, 1200), player))  # HEALTH PERKS
+                hCount += 1
+        if sCount < 4:
+            if rrr == 2:
+                perks.append(Speed(random.randint(80, 1200), player))  # SPEED PERKS
+                sCount += 1
+    if night_count == 4:
+        if hCount < 5:
+            if rrr == 1:
+                perks.append(Health(random.randint(80, 1200), player))  # HEALTH PERKS
+                hCount += 1
+        if sCount < 5:
+            if rrr == 2:
+                perks.append(Speed(random.randint(80, 1200), player))  # SPEED PERKS
+                sCount += 1
+    if night_count == 5:
+        if hCount < 6:
+            if rrr == 1:
+                perks.append(Health(random.randint(80, 1200), player))  # HEALTH PERKS
+                hCount += 1
+        if sCount < 6:
+            if rrr == 2:
+                perks.append(Speed(random.randint(80, 1200), player))  # SPEED PERKS
+                sCount += 1
+
+
+    for perk in perks:
+        perk.draw(canvas)
+        perk.update(interaction)
+
+
+
 
     terrain.draw(canvas)
 
     shoot.draw(canvas)
     shoot.update(interaction)
 
-    for perk in perks:
-        perk.draw(canvas)
-        perk.update(interaction)
+
 
     for zombie in zombies:
         zombie.draw(canvas)
