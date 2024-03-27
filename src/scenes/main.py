@@ -16,7 +16,7 @@ from src.classes.Perks import Health
 from src.classes.Perks import Speed
 
 from src.game.Zombie import Zombie1
-# from src.game.Zombie import Zombie2
+from src.game.Zombie import Zombie2
 # from src.game.Zombie import Zombie3
 # from src.game.Zombie import Zombie4
 # from src.game.Zombie import Zombie5
@@ -44,6 +44,7 @@ max_zom_num = 1
 wave_delay = 10000
 global night_count
 night_count = 0
+
 # zzz = Zombie(400, -000, player,shoot)
 def draw(manager, canvas, clock, frame, interaction):
     """ This gets run on every frame. """
@@ -58,7 +59,7 @@ def draw(manager, canvas, clock, frame, interaction):
 
         if cur_zom_num < max_zom_num:
             if timer % 40 == 0:
-                zombies.append(Zombie1(200, -000, player,shoot))
+                zombies.append(Zombie(400, -000, player,shoot))
 
                 #this line of code crushes the game for some reason
                 #responsible for limiting the number of zombies in each wave

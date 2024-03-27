@@ -1,10 +1,14 @@
 from src.classes.Sprite import Sprite
 from src.classes.Spritesheet import Spritesheet
 from src.classes import Music
-
+global SPEED
 SPEED = 2.5
 JUMP_POWER = 24 * 4
 
+try:
+    import simplegui
+except ImportError:
+    import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
 class Player:
     """
@@ -28,6 +32,7 @@ class Player:
         self.time_survived = 0
         self.health = health
         self.max_health = max_health
+        self.speed = 2.5
 
     def update(self, interaction):
         """ This gets run on every frame. """
@@ -98,6 +103,18 @@ class Player:
     #increase time_survived
     def increaseTimeSurvived(self, amount):
         self.time_survived += amount
+
+
+
+    def barry_allen(self):
+        global SPEED
+        SPEED = 2.5
+
+    def flash(self):
+        global SPEED
+        SPEED = 4
+        timer = simplegui.create_timer(5000, self.barry_allen)
+        timer.start()
 
     def __str__(self):
         return f"{self.name} (Level {self.level}) - Health: {self.health}/{self.max_health}"
