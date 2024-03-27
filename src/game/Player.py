@@ -15,7 +15,7 @@ class Player:
     Contains the `Sprite`, along with the health of the player.
     """
 
-    def __init__(self, x, y, level=1, health=1000, max_health=1000):
+    def __init__(self, x, y, level=1, health=100, max_health=100):
         self.size = (50, 120)
         self.sprite = Sprite("player", x, y)
         self.sprite.sheet = Spritesheet(
