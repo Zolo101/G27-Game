@@ -7,21 +7,21 @@ class WaveManager:
     """
 
     def __init__(self):
-        self.zom_num = 10
+        self.zom_num = 20
         self.zom_health = 100
         self.speed = 2
         self.current_wave = 1  # Track the current wave number
-        self.spawn_cooldown = 250 / self.zom_num
+        self.spawn_cooldown = 900 / self.zom_num
 
     def new_wave(self, add_health, add_speed):
-        self.zom_num = 10
+        self.zom_num = 20 + (10 * self.current_wave)
         self.zom_health += add_health
         self.speed += add_speed
         self.current_wave += 1  # Increment the wave number
-        self.spawn_cooldown = 250 / self.zom_num
+        self.spawn_cooldown = 900 / self.zom_num
 
     def add_zombie(self, zombies, player, shoot):
-        if self.zom_num > 0:
+        if self.zom_num >= 0:
             self.zom_num -= 1
             zombies.append(Zombie(400, 0, player, shoot))
 

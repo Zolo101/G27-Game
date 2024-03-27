@@ -25,7 +25,7 @@ from src.game.Zombie import Zombie2
 # TODO: Make the width and height a variable
 terrain = Terrain(1280, 800)
 sky = Sky()
-player = Player(600, 400)
+player = Player(600, 0)
 builder = Builder()
 pew = Pew(player)
 ui = UI(player)
@@ -59,7 +59,7 @@ def draw(manager, canvas, clock, frame, interaction):
         if clock.transition(wave_manager.spawn_cooldown):
             wave_manager.add_zombie(zombies, player, shoot)
 
-    if night_count != sky.day:
+    if night_count != sky.day and night_count != 0:
         # its a new night, and we survived it
         wave_manager.new_wave(50, 1)
     night_count = sky.day
@@ -128,7 +128,7 @@ def draw(manager, canvas, clock, frame, interaction):
     if player.sprite.pos.y > 800:
         player.take_damage(49)
         player.sprite.pos.x = 600
-        player.sprite.pos.y = 400
+        player.sprite.pos.y = 0
 
     # game over check
     if not player.is_alive():
@@ -139,27 +139,28 @@ def draw(manager, canvas, clock, frame, interaction):
     builder.draw(canvas, interaction)
     ui.draw(canvas, night_count)
 
-    side_left = (
-        Vector(player.sprite.pos.x, player.sprite.pos.y + (player.size[1] - 10))
-        .snap(Vector(20, 20))
-    )
-    side_right = (
-        Vector(player.sprite.pos.x + (player.size[0]), player.sprite.pos.y + (player.size[1] - 10))
-        .snap(Vector(20, 20))
-    )
-    bottom_center = (
-        Vector(player.sprite.pos.x + (player.size[0] / 2), player.sprite.pos.y + player.size[1] + 10)
-        .snap(Vector(20, 20))
-    )
-    bottom_center_up = (
-        Vector(player.sprite.pos.x + (player.size[0] / 2), player.sprite.pos.y + player.size[1] - 10)
-        .snap(Vector(20, 20))
-    )
-
-    draw_cube(canvas, side_left, "#ff0000")
-    draw_cube(canvas, side_right, "#00ff00")
-    draw_cube(canvas, bottom_center, "#ffffff")
-    draw_cube(canvas, bottom_center_up, "#aaaaaa")
+    # DEBUG COLLISION STUFF
+    # side_left = (
+    #     Vector(player.sprite.pos.x, player.sprite.pos.y + (player.size[1] - 10))
+    #     .snap(Vector(20, 20))
+    # )
+    # side_right = (
+    #     Vector(player.sprite.pos.x + (player.size[0]), player.sprite.pos.y + (player.size[1] - 10))
+    #     .snap(Vector(20, 20))
+    # )
+    # bottom_center = (
+    #     Vector(player.sprite.pos.x + (player.size[0] / 2), player.sprite.pos.y + player.size[1] + 10)
+    #     .snap(Vector(20, 20))
+    # )
+    # bottom_center_up = (
+    #     Vector(player.sprite.pos.x + (player.size[0] / 2), player.sprite.pos.y + player.size[1] - 10)
+    #     .snap(Vector(20, 20))
+    # )
+    #
+    # draw_cube(canvas, side_left, "#ff0000")
+    # draw_cube(canvas, side_right, "#00ff00")
+    # draw_cube(canvas, bottom_center, "#ffffff")
+    # draw_cube(canvas, bottom_center_up, "#aaaaaa")
 
     # draw_debug_collisions(canvas, terrain, player)
 
