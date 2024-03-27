@@ -23,13 +23,13 @@ class Bullet:
         q = round(self.age) + 1
         self.pos += Vector(random.randrange(-q, q), random.randrange(-q, q))
 
-        # Bullet drop 
+        # Bullet drop
         self.vel.y += (BULLET_GRAVITY * self.age)
 
     def draw(self, canvas):
         """ Creates the bullet. """
         # THIS IS A TEMPORARY BULLET.
-        color = Color(0, 0, 255)
+        color = Color(255, 70, 0)
         color += Color(self.age ** 1.2, 0, -self.age ** 2) # gradient bullets based on age
         canvas.draw_circle(self.pos.get_p(), 5,10, color.__str__())
 
