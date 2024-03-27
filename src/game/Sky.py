@@ -5,7 +5,7 @@ from src.classes.Sprite import Sprite
 from src.classes.Vector import Vector
 from src.classes.Spritesheet import Spritesheet
 
-SPEED = 0.01
+SPEED = 0.001
 OFFSET = 500
 CENTER = Vector(1280 // 2, 600)
 
@@ -16,8 +16,8 @@ class Sky:
         self.moon = Sprite("Moon", True)
         self.moon_offset = 15
         self.phase = 0
+        self.day = 0
         self.color = Color(135, 206, 235)
-        self.night_count = 0
 
     def draw(self, canvas, clock, frame):
         """ This gets run on every frame. """
@@ -32,6 +32,7 @@ class Sky:
         )
 
         self.phase = math.cos(-clock.time * SPEED)
+        self.day = math.floor(((clock.time / math.pi / 2) * SPEED) + 0.8)
 
         self.color = self.get_sky_colour()
         canvas.draw_circle(self.sun.pos.get_p(), 1, 100, "Yellow")
@@ -40,9 +41,6 @@ class Sky:
         canvas.draw_circle((self.moon.pos - Vector(self.moon_offset, self.moon_offset)).get_p(), 1, 100, self.color.__str__())
 
         frame.set_canvas_background(self.color.__str__())
-
-
-
 
     def get_sky_colour(self):
         x = max(0, (self.sun.pos - CENTER).y) / 1

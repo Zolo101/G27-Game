@@ -9,6 +9,7 @@ from src.game.Sky import Sky
 from src.game.Terrain import Terrain
 from src.game.Zombie import Zombie
 from src.classes.Clock import Clock
+from src.game.wavemanager import WaveManager
 from src.scenes.UI import UI
 from src.classes.Pew import Pew
 from src.classes.Shoot import Shoot
@@ -16,7 +17,7 @@ from src.classes.Perks import Health
 from src.classes.Perks import Speed
 
 from src.game.Zombie import Zombie1
-# from src.game.Zombie import Zombie2
+from src.game.Zombie import Zombie2
 # from src.game.Zombie import Zombie3
 # from src.game.Zombie import Zombie4
 # from src.game.Zombie import Zombie5
@@ -29,6 +30,7 @@ builder = Builder()
 pew = Pew(player)
 ui = UI(player)
 shoot = Shoot(player)
+clock = Clock()
 
 global timer
 global hCount
@@ -38,40 +40,30 @@ sCount = 0
 timer = 0
 zombies = []
 perks = []
-clock = Clock()
-cur_zom_num = 0
-max_zom_num = 1
-wave_delay = 10000
+
 global night_count
 night_count = 0
+
+wave_manager = WaveManager()
+
 
 # zzz = Zombie(400, -000, player,shoot)
 def draw(manager, canvas, clock, frame, interaction):
     """ This gets run on every frame. """
     # print(interaction.keys_down())
     max_zom_num = 1
-    global timer
     global night_count
-    timer += 1
     clock.tick()
     sky.draw(canvas, clock, frame)
     if sky.phase < 0:
+        if clock.transition(wave_manager.spawn_cooldown):
+            wave_manager.add_zombie(zombies, player, shoot)
 
-        if cur_zom_num < max_zom_num:
-            if timer % 40 == 0:
-                zombies.append(Zombie1(200, -000, player,shoot))
+    if night_count != sky.day:
+        # its a new night, and we survived it
+        wave_manager.new_wave(50, 1)
+    night_count = sky.day
 
-                #this line of code crushes the game for some reason
-                #responsible for limiting the number of zombies in each wave
-                #cur_zom_num += 1
-    if (sky.phase > -1) and (sky.phase < -0.999):
-        night_count = night_count + 1
-        # print(night_count)
-
-    #makes zombies substantially harder to kill
-    if timer % wave_delay == 0:
-        for zombie in zombies:
-            zombie.progres_dif()
 
     # zombies.append(Zombie(-100, 400, player))
     # zombies.append(Zombie(1500, 400, player))
@@ -94,7 +86,6 @@ def draw(manager, canvas, clock, frame, interaction):
     shoot.draw(canvas)
     shoot.update(interaction)
 
-
     for perk in perks:
         perk.draw(canvas)
         perk.update(interaction)
@@ -107,7 +98,6 @@ def draw(manager, canvas, clock, frame, interaction):
         for bullet in shoot.bullets:
             for zombie in zombies:
                 if (bullet.pos.x < (zombie.sprite.pos.x+20)) and (bullet.pos.x > (zombie.sprite.pos.x-20)):
-                     
                     zombies.remove(zombie)
                     player.earn(100) # money per zombie kill
                     player.increaseScore(1) #increase score per zombie kill
@@ -170,8 +160,6 @@ def draw(manager, canvas, clock, frame, interaction):
     draw_cube(canvas, bottom_center, "#ffffff")
     draw_cube(canvas, bottom_center_up, "#aaaaaa")
 
-
-
     # draw_debug_collisions(canvas, terrain, player)
 
 
@@ -200,7 +188,6 @@ def tick(manager, clock, frame, interaction):
             .snap(Vector(20, 20))
         )
 
-
         for x in range(int(pos.x) - RANGE, int(pos.x) + RANGE, 20):
             for y in range(int(pos.y) - RANGE, int(pos.y) + RANGE, 20):
                 block = terrain.blocks.get((x, y))
@@ -213,7 +200,6 @@ def tick(manager, clock, frame, interaction):
 
 
 def check_collision(s, t):
-    # raycast to terrain
     # if collision at side, set blocked side to true
     new_pos = s.sprite.emulate_next_frame()
     s.sprite.grounded = False
@@ -263,11 +249,6 @@ def check_collision(s, t):
 
     if top_center in t.visible_blocks:
         s.sprite.blocked["up"] = True
-
-    # if bottom_center_up in t.visible_blocks:
-    #     new_pos.subtract(Vector(0, 20))
-    #     s.sprite.vel = Vector(0, 0)
-    #     s.sprite.blocked["down"] = True
 
     s.sprite.grounded = s.sprite.blocked["down"]
     s.sprite.touching |= (s.sprite.blocked["up"] or
