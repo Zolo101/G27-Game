@@ -7,7 +7,7 @@ class UI:
         self.health_bar_border_colour = "gold"
         self.health_bar_background_colour = "red"
 
-    def draw(self, canvas):
+    def draw(self, canvas, night_count):
         health_percentage = self.player.health / self.player.max_health
         current_health_bar_length = health_percentage * self.health_bar_width
 
@@ -33,5 +33,7 @@ class UI:
         text_pos = (13, self.health_bar_height)
         canvas.draw_text(f"Health: {self.player.health}/{self.player.max_health}", text_pos, 30, "White")
 
+        # nights text
+        canvas.draw_text(f"Night {night_count}", (13, self.health_bar_height + 100), 30, "Blue")
         #canvas.draw_text(f"Time Survived: {self.player.time_survived}", (422, 568), 60, "Black")
-        #canvas.draw_text(f"Time Survived: {self.player.time_survived}", (425, 570), 60, "Yellow") 
+        #canvas.draw_text(f"Time Survived: {self.player.time_survived}", (425, 570), 60, "Yellow")

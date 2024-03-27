@@ -22,7 +22,7 @@ sky = Sky()
 player = Player(600, 400)
 builder = Builder()
 pew = Pew(player)
-ui = UI(player)
+ui = UI(player, sky)
 shoot = Shoot(player)
 
 global timer
@@ -88,11 +88,11 @@ def draw(manager, canvas, clock, frame, interaction):
     shoot.draw(canvas)
     shoot.update(interaction)
 
-    
+
     for perk in perks:
         perk.draw(canvas)
         perk.update(interaction)
-    
+
     for zombie in zombies:
         zombie.draw(canvas)
         zombie.update()
@@ -139,7 +139,29 @@ def draw(manager, canvas, clock, frame, interaction):
     pew.draw(canvas)
     pew.update(interaction)
     builder.draw(canvas, interaction)
-    ui.draw(canvas)
+    ui.draw(canvas, night_count)
+
+    side_left = (
+        Vector(player.sprite.pos.x, player.sprite.pos.y + (player.size[1] - 10))
+        .snap(Vector(20, 20))
+    )
+    side_right = (
+        Vector(player.sprite.pos.x + (player.size[0]), player.sprite.pos.y + (player.size[1] - 10))
+        .snap(Vector(20, 20))
+    )
+    bottom_center = (
+        Vector(player.sprite.pos.x + (player.size[0] / 2), player.sprite.pos.y + player.size[1] + 10)
+        .snap(Vector(20, 20))
+    )
+    bottom_center_up = (
+        Vector(player.sprite.pos.x + (player.size[0] / 2), player.sprite.pos.y + player.size[1] - 10)
+        .snap(Vector(20, 20))
+    )
+
+    draw_cube(canvas, side_left, "#ff0000")
+    draw_cube(canvas, side_right, "#00ff00")
+    draw_cube(canvas, bottom_center, "#ffffff")
+    draw_cube(canvas, bottom_center_up, "#aaaaaa")
 
 
 
@@ -183,10 +205,12 @@ def tick(manager, clock, frame, interaction):
     check_collision(player, terrain)
 
 
-def check_collision_old(s, t):
+def check_collision(s, t):
     # raycast to terrain
     # if collision at side, set blocked side to true
+    new_pos = s.sprite.emulate_next_frame()
     s.sprite.grounded = False
+    s.sprite.touching = False
 
     s.sprite.blocked["up"] = False
     s.sprite.blocked["down"] = False
@@ -194,21 +218,33 @@ def check_collision_old(s, t):
     s.sprite.blocked["right"] = False
 
     side_left = (
-        Vector(s.sprite.pos.x, s.sprite.pos.y + (s.size[1] - 10))
+        Vector(new_pos.x, new_pos.y + (s.size[1] - 10))
         .snap(Vector(20, 20))
         .get_p()
     )
     side_right = (
-        Vector(s.sprite.pos.x + (s.size[0]), s.sprite.pos.y + (s.size[1] - 10))
+        Vector(new_pos.x + (s.size[0]), new_pos.y + (s.size[1] - 10))
         .snap(Vector(20, 20))
         .get_p()
     )
     bottom_center = (
-        Vector(s.sprite.pos.x + (s.size[0] / 2), s.sprite.pos.y + s.size[1] + 20)
+        Vector(new_pos.x + (s.size[0] / 2), new_pos.y + s.size[1] + 10)
         .snap(Vector(20, 20))
         .get_p()
     )
-    
+
+    bottom_center_up = (
+        Vector(new_pos.x + (s.size[0] / 2), new_pos.y + s.size[1] + 10)
+        .snap(Vector(20, 20))
+        .get_p()
+    )
+
+    top_center = (
+        Vector(new_pos.x + (s.size[0] / 2), new_pos.y)
+        .snap(Vector(20, 20))
+        .get_p()
+    )
+
     if side_left in t.visible_blocks:
         s.sprite.blocked["left"] = True
 
@@ -218,67 +254,19 @@ def check_collision_old(s, t):
     if bottom_center in t.visible_blocks:
         s.sprite.blocked["down"] = True
 
-    s.sprite.grounded |= (s.sprite.blocked["up"] or
+    if top_center in t.visible_blocks:
+        s.sprite.blocked["up"] = True
+
+    # if bottom_center_up in t.visible_blocks:
+    #     new_pos.subtract(Vector(0, 20))
+    #     s.sprite.vel = Vector(0, 0)
+    #     s.sprite.blocked["down"] = True
+
+    s.sprite.grounded = s.sprite.blocked["down"]
+    s.sprite.touching |= (s.sprite.blocked["up"] or
                           s.sprite.blocked["down"] or
                           s.sprite.blocked["left"] or
                           s.sprite.blocked["right"])
-
-
-def check_collision(p, t):
-    p.sprite.grounded = False
-
-    p.sprite.blocked["up"] = False
-    p.sprite.blocked["down"] = False
-    p.sprite.blocked["left"] = False
-    p.sprite.blocked["right"] = False
-
-    for block in t.visible_blocks.values():
-        # block collision
-
-        dx = p.sprite.pos.x - block.x
-        dy = p.sprite.pos.y - block.y
-
-        if collision_consensus(dx, dy, p):
-            down = block.y - 20 <= p.sprite.pos.y + p.size[1]
-            up = block.y <= p.sprite.pos.y + p.size[1]
-
-            p.sprite.blocked["up"] |= up
-            p.sprite.blocked["down"] |= down
-
-        if collision_consensus_sides(dx, dy, p):
-            bl_pos = p.sprite.pos.copy().add(Vector(0, p.size[1] - 50))
-            br_pos = p.sprite.pos.copy().add(Vector(p.size[0], p.size[1] - 50))
-
-            left = block.x <= bl_pos.x
-            right = block.x + p.size[0] >= br_pos.x
-
-            p.sprite.blocked["left"] |= left
-            p.sprite.blocked["right"] |= right
-
-        p.sprite.grounded |= (p.sprite.blocked["up"] or
-                              p.sprite.blocked["down"] or
-                              p.sprite.blocked["left"] or
-                              p.sprite.blocked["right"])
-
-
-def collision_consensus(dx, dy, p):
-    return p.size[0] - 50 >= abs(dx + 15) - 50 and p.size[1] < abs(dy) < p.size[1] + 20
-
-
-def collision_consensus_sides(dx, dy, p):
-    return abs(dx) - 10 < p.size[0] and p.size[1] - 30 < abs(dy) < p.size[1] - 10
-
-
-def draw_debug_collisions(canvas, terrain, character):
-    for t in terrain.visible_blocks.values():
-        dx = character.sprite.pos.x - t.x
-        dy = character.sprite.pos.y - t.y
-
-        if collision_consensus(dx, dy, character):
-            draw_cube(canvas, Vector(t.x, t.y))
-
-        if collision_consensus_sides(dx, dy, character):
-            draw_cube(canvas, Vector(t.x, t.y), "#ff0000")
 
 
 main = Scene("main", draw, tick)
