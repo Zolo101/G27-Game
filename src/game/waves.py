@@ -37,27 +37,3 @@ class Waves:
         self.zom_max_health = 50  # Set the initial maximum zombie health
         self.speed = 2  # Set the initial zombie speed
         self.current_wave = 1  # Reset the wave number to 1
-
-    def get_wave_info(self):
-        """
-        Returns a formatted string with information about the current wave.
-        :return: A string containing the current wave number, number of zombies, zombie health, and zombie speed.
-        """
-        return f"Wave {self.current_wave}: {self.zom_num} zombies, Health: {self.zom_health}/{self.zom_max_health}, Speed: {self.speed}"
-
-    def spawn_zombies(self, player, bullets, terrain):
-        """
-        Spawns the zombies for the current wave.
-        :param player: The player object.
-        :param bullets: The list of bullets.
-        :param terrain: The terrain object.
-        :return: A list of Zombie objects representing the spawned zombies.
-        """
-        zombies = []
-        for _ in range(self.zom_num):
-            # Spawn zombies at random positions along the edges of the terrain
-            x = terrain.blocks[min(terrain.blocks.keys(), key=lambda k: abs(k[0] - player.sprite.sheet.pos.x))][0]
-            y = terrain.blocks[min(terrain.blocks.keys(), key=lambda k: abs(k[1] - player.sprite.sheet.pos.y))][1]
-            zombie = Zombie(x, y, player, bullets, self.zom_health, self.zom_max_health, self.speed)
-            zombies.append(zombie)
-        return zombies

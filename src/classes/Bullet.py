@@ -23,7 +23,7 @@ class Bullet:
         q = round(self.age) + 1
         self.pos += Vector(random.randrange(-q, q), random.randrange(-q, q))
 
-        # Bullet drop (like in fortnite 🗿)
+        # Bullet drop 
         self.vel.y += (BULLET_GRAVITY * self.age)
 
     def draw(self, canvas):

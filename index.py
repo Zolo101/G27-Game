@@ -21,14 +21,14 @@ WIDTH, HEIGHT = (1280, 800)
 frame = simplegui.create_frame("base 27", 2560 / 2, 800, 0)
 
 manager = SceneManager()
-# music = Music.music()
+music = Music.music()
 
 
 def collision_check():
     manager.tick(clock, frame, interaction)
 
 # Start playing music
-# music.play_music()
+music.play_music()
 
 manager.add_scene(welcome)
 manager.add_scene(main)
