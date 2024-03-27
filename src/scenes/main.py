@@ -15,6 +15,7 @@ from src.classes.Pew import Pew
 from src.classes.Shoot import Shoot
 from src.classes.Perks import Health
 from src.classes.Perks import Speed
+from src.classes.Cloud  import Cloud
 
 from src.game.Zombie import Zombie1
 from src.game.Zombie import Zombie2
@@ -31,6 +32,8 @@ pew = Pew(player)
 ui = UI(player)
 shoot = Shoot(player)
 clock = Clock()
+
+cloud = Cloud()
 
 global timer
 global hCount
@@ -137,6 +140,8 @@ def draw(manager, canvas, clock, frame, interaction):
     pew.draw(canvas)
     pew.update(interaction)
     builder.draw(canvas, interaction)
+    cloud.draw(canvas)
+    cloud.update()
     ui.draw(canvas, night_count)
 
     # DEBUG COLLISION STUFF

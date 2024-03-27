@@ -36,7 +36,7 @@ manager.add_scene(main)
 manager.add_scene(game_over)
 manager.add_scene(backstory)
 
-manager.switch_scene("backstory")
+manager.switch_scene("welcome")
 
 clock = Clock()
 interaction = Interaction(simplegui.KEY_MAP | {"shift": 17})
