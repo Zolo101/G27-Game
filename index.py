@@ -28,7 +28,7 @@ def collision_check():
     manager.tick(clock, frame, interaction)
 
 # Start playing music
-music.play_music()
+#music.play_music()
 
 manager.add_scene(welcome)
 manager.add_scene(main)
