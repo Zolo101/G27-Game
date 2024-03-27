@@ -6,7 +6,7 @@ JUMP_POWER = 40 / 4
 
 #zombie class
 class Zombie:
-    def __init__(self, x, y, player, bullets,health = 50, max_health = 50,SPEED = 2,):
+    def __init__(self, x, y, player,bullets,health = 50, max_health = 50,SPEED = 2,):
         self.bullets = bullets
         self.size = (75, 200)
         self.sprite = Sprite("zombie", x, y)
@@ -23,22 +23,36 @@ class Zombie:
         self.health = health
         self.max_health = max_health
         self.SPEED = SPEED
+        self.given_damage = 0
+        self.since_damaged = 0
 
     def update(self):
         if self.player.sprite.sheet.pos.x < self.sprite.pos.x:
             self.sprite.pos.x -= self.SPEED
             self.sprite.sheet.frame_index[1] = 5
             self.sprite.sheet.next_frame()
+
         if self.player.sprite.sheet.pos.x > self.sprite.pos.x:
             self.sprite.pos.x += self.SPEED
             self.sprite.sheet.frame_index[1] = 1
             self.sprite.sheet.next_frame()
-        if (self.sprite.pos.x > self.player.sprite.sheet.pos.x) and (self.sprite.pos.x < self.player.sprite.sheet.pos.x + 20) and (self.sprite.pos.y > self.player.sprite.sheet.pos.y - 80) and (self.sprite.pos.y < self.player.sprite.sheet.pos.y + 80) :
+
+        if (self.sprite.pos.x > self.player.sprite.sheet.pos.x) and (self.sprite.pos.x < self.player.sprite.sheet.pos.x + 200) and (self.sprite.pos.y > self.player.sprite.sheet.pos.y - 200) and (self.sprite.pos.y < self.player.sprite.sheet.pos.y + 80) and  self.given_damage == False :
             self.player.take_damage(1)
+            self.given_damage = True
+
+        if self.given_damage == True:
+            self.since_damaged += 1
+
         if self.sprite.blocked["left"] or self.sprite.blocked["right"]:
             self.sprite.vel.y -= JUMP_POWER
             self.sprite.sheet.next_frame()
 
+        if  self.given_damage == True and self.since_damaged > 10:
+            self.given_damage = False
+
+        if self.since_damaged > 11:
+            self.since_damaged = 0
         # self.sprite.sheet.next_frame()
         self.sprite.sheet.max_c = 2
         self.sprite.update()
