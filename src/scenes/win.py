@@ -1,10 +1,9 @@
 from src.classes.SceneManager import Scene
-import random
 
 
-def draw(manager, canvas, clock, frame, interaction):
+def draw(game, canvas):
     """ This gets run on every frame. """
-    frame.set_canvas_background('rgb(0, 163, 60)')
+    game.frame.set_canvas_background('rgb(0, 163, 60)')
 
     canvas.draw_text(
         'w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w',
@@ -154,11 +153,12 @@ def draw(manager, canvas, clock, frame, interaction):
 
 
 
-    if interaction.get_key("space"):
-        # manager.switch_scene("welcome")
-        frame.stop()
+    if game.interaction.get_key("space"):
+        # game.manager.switch_scene("welcome")
+        game.frame.stop()
 
-def tick(manager, clock, frame, interaction):
+
+def tick(game):
     pass
 
 

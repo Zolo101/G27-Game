@@ -11,13 +11,13 @@ class SceneManager:
         self.current_scene = self.scenes[scene_name]
         print(f"Switched to scene: {scene_name}")
 
-    def draw(self, canvas, clock, frame, interaction):
+    def draw(self, game, canvas):
         """ This gets run on every frame. """
-        self.current_scene.draw(self, canvas, clock, frame, interaction)
+        self.current_scene.draw(game, canvas)
 
-    def tick(self, clock, frame, interaction):
-        """ This gets run every 4 ms for time sensitive functions """
-        self.current_scene.tick(self, clock, frame, interaction)
+    def tick(self, game):
+        """ This gets run every 8ms for time sensitive functions such as collision """
+        self.current_scene.tick(game)
 
 
 # Scene

@@ -3,216 +3,170 @@ from src.classes.Builder import Builder
 from src.classes.Color import Color
 from src.classes.SceneManager import Scene
 from src.classes.Vector import Vector
-from src.game.Player import Player
-from src.game.Sky import Sky
-from src.game.Terrain import Terrain
-from src.classes.Clock import Clock
-from src.game.wavemanager import WaveManager
-from src.scenes.UI import UI
-from src.classes.Pew import Pew
-from src.classes.Shoot import Shoot
-from src.classes.Perks import Health
-from src.classes.Perks import Speed
-from src.classes.Cloud  import Cloud
+from src.classes.Perks import Health, Speed
 
 
-# TODO: Make the width and height a variable
-terrain = Terrain(1280, 800)
-sky = Sky()
-player = Player(600, 0)
-builder = Builder()
-pew = Pew(player)
-ui = UI(player)
-shoot = Shoot(player)
-clock = Clock()
+def draw(game, canvas):
+    """ This gets run on every game.frame. """
 
-global timer
-global hCount
-global sCount
-hCount = 0
-sCount = 0
-timer = 0
-zombies = []
-perks = []
-clouds = []
-
-for i in range(1, 20):
-    clouds.append(Cloud())
-
-global night_count
-night_count = 0
-
-wave_manager = WaveManager()
-
-
-
-# zzz = Zombie(400, -000, player,shoot)
-def draw(manager, canvas, clock, frame, interaction):
-    """ This gets run on every frame. """
-    
     # print(interaction.keys_down())
     max_zom_num = 1
-    global night_count
-    clock.tick()
-    sky.draw(canvas, clock, frame)
-    if sky.phase < 0:
-        if clock.transition(wave_manager.spawn_cooldown):
-            wave_manager.add_zombie(zombies, player, shoot)
+    game.clock.tick()
+    game.sky.draw(canvas, game.clock, game.frame)
+    if game.sky.phase < 0:
+        if game.clock.transition(game.wave_manager.spawn_cooldown):
+            game.wave_manager.add_zombie(game.zombies, game.player, game.shoot)
 
-    if night_count != sky.day and night_count != 0:
+    if game.night_count != game.sky.day and game.night_count != 0:
         # its a new night, and we survived it
-        wave_manager.new_wave(50, 1)
-    night_count = sky.day
+        game.wave_manager.new_wave(50, 1)
+    game.night_count = game.sky.day
 
-    player.night = night_count
+    game.player.night = game.night_count
 
-    # zombies.append(Zombie(-100, 400, player))
-    # zombies.append(Zombie(1500, 400, player))
+    # game.zombies.append(Zombie(-100, 400, game.player))
+    # game.zombies.append(Zombie(1500, 400, game.player))
 
 
     rrr = random.randint(0, 500)
-    global hCount
-    global sCount
-    if night_count == 1:
-        if hCount < 2:
+    if game.night_count == 1:
+        if game.hCount < 2:
             if rrr == 1:
-                perks.append(Health(random.randint(80, 1200), player))  # HEALTH PERKS
-                hCount += 1
-        if sCount < 2:
+                game.perks.append(Health(random.randint(80, 1200), game.player))  # HEALTH game.PERKS
+                game.hCount += 1
+        if game.sCount < 2:
             if rrr == 2:
-                perks.append(Speed(random.randint(80, 1200), player))  # SPEED PERKS
-                sCount += 1
-    if night_count == 2:
-        if hCount < 3:
+                game.perks.append(Speed(random.randint(80, 1200), game.player))  # SPEED game.PERKS
+                game.sCount += 1
+    if game.night_count == 2:
+        if game.hCount < 3:
             if rrr == 1:
-                perks.append(Health(random.randint(80, 1200), player))  # HEALTH PERKS
-                hCount += 1
-        if sCount < 3:
+                game.perks.append(Health(random.randint(80, 1200), game.player))  # HEALTH game.PERKS
+                game.hCount += 1
+        if game.sCount < 3:
             if rrr == 2:
-                perks.append(Speed(random.randint(80, 1200), player))  # SPEED PERKS
-                sCount += 1
-    if night_count == 3:
-        if hCount < 4:
+                game.perks.append(Speed(random.randint(80, 1200), game.player))  # SPEED game.PERKS
+                game.sCount += 1
+    if game.night_count == 3:
+        if game.hCount < 4:
             if rrr == 1:
-                perks.append(Health(random.randint(80, 1200), player))  # HEALTH PERKS
-                hCount += 1
-        if sCount < 4:
+                game.perks.append(Health(random.randint(80, 1200), game.player))  # HEALTH game.PERKS
+                game.hCount += 1
+        if game.sCount < 4:
             if rrr == 2:
-                perks.append(Speed(random.randint(80, 1200), player))  # SPEED PERKS
-                sCount += 1
-    if night_count == 4:
-        if hCount < 5:
+                game.perks.append(Speed(random.randint(80, 1200), game.player))  # SPEED game.PERKS
+                game.sCount += 1
+    if game.night_count == 4:
+        if game.hCount < 5:
             if rrr == 1:
-                perks.append(Health(random.randint(80, 1200), player))  # HEALTH PERKS
-                hCount += 1
-        if sCount < 5:
+                game.perks.append(Health(random.randint(80, 1200), game.player))  # HEALTH game.PERKS
+                game.hCount += 1
+        if game.sCount < 5:
             if rrr == 2:
-                perks.append(Speed(random.randint(80, 1200), player))  # SPEED PERKS
-                sCount += 1
-    if night_count == 5:
-        if hCount < 6:
+                game.perks.append(Speed(random.randint(80, 1200), game.player))  # SPEED game.PERKS
+                game.sCount += 1
+    if game.night_count == 5:
+        if game.hCount < 6:
             if rrr == 1:
-                perks.append(Health(random.randint(80, 1200), player))  # HEALTH PERKS
-                hCount += 1
-        if sCount < 6:
+                game.perks.append(Health(random.randint(80, 1200), game.player))  # HEALTH game.PERKS
+                game.hCount += 1
+        if game.sCount < 6:
             if rrr == 2:
-                perks.append(Speed(random.randint(80, 1200), player))  # SPEED PERKS
-                sCount += 1
+                game.perks.append(Speed(random.randint(80, 1200), game.player))  # SPEED game.PERKS
+                game.sCount += 1
 
 
-    for perk in perks:
+    for perk in game.perks:
         perk.draw(canvas)
-        perk.update(interaction)
+        perk.update(game.interaction)
 
-    for cloud in clouds:
+    for cloud in game.clouds:
         cloud.draw(canvas)
         cloud.update()
 
-    terrain.draw(canvas)
+    game.terrain.draw(canvas)
 
-    shoot.draw(canvas)
-    shoot.update(interaction)
+    game.shoot.draw(canvas)
+    game.shoot.update(game.interaction)
 
-
-
-    for zombie in zombies:
+    for zombie in game.zombies:
         zombie.draw(canvas)
-        zombie.update(clock)
+        zombie.update(game.clock)
 
-    if len(zombies) > 0:
-        for bullet in shoot.bullets:
-            for zombie in zombies:
+    if len(game.zombies) > 0:
+        for bullet in game.shoot.bullets:
+            for zombie in game.zombies:
                 if (bullet.pos.x < (zombie.sprite.pos.x+20)) and (bullet.pos.x > (zombie.sprite.pos.x-20)):
                     if zombie.health <= 0:
-                        zombies.remove(zombie)
-                        player.earn(100) # money per zombie kill
-                        player.increaseScore(random.randint(50, 75)) #increase score per zombie kill
+                        game.zombies.remove(zombie)
+                        game.player.earn(100) # money per zombie kill
+                        game.player.increaseScore(random.randint(50, 75)) #increase score per zombie kill
                     # the line below crashes sometimes when killing a zombie
-                    if bullet in shoot.bullets:
+                    if bullet in game.shoot.bullets:
                         zombie.zombie_take_damage(5)
-                        shoot.bullets.remove(bullet)
+                        game.shoot.bullets.remove(bullet)
 
-        # check_collision(zombie, terrain)
-        # draw_debug_collisions(canvas, terrain, zombie)
+        # check_collision(zombie, game.terrain)
+        # draw_debug_collisions(canvas, game.terrain, zombie)
 
-    if player.money >= 10:
-        if not builder.pos.get_p() in terrain.blocks:
-            builder.build(terrain)
-            player.money -= 10
+    if game.player.money >= 10:
+        if not game.builder.pos.get_p() in game.terrain.blocks:
+            game.builder.build(game.terrain)
+            game.player.money -= 10
 
-    player.update(interaction)
-    player.draw(canvas)
+    game.player.update(game.interaction)
+    game.player.draw(canvas)
 
-    terrain.remove_dead()
-    terrain.heal()
+    game.terrain.remove_dead()
+    game.terrain.heal()
 
     # bullet collision check
-    shoot.check_collision(terrain)
+    game.shoot.check_collision(game.terrain)
 
     # out of bounds check
-    if player.sprite.pos.y > 800:
-        player.take_damage(49)
-        player.sprite.pos.x = 600
-        player.sprite.pos.y = 0
+    if game.player.sprite.pos.y > 800:
+        game.player.take_damage(49)
+        game.player.sprite.pos.x = 600
+        game.player.sprite.pos.y = 0
 
     # game over check
-    if not player.is_alive():
-        manager.switch_scene("game_over")
+    if not game.player.is_alive():
+        game.manager.switch_scene("game_over")
 
-    if (night_count == 5 and player.is_alive() and sky.moon.pos.x > 1138):
-        manager.switch_scene("win")
+    if (game.night_count == 5 and game.player.is_alive() and game.sky.moon.pos.x > 1138):
+        game.manager.switch_scene("win")
 
-    pew.draw(canvas)
-    pew.update(interaction)
-    builder.draw(canvas, interaction)
+    game.pew.draw(canvas)
+    game.pew.update(game.interaction)
+    game.builder.draw(canvas, game.interaction)
 
 
-    ui.draw(canvas, night_count)
+    game.ui.draw(canvas, game.night_count)
 
     # DEBUG COLLISION STUFF
     # side_left = (
-    #     Vector(player.sprite.pos.x, player.sprite.pos.y + (player.size[1] - 10))
+    #     Vector(game.player.sprite.pos.x, game.player.sprite.pos.y + (game.player.size[1] - 10))
     #     .snap(Vector(20, 20))
     # )
     # side_right = (
-    #     Vector(player.sprite.pos.x + (player.size[0]), player.sprite.pos.y + (player.size[1] - 10))
+    #     Vector(game.player.sprite.pos.x + (game.player.size[0]), game.player.sprite.pos.y + (game.player.size[1] - 10))
     #     .snap(Vector(20, 20))
     # )
     # bottom_center = (
-    #     Vector(player.sprite.pos.x + (player.size[0] / 2), player.sprite.pos.y + player.size[1] + 10)
+    #     Vector(game.player.sprite.pos.x + (game.player.size[0] / 2), game.player.sprite.pos.y + game.player.size[1] + 10)
     #     .snap(Vector(20, 20))
     # )
     # bottom_center_up = (
-    #     Vector(player.sprite.pos.x + (player.size[0] / 2), player.sprite.pos.y + player.size[1] - 10)
+    #     Vector(game.player.sprite.pos.x + (game.player.size[0] / 2), game.player.sprite.pos.y + game.player.size[1] - 10)
     #     .snap(Vector(20, 20))
     # )
     #
-    # draw_cube(canvas, side_left, "#ff0000")
-    # draw_cube(canvas, side_right, "#00ff00")
-    # draw_cube(canvas, bottom_center, "#ffffff")
-    # draw_cube(canvas, bottom_center_up, "#aaaaaa")
+    # draw_cube(game, side_left, "#ff0000")
+    # draw_cube(game, side_right, "#00ff00")
+    # draw_cube(game, bottom_center, "#ffffff")
+    # draw_cube(game, bottom_center_up, "#aaaaaa")
 
-    # draw_debug_collisions(canvas, terrain, player)
+    # draw_debug_collisions(canvas, game.terrain, game.player)
 
 
 def draw_cube(canvas, pos, colour="#ffffff"):
@@ -227,12 +181,12 @@ def draw_cube(canvas, pos, colour="#ffffff"):
     )
 
 
-def tick(manager, clock, frame, interaction):
+def tick(game):
     RANGE = 90
     HURT = 0.1
 
-    for zombie in zombies:
-        check_collision(zombie, terrain)
+    for zombie in game.zombies:
+        check_collision(zombie, game.terrain)
         pos = (
             zombie.sprite.pos
             .copy()
@@ -242,13 +196,13 @@ def tick(manager, clock, frame, interaction):
 
         for x in range(int(pos.x) - RANGE, int(pos.x) + RANGE, 20):
             for y in range(int(pos.y) - RANGE, int(pos.y) + RANGE, 20):
-                block = terrain.blocks.get((x, y))
+                block = game.terrain.blocks.get((x, y))
                 if block is not None:
-                    # player made blocks only
+                    # game.player made blocks only
                     if block.color == Color(156, 156, 156):
                         block.health -= HURT
 
-    check_collision(player, terrain)
+    check_collision(game.player, game.terrain)
 
 
 def check_collision(s, t):

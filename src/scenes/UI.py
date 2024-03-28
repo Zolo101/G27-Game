@@ -28,7 +28,7 @@ class UI:
             money_colour = "Red"
 
         # money text
-        canvas.draw_text(f"£{self.player.money}", (10, 120), 60, money_colour)
+        canvas.draw_text(f"{self.player.money}¥$", (10, 120), 60, money_colour)
 
         # Display text health value
         text_pos = (13, self.health_bar_height)
@@ -36,10 +36,10 @@ class UI:
 
         # nights text
         canvas.draw_text(f"Night {night_count}", (13, self.health_bar_height + 100), 30, "Blue")
-        
+
         #time survived debug code
-        canvas.draw_text(f"Time Survived: {self.player.time_survived}", (422, 568), 60, "Black")
-        canvas.draw_text(f"Time Survived: {self.player.time_survived}", (425, 570), 60, "Yellow")
+        # canvas.draw_text(f"Time Survived: {self.player.time_survived}", (422, 568), 60, "Black")
+        # canvas.draw_text(f"Time Survived: {self.player.time_survived}", (425, 570), 60, "Yellow")
 
         #score
         canvas.draw_text(f"Score: {self.player.score}", (10, 773), 60, "Black")

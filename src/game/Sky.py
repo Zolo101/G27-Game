@@ -5,7 +5,7 @@ from src.classes.Sprite import Sprite
 from src.classes.Vector import Vector
 from src.classes.Spritesheet import Spritesheet
 
-SPEED = 0.001
+SPEED = 0.005
 OFFSET = 500
 CENTER = Vector(1280 // 2, 600)
 
@@ -31,7 +31,6 @@ class Sky:
             math.sin(-clock.time * SPEED) * OFFSET,
             math.cos(-clock.time * SPEED) * OFFSET,
         )
-        print(self.moon.pos.y)
 
         self.phase = math.cos(-clock.time * SPEED)
         self.day = math.floor(((clock.time / math.pi / 2) * SPEED) + 0.8)

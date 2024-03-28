@@ -1,9 +1,9 @@
 from src.classes.SceneManager import Scene
 
 
-def draw(manager, canvas, clock, frame, interaction):
+def draw(game, canvas):
     """ This gets run on every frame. """
-    frame.set_canvas_background('rgb(100,5,25)')
+    game.frame.set_canvas_background('rgb(100,5,25)')
     canvas.draw_text(
         'Harken ye to this saga, a chronicle most dire of one valorous soul whose mettle was tryed \'gainst legions of the unliving. ', (90, 160), 20, 'Yellow', 'sans-serif')
     canvas.draw_text(
@@ -41,13 +41,13 @@ def draw(manager, canvas, clock, frame, interaction):
     canvas.draw_text('Press \' space \' to start game', (720, 760), 20, 'Yellow', 'sans-serif')
     canvas.draw_text('Press \' o \' to go back to welcome screen', (320, 760), 20, 'Yellow', 'sans-serif')
 
-    if interaction.get_key("space"):
-        manager.switch_scene("main")
-    if interaction.get_key("o"):
-        manager.switch_scene("welcome")
+    if game.interaction.get_key("space"):
+        game.manager.switch_scene("main")
+    if game.interaction.get_key("o"):
+        game.manager.switch_scene("welcome")
 
 
-def tick(manager, clock, frame, interaction):
+def tick(game):
     pass
 
 

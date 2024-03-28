@@ -1,6 +1,6 @@
 # g27 game project
 
-## Building
+## Building locally
 
 Requirements
 - SimpleGUICS2Pygame
