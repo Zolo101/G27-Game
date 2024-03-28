@@ -38,7 +38,7 @@ zombies = []
 perks = []
 clouds = []
 
-for i in range(1, 5):
+for i in range(1, 20):
     clouds.append(Cloud())
 
 global night_count
@@ -47,9 +47,11 @@ night_count = 0
 wave_manager = WaveManager()
 
 
+
 # zzz = Zombie(400, -000, player,shoot)
 def draw(manager, canvas, clock, frame, interaction):
     """ This gets run on every frame. """
+    
     # print(interaction.keys_down())
     max_zom_num = 1
     global night_count
@@ -124,8 +126,9 @@ def draw(manager, canvas, clock, frame, interaction):
         perk.draw(canvas)
         perk.update(interaction)
 
-
-
+    for cloud in clouds:    
+        cloud.draw(canvas)
+        cloud.update()
 
     terrain.draw(canvas)
 
@@ -185,9 +188,6 @@ def draw(manager, canvas, clock, frame, interaction):
     pew.update(interaction)
     builder.draw(canvas, interaction)
 
-    for cloud in clouds:    
-        cloud.draw(canvas)
-        cloud.update()
         
     ui.draw(canvas, night_count)
 
