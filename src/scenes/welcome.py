@@ -39,9 +39,9 @@ def draw(game, canvas):
     canvas.draw_text('Press \' space \' to start game', (720, 760), 20, 'Yellow', 'sans-serif')
     canvas.draw_text('Press \' i \' to view game backstory', (320, 760), 20, 'Yellow', 'sans-serif')
 
-    if game.interaction.get_key("space"):
+    if game.control.get_key("space"):
         game.manager.switch_scene("main")
-    if game.interaction.get_key("i"):
+    if game.control.get_key("i"):
         game.manager.switch_scene("backstory")
 
 

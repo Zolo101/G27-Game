@@ -21,6 +21,9 @@ class Sprite:
         self.vel = Vector(0, 0)
         """ Velocity vector of the sprite """
 
+        self.size = Vector(0,0)
+        """ Collision size of the sprite """
+
         self.sheet = None
         """ Spritesheet of the sprite """
 

@@ -18,6 +18,8 @@ class Player:
     def __init__(self, x, y, level=1, health=100, max_health=100):
         self.size = (50, 120)
         self.sprite = Sprite("player", x, y)
+        self.sprite.size = self.size
+
         self.sprite.sheet = Spritesheet(
             "./assets/player_spritesheet.png",
             640,

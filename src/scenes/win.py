@@ -153,7 +153,7 @@ def draw(game, canvas):
 
 
 
-    if game.interaction.get_key("space"):
+    if game.control.get_key("space"):
         # game.manager.switch_scene("welcome")
         game.frame.stop()
 

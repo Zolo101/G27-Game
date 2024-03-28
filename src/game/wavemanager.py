@@ -20,10 +20,10 @@ class WaveManager:
         self.current_wave += 1  # Increment the wave number
         self.spawn_cooldown = 900 / self.zom_num
 
-    def add_zombie(self, zombies, player, shoot):
+    def add_zombie(self, zombies, player, shoot, interaction):
         if self.zom_num >= 0:
             self.zom_num -= 1
-            zombies.append(Zombie(400, 0, player, shoot))
+            zombies.append(Zombie(400, 0, player, shoot, interaction))
 
     def reset(self):
         """

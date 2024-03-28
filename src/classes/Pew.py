@@ -8,6 +8,8 @@ class Pew:
         self.size = (50, 120)
         self.player = player
         self.sprite = Sprite("pew",self.player.sprite.sheet.pos.x,self.player.sprite.sheet.pos.y)
+        self.sprite.size = self.size
+
         self.sprite.sheet = Spritesheet(
             "./assets/gun_spritesheet.png",
             50,

@@ -31,7 +31,7 @@ def draw(game, canvas):
     # canvas.draw_text(f"YOU SURVIVED {game.player.time_survived} NIGHTS", (277, 548), 60, "Black")
     # canvas.draw_text(f"YOU SURVIVED {game.player.time_survived} NIGHTS", (280, 550), 60, "Yellow")
 
-    if game.interaction.get_key("c"):
+    if game.control.get_key("c"):
         # manager.switch_scene("welcome")
         game.frame.stop()
 

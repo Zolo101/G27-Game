@@ -15,7 +15,7 @@ def draw(game, canvas):
     game.sky.draw(canvas, game.clock, game.frame)
     if game.sky.phase < 0:
         if game.clock.transition(game.wave_manager.spawn_cooldown):
-            game.wave_manager.add_zombie(game.zombies, game.player, game.shoot)
+            game.wave_manager.add_zombie(game.zombies, game.player, game.shoot, game.interaction)
 
     if game.night_count != game.sky.day and game.night_count != 0:
         # its a new night, and we survived it
@@ -78,7 +78,7 @@ def draw(game, canvas):
 
     for perk in game.perks:
         perk.draw(canvas)
-        perk.update(game.interaction)
+        perk.update(game.control)
 
     for cloud in game.clouds:
         cloud.draw(canvas)
@@ -87,7 +87,7 @@ def draw(game, canvas):
     game.terrain.draw(canvas)
 
     game.shoot.draw(canvas)
-    game.shoot.update(game.interaction)
+    game.shoot.update(game.control)
 
     for zombie in game.zombies:
         zombie.draw(canvas)
@@ -114,7 +114,7 @@ def draw(game, canvas):
             game.builder.build(game.terrain)
             game.player.money -= 10
 
-    game.player.update(game.interaction)
+    game.player.update(game.control)
     game.player.draw(canvas)
 
     game.terrain.remove_dead()
@@ -137,8 +137,8 @@ def draw(game, canvas):
         game.manager.switch_scene("win")
 
     game.pew.draw(canvas)
-    game.pew.update(game.interaction)
-    game.builder.draw(canvas, game.interaction)
+    game.pew.update(game.control)
+    game.builder.draw(canvas, game.control)
 
 
     game.ui.draw(canvas, game.night_count)

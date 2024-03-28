@@ -3,6 +3,7 @@ from src.classes.Builder import Builder
 from src.classes.Clock import Clock
 from src.classes.Cloud import Cloud
 from src.classes.ControlManager import ControlManager
+from src.classes.Interaction import Interaction
 from src.classes.Pew import Pew
 from src.classes.SceneManager import SceneManager
 from src.classes.Shoot import Shoot
@@ -50,7 +51,7 @@ class Game:
         self.manager.switch_scene("welcome")
 
         self.clock = Clock()
-        self.interaction = ControlManager(simplegui.KEY_MAP | {"shift": 17})
+        self.control = ControlManager(simplegui.KEY_MAP | {"shift": 17})
 
         self.timer = simplegui.create_timer(8, self.collision_check)
 
@@ -70,13 +71,14 @@ class Game:
         self.perks = []
         self.clouds = []
         self.wave_manager = WaveManager()
+        self.interaction = Interaction()
         # self.draw_handler = DrawHandler(self, self.manager)
 
         self.frame.set_draw_handler(self.draw)
-        self.frame.set_keydown_handler(self.interaction.key_down)
-        self.frame.set_keyup_handler(self.interaction.key_up)
-        self.frame.set_mouseclick_handler(self.interaction.mouse_click)
-        self.frame.set_mousedrag_handler(self.interaction.mouse_click)
+        self.frame.set_keydown_handler(self.control.key_down)
+        self.frame.set_keyup_handler(self.control.key_up)
+        self.frame.set_mouseclick_handler(self.control.mouse_click)
+        self.frame.set_mousedrag_handler(self.control.mouse_click)
         self.timer.start()
         self.frame.start()
 

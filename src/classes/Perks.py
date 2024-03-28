@@ -1,3 +1,5 @@
+from src.classes.Vector import Vector
+
 try:
     import simplegui
 except ImportError:
@@ -24,14 +26,14 @@ class Health:
         for obj in self.falling_perks:
             # self.sprite.sheet.draw(canvas)
             # canvas.draw_circle(obj, 10, 60, "Red")
-            canvas.draw_image(self.image, (592,592),(1184,1184), (obj), (95, 95))
+            canvas.draw_image(self.image, (592,592), (1184,1184), obj, (95, 95))
 
     #updates
     def update(self,interaction):
         for obj in self.falling_perks:
             obj[1] += 1                                                                                                 # SPEED OF PERK FALLING
             if interaction.get_key("e"):
-                if (obj[0] > self.player.sprite.sheet.pos.x) and (obj[0] < self.player.sprite.sheet.pos.x + 50) and (obj[1] > self.player.sprite.sheet.pos.y - 110) and (obj[1] < self.player.sprite.sheet.pos.y + 110) :
+                if (self.player.sprite.pos - Vector(obj[0], obj[1])).length() < 50:
                     self.falling_perks.remove(obj)
                     self.player.heal(50)
 class Speed:
@@ -45,13 +47,13 @@ class Speed:
     def draw(self,canvas):
         for obj in self.falling_perks:
             # https://www.spriters-resource.com/resources/sheets/200/202977.png?updated=1690658883
-            canvas.draw_image(self.image, (4, 7.5), (8, 15), (obj), (40, 75))
+            canvas.draw_image(self.image, (4, 7.5), (8, 15), obj, (40, 75))
 
     def update(self,interaction):
         for obj in self.falling_perks:
             obj[1] += 1                                                                                                 # SPEED OF PERK FALLING
             if interaction.get_key("e"):
-                if (obj[0] > self.player.sprite.sheet.pos.x) and (obj[0] < self.player.sprite.sheet.pos.x + 50) and (obj[1] > self.player.sprite.sheet.pos.y - 110) and (obj[1] < self.player.sprite.sheet.pos.y + 110) :
+                if (self.player.sprite.pos - Vector(obj[0], obj[1])).length() < 50:
                     self.falling_perks.remove(obj)
                     self.player.flash()
 

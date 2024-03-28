@@ -1,3 +1,4 @@
+from src.classes.Interaction import Interaction
 from src.classes.Sprite import Sprite
 from src.classes.Spritesheet import Spritesheet
 from src.classes.Vector import Vector
@@ -6,10 +7,13 @@ JUMP_POWER = 60
 
 
 class Zombie:
-    def __init__(self, x, y, player,bullets,health = 250, max_health = 250,SPEED = 2,):
+    def __init__(self, x, y, player,bullets, interaction, health = 250, max_health = 250,SPEED = 2,):
         self.bullets = bullets
         self.size = (75, 200)
         self.sprite = Sprite("zombie", x, y)
+        self.sprite.size = self.size
+        self.interaction = interaction
+
         self.sprite.sheet = Spritesheet(
             "./assets/zombie_spritesheet.png",
             288,
@@ -35,7 +39,7 @@ class Zombie:
         distance_to_player = center - player_center
 
         # no need to move if your already at the player!
-        if distance_to_player.length() > 60:
+        if not self.interaction.sprite_sprite_collision(self.sprite, self.player.sprite):
             if player_center.x < center.x and not self.sprite.blocked["left"]:
                 self.sprite.pos.x -= self.SPEED
                 self.sprite.sheet.frame_index[1] = 5
@@ -47,7 +51,7 @@ class Zombie:
             if (self.sprite.blocked["left"] or self.sprite.blocked["right"]) and self.sprite.grounded:
                 self.sprite.vel.y -= JUMP_POWER
 
-        if abs(distance_to_player.x) < 60 and abs(distance_to_player.y) < 80 and not self.given_damage:
+        if abs(distance_to_player.x) < 70 and abs(distance_to_player.y) < 80 and not self.given_damage:
             self.player.take_damage(1)
             self.given_damage = True
 
