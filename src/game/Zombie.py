@@ -1,10 +1,10 @@
 from src.classes.Sprite import Sprite
 from src.classes.Spritesheet import Spritesheet
+from src.classes.Vector import Vector
+
+JUMP_POWER = 60
 
 
-JUMP_POWER = 40 / 4
-
-#zombie class
 class Zombie:
     def __init__(self, x, y, player,bullets,health = 250, max_health = 250,SPEED = 2,):
         self.bullets = bullets
@@ -26,27 +26,33 @@ class Zombie:
         self.given_damage = 0
         self.since_damaged = 0
 
-    def update(self):
-        if self.player.sprite.sheet.pos.x < self.sprite.pos.x and not self.sprite.blocked["right"]:
-            self.sprite.pos.x -= self.SPEED
-            self.sprite.sheet.frame_index[1] = 5
+    def update(self, clock):
+        center = self.sprite.pos.copy().add(Vector(self.size[0] / 2, self.size[1] / 2))
+        player_center = self.player.sprite.pos.copy().add(Vector(self.player.size[0] / 2, self.player.size[1] / 2))
+        if clock.transition(16):
             self.sprite.sheet.next_frame()
 
-        if self.player.sprite.sheet.pos.x > self.sprite.pos.x and not self.sprite.blocked["left"]:
-            self.sprite.pos.x += self.SPEED
-            self.sprite.sheet.frame_index[1] = 1
-            self.sprite.sheet.next_frame()
+        distance_to_player = center - player_center
 
-        if (self.sprite.pos.x > self.player.sprite.sheet.pos.x) and (self.sprite.pos.x < self.player.sprite.sheet.pos.x + 200) and (self.sprite.pos.y > self.player.sprite.sheet.pos.y - 200) and (self.sprite.pos.y < self.player.sprite.sheet.pos.y + 80) and not self.given_damage:
+        # no need to move if your already at the player!
+        if distance_to_player.length() > 60:
+            if player_center.x < center.x and not self.sprite.blocked["left"]:
+                self.sprite.pos.x -= self.SPEED
+                self.sprite.sheet.frame_index[1] = 5
+
+            if player_center.x > center.x and not self.sprite.blocked["right"]:
+                self.sprite.pos.x += self.SPEED
+                self.sprite.sheet.frame_index[1] = 1
+
+            if (self.sprite.blocked["left"] or self.sprite.blocked["right"]) and self.sprite.grounded:
+                self.sprite.vel.y -= JUMP_POWER
+
+        if abs(distance_to_player.x) < 60 and abs(distance_to_player.y) < 80 and not self.given_damage:
             self.player.take_damage(1)
             self.given_damage = True
 
         if self.given_damage:
             self.since_damaged += 1
-
-        if (self.sprite.blocked["left"] or self.sprite.blocked["right"]) and self.sprite.grounded:
-            self.sprite.vel.y -= JUMP_POWER
-            # self.sprite.sheet.next_frame()
 
         if self.given_damage and self.since_damaged > 10:
             self.given_damage = False

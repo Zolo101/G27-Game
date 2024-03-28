@@ -1,5 +1,4 @@
 import random
-from src.classes import Music
 from src.classes.Builder import Builder
 from src.classes.Color import Color
 from src.classes.SceneManager import Scene
@@ -7,7 +6,6 @@ from src.classes.Vector import Vector
 from src.game.Player import Player
 from src.game.Sky import Sky
 from src.game.Terrain import Terrain
-from src.game.Zombie import Zombie
 from src.classes.Clock import Clock
 from src.game.wavemanager import WaveManager
 from src.scenes.UI import UI
@@ -126,7 +124,7 @@ def draw(manager, canvas, clock, frame, interaction):
         perk.draw(canvas)
         perk.update(interaction)
 
-    for cloud in clouds:    
+    for cloud in clouds:
         cloud.draw(canvas)
         cloud.update()
 
@@ -139,7 +137,7 @@ def draw(manager, canvas, clock, frame, interaction):
 
     for zombie in zombies:
         zombie.draw(canvas)
-        zombie.update()
+        zombie.update(clock)
 
     if len(zombies) > 0:
         for bullet in shoot.bullets:
@@ -188,7 +186,7 @@ def draw(manager, canvas, clock, frame, interaction):
     pew.update(interaction)
     builder.draw(canvas, interaction)
 
-        
+
     ui.draw(canvas, night_count)
 
     # DEBUG COLLISION STUFF
@@ -230,7 +228,7 @@ def draw_cube(canvas, pos, colour="#ffffff"):
 
 
 def tick(manager, clock, frame, interaction):
-    RANGE = 60
+    RANGE = 90
     HURT = 0.1
 
     for zombie in zombies:
@@ -238,7 +236,7 @@ def tick(manager, clock, frame, interaction):
         pos = (
             zombie.sprite.pos
             .copy()
-            .add(Vector(0, zombie.size[1]))
+            .add(Vector(zombie.size[0] / 2, zombie.size[1] / 2))
             .snap(Vector(20, 20))
         )
 
@@ -292,16 +290,16 @@ def check_collision(s, t):
         .get_p()
     )
 
-    if side_left in t.visible_blocks:
+    if side_left in t.blocks:
         s.sprite.blocked["left"] = True
 
-    if side_right in t.visible_blocks:
+    if side_right in t.blocks:
         s.sprite.blocked["right"] = True
 
-    if bottom_center in t.visible_blocks:
+    if bottom_center in t.blocks:
         s.sprite.blocked["down"] = True
 
-    if top_center in t.visible_blocks:
+    if top_center in t.blocks:
         s.sprite.blocked["up"] = True
 
     s.sprite.grounded = s.sprite.blocked["down"]

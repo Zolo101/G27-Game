@@ -30,7 +30,7 @@ class Bullet:
         """ Creates the bullet. """
         # THIS IS A TEMPORARY BULLET.
         color = Color(255, 70, 0)
-        color += Color(self.age ** 1.2, 0, -self.age ** 2) # gradient bullets based on age
+        color += Color(0, self.age ** 1.6, 0) # gradient bullets based on age
         canvas.draw_circle(self.pos.get_p(), 5,10, color.__str__())
 
 

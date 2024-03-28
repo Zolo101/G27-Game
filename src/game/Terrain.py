@@ -33,6 +33,10 @@ class Terrain:
             for j in range(0, height // BLOCK_SIZE):
                 # noise
 
+                if not 1 < i < 62:
+                    wall = Block(i * BLOCK_SIZE, j * BLOCK_SIZE, wall=True)
+                    self.blocks[(i * BLOCK_SIZE, j * BLOCK_SIZE)] = wall
+
                 if j > h:
                     self.blocks[(i * BLOCK_SIZE, j * BLOCK_SIZE)] = Block(i * BLOCK_SIZE, j * BLOCK_SIZE)
         self.compute_texture()
@@ -95,6 +99,9 @@ class Terrain:
             else:
                 block.color = Color(81, 255, 61)
 
+            if block.wall:
+                block.color = Color(245, 155, 0)
+
     def compute_lighting(self):
         """
         Computes the lightning for each block by
@@ -118,23 +125,9 @@ class Terrain:
             if clip > 3:
                 block.lighting -= 1
 
-            # if block.lighting > 80:
-            # block.color += rand_col(0, max(1, block.lighting // 10))
-
-            # block.lighting += (block.x - BLOCK_SIZE, block.y + BLOCK_SIZE) in self.blocks
-            # block.lighting += (block.x, block.y + BLOCK_SIZE) in self.blocks
-            # block.lighting += (block.x + BLOCK_SIZE, block.y + BLOCK_SIZE) in self.blocks
-
-            # block.lighting += (block.x - BLOCK_SIZE, block.y) in self.blocks
-            # block.lighting += (block.x + BLOCK_SIZE, block.y) in self.blocks
-
-            # block.lighting += (block.x - BLOCK_SIZE, block.y - BLOCK_SIZE) in self.blocks
-            # block.lighting += (block.x, block.y - BLOCK_SIZE) in self.blocks
-            # block.lighting += (block.x + BLOCK_SIZE, block.y - BLOCK_SIZE) in self.blocks
-
 
 class Block:
-    def __init__(self, x, y, man_made=False):
+    def __init__(self, x, y, man_made=False, wall=False):
         self.x = x
         self.y = y
         self.lighting = 0
@@ -142,6 +135,7 @@ class Block:
         self.color = rand_col()
         self.health = 100
         self.man_made = man_made
+        self.wall = wall
 
     def draw(self, canvas):
         """ This gets run on every frame. """
@@ -164,9 +158,8 @@ class Block:
                             color.__str__(),
                             color.__str__())
 
+        # Give it a cool look
         outset = 7
-
-
         if self.man_made:
             canvas.draw_polygon([(self.x + outset, self.y + outset),
                                  (self.x - outset + BLOCK_SIZE, self.y + outset),
