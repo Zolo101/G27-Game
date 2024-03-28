@@ -13,6 +13,7 @@ from src.game.Terrain import Terrain
 from src.game.WaveManager import WaveManager
 from src.game.UI import UI
 from src.scenes.backstory import backstory
+from src.scenes.controls import controls
 from src.scenes.game_over import game_over
 from src.scenes.main import main
 from src.scenes.welcome import welcome
@@ -46,9 +47,10 @@ class Game:
         self.manager.add_scene(main)
         self.manager.add_scene(game_over)
         self.manager.add_scene(backstory)
+        self.manager.add_scene(controls)
         self.manager.add_scene(win)
 
-        self.manager.switch_scene("welcome")
+        self.manager.switch_scene("win")
 
         self.clock = Clock()
         self.control = ControlManager(simplegui.KEY_MAP | {"shift": 17})

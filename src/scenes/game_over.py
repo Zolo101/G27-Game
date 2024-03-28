@@ -27,6 +27,8 @@ def draw(game, canvas):
 
     canvas.draw_text(f"Score: {game.player.score}", (522, 573), 60, "Black")
     canvas.draw_text(f"Score: {game.player.score}", (525, 575), 60, "Yellow")
+    canvas.draw_text('©GROUP-XXVII', (1165, 793), 15, 'White', 'sans-serif')
+
     #
     # canvas.draw_text(f"YOU SURVIVED {game.player.time_survived} NIGHTS", (277, 548), 60, "Black")
     # canvas.draw_text(f"YOU SURVIVED {game.player.time_survived} NIGHTS", (280, 550), 60, "Yellow")

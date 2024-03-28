@@ -40,9 +40,10 @@ def draw(game, canvas):
 
     canvas.draw_text('Press \' space \' to start game', (720, 760), 20, 'Yellow', 'sans-serif')
     canvas.draw_text('Press \' o \' to go back to welcome screen', (320, 760), 20, 'Yellow', 'sans-serif')
+    canvas.draw_text('©GROUP-XXVII', (1165, 793), 15, 'White', 'sans-serif')
 
     if game.control.get_key("space"):
-        game.manager.switch_scene("main")
+        game.start()
     if game.control.get_key("o"):
         game.manager.switch_scene("welcome")
 

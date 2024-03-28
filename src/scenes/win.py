@@ -140,6 +140,8 @@ def draw(game, canvas):
 
     canvas.draw_text('YOU', (407, 373), 250, 'rgb(4, 0, 255)', 'sans-serif')
     canvas.draw_text('WIN', (431, 583), 250, 'rgb(4, 0, 255)', 'sans-serif')
+    canvas.draw_text('Press \'b\' to view hidden story', (30, 793), 20, 'black')
+    canvas.draw_text('©GROUP-XXVII', (1165, 793), 15, 'White', 'sans-serif')
 
 
 
@@ -156,6 +158,9 @@ def draw(game, canvas):
 
     if game.control.get_key("c"):
         game.manager.switch_scene("welcome")
+
+    if game.control.get_key("b"):
+        game.manager.switch_scene("backstory")
 
 
 def tick(game):
