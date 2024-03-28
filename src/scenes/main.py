@@ -133,7 +133,7 @@ def draw(game, canvas):
     if not game.player.is_alive():
         game.manager.switch_scene("game_over")
 
-    if (game.night_count == 5 and game.player.is_alive() and game.sky.moon.pos.x > 1138):
+    if game.night_count >= 5 and game.player.is_alive() and game.sky.moon.pos.x > 1138:
         game.manager.switch_scene("win")
 
     game.pew.draw(canvas)

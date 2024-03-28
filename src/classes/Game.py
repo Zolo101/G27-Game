@@ -85,6 +85,7 @@ class Game:
     def start(self):
         # self.terrain = Terrain(1280, 800)
         self.terrain = Terrain(1280, 800)
+        self.clock = Clock()
         self.sky = Sky()
         self.player = Player(600, 0)
         self.player.night = 0
