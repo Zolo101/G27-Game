@@ -75,6 +75,15 @@ class Zombie:
     def draw(self, canvas):
         """ This gets run on every frame. """
 
+        bar_x = self.sprite.pos.x
+        bar_y = self.sprite.pos.y + self.size[1] + 5
+        health_percentage = self.health / self.max_health
+        health_bar_width = health_percentage * 70
+        health_bar_height = 10
+        health_bar_colour = "Red"
+
+        canvas.draw_polygon([(bar_x, bar_y), (bar_x + health_bar_width, bar_y), (bar_x + health_bar_width, bar_y + health_bar_height), (bar_x, bar_y + health_bar_height)],
+                            1, health_bar_colour, health_bar_colour)
         # debug
         # canvas.draw_polygon([
         #     (self.sprite.pos.x, self.sprite.pos.y),
