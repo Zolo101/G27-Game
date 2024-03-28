@@ -6,7 +6,7 @@ JUMP_POWER = 40 / 4
 
 #zombie class
 class Zombie:
-    def __init__(self, x, y, player,bullets,health = 50, max_health = 50,SPEED = 2,):
+    def __init__(self, x, y, player,bullets,health = 250, max_health = 250,SPEED = 2,):
         self.bullets = bullets
         self.size = (75, 200)
         self.sprite = Sprite("zombie", x, y)
@@ -80,10 +80,13 @@ class Zombie:
         health_percentage = self.health / self.max_health
         health_bar_width = health_percentage * 70
         health_bar_height = 10
-        health_bar_colour = "Red"
 
+        canvas.draw_polygon([(bar_x, bar_y), (bar_x + 70, bar_y), (bar_x + 70, bar_y + health_bar_height), (bar_x, bar_y + health_bar_height)],
+                            1, "Red", "Red")
+        
         canvas.draw_polygon([(bar_x, bar_y), (bar_x + health_bar_width, bar_y), (bar_x + health_bar_width, bar_y + health_bar_height), (bar_x, bar_y + health_bar_height)],
-                            1, health_bar_colour, health_bar_colour)
+                            1, "Green", "Green")
+        
         # debug
         # canvas.draw_polygon([
         #     (self.sprite.pos.x, self.sprite.pos.y),

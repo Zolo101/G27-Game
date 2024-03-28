@@ -12,13 +12,14 @@ class UI:
         current_health_bar_length = health_percentage * self.health_bar_width
 
         #background bar
-        canvas.draw_polygon([(10, 10), (10 + self.health_bar_width, 10), (10 + self.health_bar_width, 10 + self.health_bar_height), (10, 10 + self.health_bar_height)], 1, self.health_bar_background_colour, self.health_bar_background_colour)
-
+        canvas.draw_polygon([(10, 10), (10 + self.health_bar_width, 10), (10 + self.health_bar_width, 10 + self.health_bar_height), (10, 10 + self.health_bar_height)],
+                            1, self.health_bar_background_colour, self.health_bar_background_colour)
         #health bar
-        canvas.draw_polygon([(10, 10), (10 + current_health_bar_length, 10), (10 + current_health_bar_length, 10 + self.health_bar_height), (10, 10 + self.health_bar_height)], 1, self.health_bar_colour, self.health_bar_colour)
-
+        canvas.draw_polygon([(10, 10), (10 + current_health_bar_length, 10), (10 + current_health_bar_length, 10 + self.health_bar_height), (10, 10 + self.health_bar_height)],
+                            1, self.health_bar_colour, self.health_bar_colour)
         #border
-        canvas.draw_polygon([(10, 10), (10 + self.health_bar_width, 10), (10 + self.health_bar_width, 10 + self.health_bar_height), (10, 10 + self.health_bar_height)], 5, self.health_bar_border_colour)
+        canvas.draw_polygon([(10, 10), (10 + self.health_bar_width, 10), (10 + self.health_bar_width, 10 + self.health_bar_height), (10, 10 + self.health_bar_height)],
+                            5, self.health_bar_border_colour)
 
         # money colour
         money_colour = "Green"
