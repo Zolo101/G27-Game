@@ -106,7 +106,6 @@ class Player:
         self.time_survived += amount
 
 
-
     def barry_allen(self):
         global SPEED
         SPEED = 2.5
@@ -122,7 +121,7 @@ class Player:
 
     def draw(self, canvas):
         """ This gets run on every frame. """
-        self.increaseTimeSurvived(1)
+        self.increaseTimeSurvived(0.02)
         # print(self.sprite.blocked)
 
         # debug
