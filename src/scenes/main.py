@@ -145,7 +145,7 @@ def draw(manager, canvas, clock, frame, interaction):
                     if zombie.health <= 0:
                         zombies.remove(zombie)
                         player.earn(100) # money per zombie kill
-                        player.increaseScore(1) #increase score per zombie kill
+                        player.increaseScore(random.randint(50, 75)) #increase score per zombie kill
                     # the line below crashes sometimes when killing a zombie
                     if bullet in shoot.bullets:
                         zombie.zombie_take_damage(5)
