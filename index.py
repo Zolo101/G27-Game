@@ -1,4 +1,4 @@
-from src.classes.Game import Game
+from src.game.Game import Game
 
 try:
     import simplegui

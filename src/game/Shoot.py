@@ -1,6 +1,5 @@
 from src.classes.Sprite import Sprite
-from src.classes.Spritesheet import Spritesheet
-from src.classes.Bullet import Bullet
+from src.game.Bullet import Bullet
 from src.classes.Vector import Vector
 
 

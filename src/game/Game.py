@@ -1,17 +1,17 @@
 from src.classes import Music
-from src.classes.Builder import Builder
+from src.game.Builder import Builder
 from src.classes.Clock import Clock
-from src.classes.Cloud import Cloud
+from src.game.Cloud import Cloud
 from src.classes.ControlManager import ControlManager
 from src.classes.Interaction import Interaction
-from src.classes.Pew import Pew
+from src.game.Pew import Pew
 from src.classes.SceneManager import SceneManager
-from src.classes.Shoot import Shoot
+from src.game.Shoot import Shoot
 from src.game.Player import Player
 from src.game.Sky import Sky
 from src.game.Terrain import Terrain
-from src.game.wavemanager import WaveManager
-from src.scenes.UI import UI
+from src.game.WaveManager import WaveManager
+from src.game.UI import UI
 from src.scenes.backstory import backstory
 from src.scenes.game_over import game_over
 from src.scenes.main import main
@@ -40,7 +40,7 @@ class Game:
         self.music = Music.music()
 
         # Start playing music
-        #music.play_music()
+        self.music.play_music()
 
         self.manager.add_scene(welcome)
         self.manager.add_scene(main)

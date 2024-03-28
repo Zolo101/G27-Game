@@ -1,9 +1,8 @@
 import random
-from src.classes.Builder import Builder
 from src.classes.Color import Color
 from src.classes.SceneManager import Scene
 from src.classes.Vector import Vector
-from src.classes.Perks import Health, Speed
+from src.game.Perks import Health, Speed
 
 
 def draw(game, canvas):
