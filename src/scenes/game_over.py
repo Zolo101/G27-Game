@@ -14,9 +14,14 @@ def draw(manager, canvas, clock, frame, interaction):
     #Display Score
     # canvas.draw_text(f"Score: {player.score}", (522, 388), 60, "Black")
     # canvas.draw_text(f"Score: {player.score}", (525, 390), 60, "Yellow")
+    if player.night > 1 or player.night==0:
+        canvas.draw_text(f"YOU SURVIVED {player.night} NIGHTS", (277, 413), 60, "Black")
+        canvas.draw_text(f"YOU SURVIVED {player.night} NIGHTS", (280, 415), 60, "Yellow")
 
-    canvas.draw_text(f"YOU SURVIVED {player.night} NIGHTS", (277, 413), 60, "Black")
-    canvas.draw_text(f"YOU SURVIVED {player.night} NIGHTS", (280, 415), 60, "Yellow")
+    if player.night == 1:
+        canvas.draw_text(f"YOU SURVIVED {player.night} NIGHT", (277, 413), 60, "Black")
+        canvas.draw_text(f"YOU SURVIVED {player.night} NIGHT", (280, 415), 60, "Yellow")
+
 
     #Display Time Survived
     canvas.draw_text(f"Time Survived: {player.time_survived}", (422, 493), 60, "Black")
