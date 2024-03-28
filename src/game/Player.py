@@ -33,6 +33,7 @@ class Player:
         self.health = health
         self.max_health = max_health
         self.speed = 2.5
+        self.night = 0
 
     def update(self, interaction):
         """ This gets run on every frame. """

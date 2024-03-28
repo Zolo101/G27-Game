@@ -17,11 +17,6 @@ from src.classes.Perks import Health
 from src.classes.Perks import Speed
 from src.classes.Cloud  import Cloud
 
-from src.game.Zombie import Zombie1
-from src.game.Zombie import Zombie2
-# from src.game.Zombie import Zombie3
-# from src.game.Zombie import Zombie4
-# from src.game.Zombie import Zombie5
 
 # TODO: Make the width and height a variable
 terrain = Terrain(1280, 800)
@@ -67,7 +62,7 @@ def draw(manager, canvas, clock, frame, interaction):
         wave_manager.new_wave(50, 1)
     night_count = sky.day
 
-    print(night_count)
+    player.night = night_count
 
     # zombies.append(Zombie(-100, 400, player))
     # zombies.append(Zombie(1500, 400, player))
