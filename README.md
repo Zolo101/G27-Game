@@ -13,7 +13,7 @@ pip install SimpleGUICS2Pygame noise
 ```
 
 ## What each file does
-- **assets**: Contains every asset used in the game
+- **assets**: Contains every asset used in the game. All assets were sourced from the internet, we did not make any ourselves.
 - **src/classes**: Contains utility classes that are used throughout the games code
   - Clock.py - Frame counter, used for animation frames
   - Color.py - Allows for easy color manipulation, used extensively in the terrain
