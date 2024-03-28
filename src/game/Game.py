@@ -50,7 +50,7 @@ class Game:
         self.manager.add_scene(controls)
         self.manager.add_scene(win)
 
-        self.manager.switch_scene("win")
+        self.manager.switch_scene("welcome")
 
         self.clock = Clock()
         self.control = ControlManager(simplegui.KEY_MAP | {"shift": 17})
