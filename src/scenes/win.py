@@ -65,9 +65,9 @@ def draw(game, canvas):
     canvas.draw_text(
         'w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w',
         (-7, 750), 50, 'black', 'sans-serif')
-    canvas.draw_text(
-        'w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w',
-        (-7, 790), 50, 'black', 'sans-serif')
+    # canvas.draw_text(
+    #     'w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w',
+    #     (-7, 790), 50, 'black', 'sans-serif')
 
     canvas.draw_text('w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w',
                      (-5, 30), 50, 'white', 'sans-serif')
@@ -128,10 +128,11 @@ def draw(game, canvas):
     canvas.draw_text(
         'w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w',
         (-5, 750), 50, 'white', 'sans-serif')
-    canvas.draw_text(
-        'w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w',
-        (-5, 790), 50, 'white', 'sans-serif')
+    # canvas.draw_text(
+        # 'w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w',
+        # (-5, 790), 50, 'white', 'sans-serif')
 
+    canvas.draw_text('Press \'c\' to go back to menu', (400, 790), 30, 'Black', 'sans-serif')
 
 
     canvas.draw_text('YOU', (402, 371), 250, 'black', 'sans-serif')
@@ -153,9 +154,8 @@ def draw(game, canvas):
 
 
 
-    if game.control.get_key("space"):
-        # game.manager.switch_scene("welcome")
-        game.frame.stop()
+    if game.control.get_key("c"):
+        game.manager.switch_scene("welcome")
 
 
 def tick(game):

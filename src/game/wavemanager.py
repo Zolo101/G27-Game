@@ -1,3 +1,5 @@
+import random
+
 from src.game.Zombie import Zombie
 
 
@@ -14,7 +16,7 @@ class WaveManager:
         self.spawn_cooldown = 900 / self.zom_num
 
     def new_wave(self, add_health, add_speed):
-        self.zom_num = 20 + (10 * self.current_wave)
+        self.zom_num = 5 + (5 * self.current_wave)
         self.zom_health += add_health
         self.speed += add_speed
         self.current_wave += 1  # Increment the wave number
@@ -23,7 +25,7 @@ class WaveManager:
     def add_zombie(self, zombies, player, shoot, interaction):
         if self.zom_num >= 0:
             self.zom_num -= 1
-            zombies.append(Zombie(400, 0, player, shoot, interaction))
+            zombies.append(Zombie(random.randrange(80, 1200), 0, player, shoot, interaction))
 
     def reset(self):
         """

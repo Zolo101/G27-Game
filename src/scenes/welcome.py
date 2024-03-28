@@ -21,12 +21,12 @@ def draw(game, canvas):
 
     canvas.draw_text('[ < ]  =  AIM LEFT ', (768, 350), 30, 'White', 'sans-serif')
     canvas.draw_text('[ > ]  =  AIM RIGHT ', (768, 425), 30, 'White', 'sans-serif')
-    canvas.draw_text('[ ^ ]  =  game.SHOOT ', (768, 500), 30, 'White', 'sans-serif')
+    canvas.draw_text('[ ^ ]  =  SHOOT ', (768, 500), 30, 'White', 'sans-serif')
 
     canvas.draw_text('[ left shift ]  =  BUILD MODE ', (256, 575), 30, 'White', 'sans-serif')
     canvas.draw_text('[ mouse ]  =  BUILD MODE ', (256, 650), 30, 'White', 'sans-serif')
 
-    canvas.draw_text('[ e ]  =  EQUIP game.PERKS ', (768, 575), 30, 'White', 'sans-serif')
+    canvas.draw_text('[ e ]  =  EQUIP PERKS ', (768, 575), 30, 'White', 'sans-serif')
     canvas.draw_text('[ lmb ]  =  PLACE BLOCK ', (768, 650), 30, 'White', 'sans-serif')
 
 
@@ -40,7 +40,7 @@ def draw(game, canvas):
     canvas.draw_text('Press \' i \' to view game backstory', (320, 760), 20, 'Yellow', 'sans-serif')
 
     if game.control.get_key("space"):
-        game.manager.switch_scene("main")
+        game.start()
     if game.control.get_key("i"):
         game.manager.switch_scene("backstory")
 

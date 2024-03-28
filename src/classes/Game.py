@@ -31,10 +31,10 @@ from src.scenes.win import win
 
 class Game:
     def __init__(self, simplegui):
-        width = 1280
-        height = 800
+        self.width = 1280
+        self.height = 800
 
-        self.frame = simplegui.create_frame("base 27", 2560 / 2, 800, 0)
+        self.frame = simplegui.create_frame("base 27", self.width, self.height, 0)
 
         self.manager = SceneManager()
         self.music = Music.music()
@@ -83,9 +83,11 @@ class Game:
         self.frame.start()
 
     def start(self):
+        # self.terrain = Terrain(1280, 800)
         self.terrain = Terrain(1280, 800)
         self.sky = Sky()
         self.player = Player(600, 0)
+        self.player.night = 0
         self.builder = Builder()
         self.pew = Pew(self.player)
         self.ui = UI(self.player)
@@ -103,7 +105,6 @@ class Game:
             self.clouds.append(Cloud())
 
         self.wave_manager = WaveManager()
-
         self.manager.switch_scene("main")
 
     def collision_check(self):

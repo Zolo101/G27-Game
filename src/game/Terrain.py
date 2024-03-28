@@ -4,7 +4,6 @@ from perlin_noise import PerlinNoise
 from src.classes.Color import Color
 
 BLOCK_SIZE = 20
-noise = PerlinNoise()
 
 
 def rand_col(minimum=0, maximum=255):
@@ -21,13 +20,14 @@ class Terrain:
     """
 
     def __init__(self, width, height):
+        noise = PerlinNoise()
         self.blocks = {}  # (x, y) : Block
 
         # These are blocks that the player can touch
         self.visible_blocks = {}
 
         for i in range(0, width // BLOCK_SIZE):
-            h = min(35, 30 - (noise.noise(i / 20) * 20) + (noise.noise(i / 10) * 10))
+            h = min(35.0, 30 - (noise.noise(i / 20) * 20) + (noise.noise(i / 10) * 10))
             # h = 30
 
             for j in range(0, height // BLOCK_SIZE):

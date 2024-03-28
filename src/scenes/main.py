@@ -19,7 +19,7 @@ def draw(game, canvas):
 
     if game.night_count != game.sky.day and game.night_count != 0:
         # its a new night, and we survived it
-        game.wave_manager.new_wave(50, 1)
+        game.wave_manager.new_wave(25, 1)
     game.night_count = game.sky.day
 
     game.player.night = game.night_count
@@ -182,7 +182,7 @@ def draw_cube(canvas, pos, colour="#ffffff"):
 
 
 def tick(game):
-    RANGE = 90
+    RANGE = 120
     HURT = 0.1
 
     for zombie in game.zombies:

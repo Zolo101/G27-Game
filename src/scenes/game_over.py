@@ -6,7 +6,7 @@ def draw(game, canvas):
     game.frame.set_canvas_background('rgb(204, 14, 10)')
     canvas.draw_text('G A M E  O V E R', (357, 248), 75, 'Black')  # POSITION IS THE BOTTOM LEFT OF TEXT
     canvas.draw_text('G A M E  O V E R', (360, 250), 75, 'Yellow')  # POSITION IS THE BOTTOM LEFT OF TEXT
-    canvas.draw_text('Press \'c\' to close game', (540, 750), 20, 'Yellow', 'sans-serif')
+    canvas.draw_text('Press \'c\' to go back to menu', (540, 750), 20, 'Yellow', 'sans-serif')
     # print(game.frame.get_canvas_textheight('Welcome to Base 27 !',50))
 
     #Display Score
@@ -32,8 +32,7 @@ def draw(game, canvas):
     # canvas.draw_text(f"YOU SURVIVED {game.player.time_survived} NIGHTS", (280, 550), 60, "Yellow")
 
     if game.control.get_key("c"):
-        # manager.switch_scene("welcome")
-        game.frame.stop()
+        game.manager.switch_scene("welcome")
 
 
 def tick(game):

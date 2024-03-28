@@ -33,7 +33,7 @@ class Health:
         for obj in self.falling_perks:
             obj[1] += 1                                                                                                 # SPEED OF PERK FALLING
             if interaction.get_key("e"):
-                if (self.player.sprite.pos - Vector(obj[0], obj[1])).length() < 50:
+                if (self.player.sprite.pos - Vector(obj[0], obj[1])).length() < 80:
                     self.falling_perks.remove(obj)
                     self.player.heal(50)
 class Speed:
@@ -53,7 +53,7 @@ class Speed:
         for obj in self.falling_perks:
             obj[1] += 1                                                                                                 # SPEED OF PERK FALLING
             if interaction.get_key("e"):
-                if (self.player.sprite.pos - Vector(obj[0], obj[1])).length() < 50:
+                if (self.player.sprite.pos - Vector(obj[0], obj[1])).length() < 80:
                     self.falling_perks.remove(obj)
                     self.player.flash()
 
