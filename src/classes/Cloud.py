@@ -7,13 +7,13 @@ except ImportError:
 class Cloud:
     def __init__(self):
         self.image = simplegui._load_local_image("./assets/cloud.png")
-        self.pos = [-100, random.randrange(0, 100)]
-        self.vel = [10, 0]
+        self.pos = [random.randrange(-200, 1200), random.randrange(-50, 150)]
+        self.vel = [random.randrange(1, 5), 0]
 
     def draw(self, canvas):
         canvas.draw_image(self.image, (self.image.get_width()/2, self.image.get_height()/2),
                           (self.image.get_width(), self.image.get_height()), self.pos,
-                          (self.image.get_width()/2, self.image.get_height()/2))
+                          (self.image.get_width()/2, self.image.get_height()/3))
 
     def update(self):
         self.pos[0] += self.vel[0]

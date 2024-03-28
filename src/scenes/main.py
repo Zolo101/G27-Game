@@ -28,8 +28,6 @@ ui = UI(player)
 shoot = Shoot(player)
 clock = Clock()
 
-cloud = Cloud()
-
 global timer
 global hCount
 global sCount
@@ -38,6 +36,10 @@ sCount = 0
 timer = 0
 zombies = []
 perks = []
+clouds = []
+
+for i in range(1, 5):
+    clouds.append(Cloud())
 
 global night_count
 night_count = 0
@@ -182,8 +184,11 @@ def draw(manager, canvas, clock, frame, interaction):
     pew.draw(canvas)
     pew.update(interaction)
     builder.draw(canvas, interaction)
-    cloud.draw(canvas)
-    cloud.update()
+
+    for cloud in clouds:    
+        cloud.draw(canvas)
+        cloud.update()
+        
     ui.draw(canvas, night_count)
 
     # DEBUG COLLISION STUFF
