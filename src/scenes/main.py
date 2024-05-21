@@ -102,7 +102,7 @@ def draw(game, canvas):
                         game.player.increaseScore(random.randint(50, 75)) #increase score per zombie kill
                     # the line below crashes sometimes when killing a zombie
                     if bullet in game.shoot.bullets:
-                        zombie.zombie_take_damage(5)
+                        zombie.zombie_take_damage(5)#skibidi
                         game.shoot.bullets.remove(bullet)
 
         # check_collision(zombie, game.terrain)
