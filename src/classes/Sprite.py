@@ -74,7 +74,7 @@ class Sprite:
 
         # collision physics
         if self.blocked["down"] or self.blocked["up"]:
-            self.vel.y = 0
+            self.vel.y = min(self.vel.y, 0)
 
         if not (self.blocked["left"] or self.blocked["right"]):
             self.vel.x *= AIR_RESISTANCE
