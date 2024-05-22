@@ -1,8 +1,10 @@
+import math
+
 from src.classes.Vector import Vector
 
 GRAVITY = 1.5
 AIR_RESISTANCE = 0.8
-TERMINAL_VELOCITY = 20
+TERMINAL_VELOCITY = 10
 
 
 class Sprite:
@@ -51,9 +53,9 @@ class Sprite:
         next_velocity = self.vel.copy()
 
         if not self.fixed:
-            next_velocity.y += GRAVITY;
+            next_velocity.y += GRAVITY
 
-        next_position += next_velocity;
+        next_position += next_velocity
         return next_position
 
     def update(self):
@@ -75,6 +77,10 @@ class Sprite:
         # collision physics
         if self.blocked["down"] or self.blocked["up"]:
             self.vel.y = min(self.vel.y, 0)
+
+        if self.blocked["up"]:
+            self.vel.y = 0
+            self.pos.y += 20
 
         if not (self.blocked["left"] or self.blocked["right"]):
             self.vel.x *= AIR_RESISTANCE

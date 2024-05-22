@@ -143,27 +143,49 @@ def draw(game, canvas):
     game.ui.draw(canvas, game.night_count)
 
     # DEBUG COLLISION STUFF
-    # side_left = (
-    #     Vector(game.player.sprite.pos.x, game.player.sprite.pos.y + (game.player.size[1] - 10))
-    #     .snap(Vector(20, 20))
-    # )
-    # side_right = (
-    #     Vector(game.player.sprite.pos.x + (game.player.size[0]), game.player.sprite.pos.y + (game.player.size[1] - 10))
-    #     .snap(Vector(20, 20))
-    # )
-    # bottom_center = (
-    #     Vector(game.player.sprite.pos.x + (game.player.size[0] / 2), game.player.sprite.pos.y + game.player.size[1] + 10)
-    #     .snap(Vector(20, 20))
-    # )
-    # bottom_center_up = (
-    #     Vector(game.player.sprite.pos.x + (game.player.size[0] / 2), game.player.sprite.pos.y + game.player.size[1] - 10)
-    #     .snap(Vector(20, 20))
-    # )
+    # left = []
+    # right = []
+    # bottom = []
+    # top = []
     #
-    # draw_cube(game, side_left, "#ff0000")
-    # draw_cube(game, side_right, "#00ff00")
-    # draw_cube(game, bottom_center, "#ffffff")
-    # draw_cube(game, bottom_center_up, "#aaaaaa")
+    # for i in range(0, 6):
+    #     left.append(
+    #         Vector(game.player.sprite.pos.x, game.player.sprite.pos.y + (i * 20))
+    #         .snap(Vector(20, 20))
+    #     )
+    #
+    # for i in range(0, 6):
+    #     right.append(
+    #         Vector(game.player.sprite.pos.x + (game.player.size[0]), game.player.sprite.pos.y + (i * 20))
+    #         .snap(Vector(20, 20))
+    #     )
+    #
+    # for i in range(0, 1):
+    #     bottom.append(
+    #         Vector(game.player.sprite.pos.x + (game.player.size[0] / 2) + (i * 20), game.player.sprite.pos.y + game.player.size[1] + 10)
+    #         .snap(Vector(20, 20))
+    #     )
+    #
+    # for i in range(-1, 2):
+    #     top.append(
+    #         Vector(game.player.sprite.pos.x + (game.player.size[0] / 2) + (i * 20), game.player.sprite.pos.y - 40)
+    #         .snap(Vector(20, 20))
+    #     )
+
+    # for checker in left:
+    #     draw_cube(canvas, checker, "#ff0000")
+    #
+    # for checker in right:
+    #     draw_cube(canvas, checker, "#00ff00")
+    #
+    # for checker in bottom:
+    #     draw_cube(canvas, checker, "#ffffff")
+    #
+    # for checker in top:
+    #     draw_cube(canvas, checker, "#aaaaaa")
+
+    # for checker in :
+    # draw_cube(canvas, top, "#0000ff")
 
     # draw_debug_collisions(canvas, game.terrain, game.player)
 
@@ -215,45 +237,63 @@ def check_collision(s, t):
     s.sprite.blocked["left"] = False
     s.sprite.blocked["right"] = False
 
-    side_left = (
-        Vector(new_pos.x, new_pos.y + (s.size[1] - 10))
-        .snap(Vector(20, 20))
-        .get_p()
-    )
-    side_right = (
-        Vector(new_pos.x + (s.size[0]), new_pos.y + (s.size[1] - 10))
-        .snap(Vector(20, 20))
-        .get_p()
-    )
-    bottom_center = (
-        Vector(new_pos.x + (s.size[0] / 2), new_pos.y + s.size[1] + 10)
-        .snap(Vector(20, 20))
-        .get_p()
-    )
+    left = []
+    right = []
+    bottom = []
+    top = []
 
-    bottom_center_up = (
-        Vector(new_pos.x + (s.size[0] / 2), new_pos.y + s.size[1] + 10)
-        .snap(Vector(20, 20))
-        .get_p()
-    )
+    for i in range(0, 6):
+        left.append(
+            Vector(new_pos.x, new_pos.y + (i * 20))
+            .snap(Vector(20, 20))
+            .get_p()
+        )
 
-    top_center = (
-        Vector(new_pos.x + (s.size[0] / 2), new_pos.y)
-        .snap(Vector(20, 20))
-        .get_p()
-    )
+    for i in range(0, 6):
+        right.append(
+            Vector(new_pos.x + (s.size[0]), new_pos.y + (i * 20))
+            .snap(Vector(20, 20))
+            .get_p()
+        )
 
-    if side_left in t.blocks:
-        s.sprite.blocked["left"] = True
+    for i in range(0, 1):
+        bottom.append(
+            Vector(new_pos.x + (s.size[0] / 2) + (i * 20), new_pos.y + s.size[1] + 10)
+            .snap(Vector(20, 20))
+            .get_p()
+        )
 
-    if side_right in t.blocks:
-        s.sprite.blocked["right"] = True
+    # bottom_center_up = (
+    #     Vector(new_pos.x + (s.size[0] / 2), new_pos.y + s.size[1] + 10)
+    #     .snap(Vector(20, 20))
+    #     .get_p()
+    # )
 
-    if bottom_center in t.blocks:
-        s.sprite.blocked["down"] = True
+    for i in range(-1, 2):
+        top.append(
+            Vector(new_pos.x + (s.size[0] / 2) + (i * 20), new_pos.y - 40)
+            .snap(Vector(20, 20))
+            .get_p()
+        )
 
-    if top_center in t.blocks:
-        s.sprite.blocked["up"] = True
+    # check if any of left is in t.blocks
+    for checker in left:
+        if checker in t.blocks:
+            s.sprite.blocked["left"] = True
+
+    for checker in right:
+        if checker in t.blocks:
+            s.sprite.blocked["right"] = True
+
+    for checker in bottom:
+        if checker in t.blocks:
+            s.sprite.blocked["down"] = True
+
+    for checker in top:
+        if checker in t.blocks:
+            s.sprite.blocked["up"] = True
+
+    # print(s.sprite.blocked)
 
     s.sprite.grounded = s.sprite.blocked["down"]
     s.sprite.touching |= (s.sprite.blocked["up"] or
