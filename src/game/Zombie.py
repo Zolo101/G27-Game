@@ -33,7 +33,7 @@ class Zombie:
     def update(self, clock):
         center = self.sprite.pos.copy().add(Vector(self.size[0] / 2, self.size[1] / 2))
         player_center = self.player.sprite.pos.copy().add(Vector(self.player.size[0] / 2, self.player.size[1] / 2))
-        if clock.transition(16):
+        if clock.transition(12):
             self.sprite.sheet.next_frame()
 
         distance_to_player = center - player_center
