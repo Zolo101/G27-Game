@@ -275,7 +275,7 @@ def check_collision(s, t):
 
     for i in range(-1, 2):
         top.append(
-            Vector(new_pos.x + (s.size[0] / 2) + (i * 20), new_pos.y - 40)
+            Vector(new_pos.x + (s.size[0] / 2) + (i * 10), new_pos.y - 40)
             .snap(Vector(20, 20))
             .get_p()
         )
