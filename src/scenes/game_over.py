@@ -22,8 +22,8 @@ def draw(game, canvas):
 
 
     #Display Time Survived
-    canvas.draw_text(f"Time Survived (sec) : {round(game.player.time_survived)}", (357, 493), 60, "Black")
-    canvas.draw_text(f"Time Survived (sec) : {round(game.player.time_survived)}", (360, 495), 60, "Yellow")
+    canvas.draw_text(f"Time Survived (sec) : {round(game.player.time_survived)}", (342, 493), 60, "Black")
+    canvas.draw_text(f"Time Survived (sec) : {round(game.player.time_survived)}", (345, 495), 60, "Yellow")
 
     canvas.draw_text(f"Score: {game.player.score}", (522, 573), 60, "Black")
     canvas.draw_text(f"Score: {game.player.score}", (525, 575), 60, "Yellow")
