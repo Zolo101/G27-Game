@@ -95,7 +95,11 @@ def draw(game, canvas):
     if len(game.zombies) > 0:
         for bullet in game.shoot.bullets:
             for zombie in game.zombies:
-                if ((bullet.pos.x < (zombie.sprite.pos.x+20)) and (bullet.pos.x > (zombie.sprite.pos.x-20))and(bullet.pos.y > (zombie.sprite.pos.y))):
+                if (
+                        (bullet.pos.x < (zombie.sprite.pos.x+20)) and
+                        (bullet.pos.x > (zombie.sprite.pos.x-20)) and
+                        (bullet.pos.y > (zombie.sprite.pos.y)) and
+                        (bullet.pos.y < (zombie.sprite.pos.y + zombie.sprite.size[1]))):
                     if zombie.health <= 0:
                         game.zombies.remove(zombie)
                         game.player.earn(100) # money per zombie kill
@@ -171,7 +175,7 @@ def draw(game, canvas):
     #         Vector(game.player.sprite.pos.x + (game.player.size[0] / 2) + (i * 20), game.player.sprite.pos.y - 40)
     #         .snap(Vector(20, 20))
     #     )
-
+    #
     # for checker in left:
     #     draw_cube(canvas, checker, "#ff0000")
     #
