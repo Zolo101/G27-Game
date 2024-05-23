@@ -41,7 +41,7 @@ class Game:
         self.music = Music.music()
 
         # Start playing music
-        # self.music.play_music()
+        self.music.play_music()
 
         self.manager.add_scene(welcome)
         self.manager.add_scene(main)
